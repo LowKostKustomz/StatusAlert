@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'StatusAlert_Example' do
+  pod 'StatusAlert', :path => '../'
+
+  target 'StatusAlert_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
