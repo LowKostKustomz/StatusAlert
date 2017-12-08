@@ -115,7 +115,6 @@ class ViewController: UIViewController {
                                             title: title,
                                             message: message,
                                             canBePickedOrDismissed: isPickable)
-        statusAlert.prepare()
         statusAlert.show(withVerticalPosition: preferredPosition)
     }
     

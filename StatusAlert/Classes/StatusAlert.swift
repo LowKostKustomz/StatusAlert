@@ -116,8 +116,29 @@ public class StatusAlert: UIView {
     
     // MARK: - Public methods -
     
+    /// Shows `StatusAlert` in `presenter`
+    ///
+    /// - Parameters:
+    ///   - presenter: view present `StatusAlert` in
+    ///   - verticalPosition: `StatusAlert` position in `presenter`
+    public func show(in presenter: UIView = UIApplication.shared.keyWindow ?? UIView(),
+                     withVerticalPosition verticalPosition: VerticalPosition = .center(offset: nil)) {
+        guard canBeShowed
+            else {
+                return
+        }
+        prepare()
+        position(inPresenter: presenter,
+                 withVerticalPosition: verticalPosition)
+        present()
+    }
+    
+    // MARK: - Private methods -
+    
+    // MARK: Creation methods
+    
     /// Must be called before the `StatusAlert` presenting
-    public func prepare() {
+    private func prepare() {
         assertIsMainThread()
         
         let stackView = createStackView()
@@ -156,26 +177,6 @@ public class StatusAlert: UIView {
         
         isPrepared = true
     }
-    
-    /// Shows `StatusAlert` in `presenter`
-    ///
-    /// - Parameters:
-    ///   - presenter: view present `StatusAlert` in
-    ///   - verticalPosition: `StatusAlert` position in `presenter`
-    public func show(in presenter: UIView = UIApplication.shared.keyWindow ?? UIView(),
-                     withVerticalPosition verticalPosition: VerticalPosition = .center(offset: nil)) {
-        guard canBeShowed
-            else {
-                return
-        }
-        position(inPresenter: presenter,
-                 withVerticalPosition: verticalPosition)
-        present()
-    }
-    
-    // MARK: - Private methods -
-    
-    // MARK: Creation methods
     
     private func position(inPresenter presenter: UIView,
                           withVerticalPosition verticalPosition: VerticalPosition) {
