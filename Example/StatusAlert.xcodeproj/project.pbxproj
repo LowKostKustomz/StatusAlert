@@ -29,7 +29,7 @@
 
 /* Begin PBXFileReference section */
 		02A1E32D00CC1249994E4ECF /* Pods-StatusAlert_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StatusAlert_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StatusAlert_Tests/Pods-StatusAlert_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		165C8F002F97597DCD7D0E8F /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		165C8F002F97597DCD7D0E8F /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		4A60AF17A8578EE176C83BEE /* Pods-StatusAlert_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StatusAlert_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-StatusAlert_Example/Pods-StatusAlert_Example.release.xcconfig"; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* StatusAlert_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StatusAlert_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -45,8 +45,8 @@
 		7470C016B9F420B578D98654 /* Pods_StatusAlert_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StatusAlert_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		99BC2B2A64FB51C61F06DDE3 /* Pods_StatusAlert_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StatusAlert_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6DCF47810F7CB5D542EE2AD /* Pods-StatusAlert_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StatusAlert_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-StatusAlert_Tests/Pods-StatusAlert_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		E22DBC2D161C23A75FD86CD2 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; name = README.md; path = ../README.md; sourceTree = "<group>"; };
-		F9F31DA03D850F944EE3E8AF /* StatusAlert.podspec */ = {isa = PBXFileReference; includeInIndex = 1; name = StatusAlert.podspec; path = ../StatusAlert.podspec; sourceTree = "<group>"; };
+		E22DBC2D161C23A75FD86CD2 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		F9F31DA03D850F944EE3E8AF /* StatusAlert.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = StatusAlert.podspec; path = ../StatusAlert.podspec; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -215,10 +215,12 @@
 				TargetAttributes = {
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = E8RRW68D5D;
 						LastSwiftMigration = 0900;
 					};
 					607FACE41AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = E8RRW68D5D;
 						LastSwiftMigration = 0900;
 						TestTargetID = 607FACCF1AFB9204008FA782;
 					};
@@ -517,10 +519,11 @@
 			baseConfigurationReference = 684FC704590441A5AD7E5CE9 /* Pods-StatusAlert_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = E8RRW68D5D;
 				INFOPLIST_FILE = StatusAlert/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = org.cocoapods.demo.StatusAlertExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
@@ -532,10 +535,11 @@
 			baseConfigurationReference = 4A60AF17A8578EE176C83BEE /* Pods-StatusAlert_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = E8RRW68D5D;
 				INFOPLIST_FILE = StatusAlert/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = org.cocoapods.demo.StatusAlertExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
@@ -546,8 +550,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 02A1E32D00CC1249994E4ECF /* Pods-StatusAlert_Tests.debug.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = E8RRW68D5D;
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(SDKROOT)/System/Library/Frameworks",
 					"$(inherited)",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -567,8 +572,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B6DCF47810F7CB5D542EE2AD /* Pods-StatusAlert_Tests.release.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = E8RRW68D5D;
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(SDKROOT)/System/Library/Frameworks",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = Tests/Info.plist;
