@@ -8,7 +8,7 @@ import Foundation
 extension StatusAlert {
     public enum Appearance {
         /// - Note: Do not change to save system look
-        public static var titleFont: UIFont = UIFont.systemFont(ofSize: 22, weight: UIFont.Weight.semibold)
+        public static var titleFont: UIFont = UIFont.systemFont(ofSize: 23, weight: UIFont.Weight.semibold)
         
         /// - Note: Do not change to save system look
         public static var messageFont: UIFont = UIFont.systemFont(ofSize: 16, weight: UIFont.Weight.regular)
@@ -18,8 +18,16 @@ extension StatusAlert {
     }
     
     public enum VerticalPosition {
+        /// position in the center of the view with given `offset`
+        /// - Note: Pass nil to save system look
         case center(offset: CGFloat?)
+        
+        /// position on the top of the view with given `offset`
+        /// - Note: Pass nil to save default value
         case top(offset: CGFloat?)
+        
+        /// position at the bottom of the view with given `offset`
+        /// - Note: Pass nil to save default value
         case bottom(offset: CGFloat?)
     }
     

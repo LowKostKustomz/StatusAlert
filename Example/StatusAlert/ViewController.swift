@@ -93,13 +93,19 @@ class ViewController: UIViewController {
                                   action:  { [weak self] in
                                     self?.showStatusAlert(withImage: UIImage(named: "Loved icon"),
                                                           title: "Loved",
-                                                          message: "We'll recommend more like this in For You")
+                                                          message: "We’ll recommend more like this in For You.")
             }),
                TableViewCellModel(title: "From the Podcasts app",
                                   action:  { [weak self] in
                                     self?.showStatusAlert(withImage: UIImage(named: "Success icon"),
                                                           title: "С подпиской",
                                                           message: nil)
+               }),
+               TableViewCellModel(title: "From the News app",
+                                  action:  { [weak self] in
+                                    self?.showStatusAlert(withImage: UIImage(named: "Loved icon"),
+                                                          title: "Loved",
+                                                          message: "We’ll show more stories about this in For You.")
                })]
         let fromAppsSection: Section = ("From the Apple apps", fromAppsSectionModels, "See these to be sure that everything looks similar to the Apple apps")
         sections.append(fromAppsSection)
@@ -147,6 +153,7 @@ class ViewController: UIViewController {
         actionSheet.addAction(UIAlertAction(title: "Cancel",
                                             style: .cancel,
                                             handler: nil))
+        actionSheet.popoverPresentationController?.barButtonItem = navigationItem.leftBarButtonItems?.first
         present(actionSheet,
                 animated: true,
                 completion: nil)
@@ -170,6 +177,7 @@ class ViewController: UIViewController {
                                                 self?.isPickable = false
                                                 self?.setNavigationItems()
         }))
+        actionSheet.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItems?.first
         present(actionSheet,
                 animated: true,
                 completion: nil)

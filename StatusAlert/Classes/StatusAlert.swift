@@ -121,6 +121,7 @@ public class StatusAlert: UIView {
     /// - Parameters:
     ///   - presenter: view present `StatusAlert` in
     ///   - verticalPosition: `StatusAlert` position in `presenter`
+    /// - Note: must be called from the main thread only
     public func show(in presenter: UIView = UIApplication.shared.keyWindow ?? UIView(),
                      withVerticalPosition verticalPosition: VerticalPosition = .center(offset: nil)) {
         guard canBeShowed
