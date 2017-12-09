@@ -30,7 +30,7 @@ StatusAlert is available via CocoaPods.
 StatusAlert is available through [CocoaPods](http://cocoapods.org). Add the following line to your `Podfile`:
 
 ```ruby
-pod 'StatusAlert', '~> 0.9.1'
+pod 'StatusAlert', '~> 0.9.2'
 ```
 
 ## Demo
