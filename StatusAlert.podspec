@@ -12,8 +12,8 @@ It looks very similar to the alerts displayed in Podcasts, Apple Music and News 
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'LowKostKustomz' => 'mierosh@gmail.com' }
   s.source           = { :git => 'https://github.com/LowKostKustomz/StatusAlert.git', :tag => s.version.to_s }
-  s.social_media_url = 'https://twitter.com/zebster007'
+  s.social_media_url = 'https://twitter.com/LowKostKustomz'
   s.ios.deployment_target = '9.0'
-  s.source_files = 'StatusAlert/Classes/**/*'
+  s.source_files = 'StatusAlert/Classes/**/*.{swift}'
   s.frameworks = 'UIKit'
 end
