@@ -2,6 +2,7 @@
 
 [![Swift](https://img.shields.io/badge/Swift-4.0-orange.svg?style=flat)]()
 [![Version](https://img.shields.io/cocoapods/v/StatusAlert.svg?style=flat)](http://cocoapods.org/pods/StatusAlert)
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![License](https://img.shields.io/cocoapods/l/StatusAlert.svg?style=flat)](http://cocoapods.org/pods/StatusAlert)
 [![Platform](https://img.shields.io/cocoapods/p/StatusAlert.svg?style=flat)](http://cocoapods.org/pods/StatusAlert)
 
@@ -23,14 +24,22 @@ It looks very similar to the alerts displayed in Podcasts, Apple Music and News 
 
 ## Installation
 
-StatusAlert is available via CocoaPods.
+StatusAlert is available via CocoaPods and Carthage.
 
 ### CocoaPods
 
-StatusAlert is available through [CocoaPods](http://cocoapods.org). Add the following line to your `Podfile`:
+To install StatusAlert using [CocoaPods](http://cocoapods.org), add the following line to your `Podfile`:
 
 ```ruby
 pod 'StatusAlert', '~> 0.9.2'
+```
+
+### Carthage
+
+To install StatusAlert using [Carthage](https://github.com/Carthage/Carthage), add the following line to your `Cartfile`:
+
+```ruby
+github "LowKostKustomz/StatusAlert" ~> 0.9.2
 ```
 
 ## Demo
