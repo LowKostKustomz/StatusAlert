@@ -15,6 +15,11 @@ extension StatusAlert {
         
         /// - Note: Do not change to save system look
         public static var contentColor: UIColor = UIColor.darkGray
+        
+        /// Used if device does not support blur or if `Reduce Transparency` toggle
+        /// in `General->Accessibility->Increase Contrast` is on
+        /// - Note: Do not change to save system look
+        public static var backgroundColor: UIColor = UIColor.groupTableViewBackground
     }
     
     public enum VerticalPosition {

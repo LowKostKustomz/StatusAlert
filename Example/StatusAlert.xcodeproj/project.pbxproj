@@ -13,6 +13,8 @@
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
+		E92B11BF1FF92412009FEA6C /* UIDevice+Blur.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92B11BD1FF92409009FEA6C /* UIDevice+Blur.swift */; };
+		E92B11C01FF92412009FEA6C /* UIDevice+Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92B11BE1FF92409009FEA6C /* UIDevice+Platform.swift */; };
 		E9A189EF1FDC1A7D00F3B75B /* StatusAlert.h in Headers */ = {isa = PBXBuildFile; fileRef = E9A189ED1FDC1A7D00F3B75B /* StatusAlert.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E9A189F21FDC1A7D00F3B75B /* StatusAlert.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9A189EB1FDC1A7D00F3B75B /* StatusAlert.framework */; };
 		E9A189F31FDC1A7D00F3B75B /* StatusAlert.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E9A189EB1FDC1A7D00F3B75B /* StatusAlert.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -70,6 +72,8 @@
 		99BC2B2A64FB51C61F06DDE3 /* Pods_StatusAlert_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StatusAlert_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6DCF47810F7CB5D542EE2AD /* Pods-StatusAlert_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StatusAlert_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-StatusAlert_Tests/Pods-StatusAlert_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		E22DBC2D161C23A75FD86CD2 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		E92B11BD1FF92409009FEA6C /* UIDevice+Blur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Blur.swift"; sourceTree = "<group>"; };
+		E92B11BE1FF92409009FEA6C /* UIDevice+Platform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Platform.swift"; sourceTree = "<group>"; };
 		E9A189EB1FDC1A7D00F3B75B /* StatusAlert.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StatusAlert.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9A189ED1FDC1A7D00F3B75B /* StatusAlert.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StatusAlert.h; sourceTree = "<group>"; };
 		E9A189EE1FDC1A7D00F3B75B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -120,6 +124,7 @@
 		607FACC71AFB9204008FA782 = {
 			isa = PBXGroup;
 			children = (
+				E92B11BC1FF92409009FEA6C /* Extensions */,
 				E9A189F81FDC1ABD00F3B75B /* StatusAlert.swift */,
 				E9A189F91FDC1ABD00F3B75B /* StatusAlertUtils.swift */,
 				607FACF51AFB993E008FA782 /* Podspec Metadata */,
@@ -197,6 +202,16 @@
 				99BC2B2A64FB51C61F06DDE3 /* Pods_StatusAlert_Tests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E92B11BC1FF92409009FEA6C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				E92B11BD1FF92409009FEA6C /* UIDevice+Blur.swift */,
+				E92B11BE1FF92409009FEA6C /* UIDevice+Platform.swift */,
+			);
+			name = Extensions;
+			path = ../StatusAlert/Classes/Extensions;
 			sourceTree = "<group>";
 		};
 		E9A189EC1FDC1A7D00F3B75B /* StatusAlert */ = {
@@ -482,6 +497,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E92B11BF1FF92412009FEA6C /* UIDevice+Blur.swift in Sources */,
+				E92B11C01FF92412009FEA6C /* UIDevice+Platform.swift in Sources */,
 				E9A189FA1FDC1ABD00F3B75B /* StatusAlert.swift in Sources */,
 				E9A189FB1FDC1ABD00F3B75B /* StatusAlertUtils.swift in Sources */,
 			);
@@ -717,7 +734,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = StatusAlert/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lowkostkustomz.StatusAlert;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -749,7 +766,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = StatusAlert/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lowkostkustomz.StatusAlert;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
