@@ -64,6 +64,11 @@ public class StatusAlert: UIView {
         return true
     }
     
+    /// Determines whether blur is available
+    private var isBlurAvailable: Bool {
+        return UIDevice.current.isBlurAvailable
+    }
+    
     private var isPrepared: Bool = false
     
     /// Determines wether `StatusAlert` can be picked or dismissed by tap
@@ -105,6 +110,13 @@ public class StatusAlert: UIView {
                                    message: String?,
                                    canBePickedOrDismissed: Bool = false) -> StatusAlert {
         let statusAlert = StatusAlert()
+        
+        NotificationCenter
+            .default
+            .addObserver(statusAlert,
+                         selector: #selector(setupContentViewBackground),
+                         name: NSNotification.Name.UIAccessibilityReduceTransparencyStatusDidChange,
+                         object: nil)
         
         statusAlert.image = image
         statusAlert.title = title
@@ -225,14 +237,7 @@ public class StatusAlert: UIView {
     private func createStackView() -> UIStackView {
         translatesAutoresizingMaskIntoConstraints = false
         contentView = UIVisualEffectView()
-        if #available(iOS 11, *) {
-            contentView.effect = blurEffect
-            alpha = 0
-        } else {
-            contentView.contentView.alpha = 0
-        }
-        contentView.clipsToBounds = true
-        contentView.layer.cornerRadius = SizesAndDistances.defaultCornerRadius
+        setupContentView()
         addSubview(contentView)
         
         contentView
@@ -326,6 +331,35 @@ public class StatusAlert: UIView {
                 .isActive = true
         }
         return stackView
+    }
+    
+    @objc private func setupContentViewBackground() {
+        if isBlurAvailable {
+            if #available(iOS 11, *) {
+                contentView.effect = blurEffect
+            } else if StatusAlert.isPresenting {
+                contentView.effect = blurEffect
+            }
+        } else {
+            contentView.backgroundColor = Appearance.backgroundColor
+        }
+    }
+    
+    private func setupContentView() {
+        setupContentViewBackground()
+        
+        if isBlurAvailable {
+            if #available(iOS 11, *) {
+                alpha = 0
+            } else {
+                contentView.contentView.alpha = 0
+            }
+        } else {
+            alpha = 0
+        }
+        
+        contentView.clipsToBounds = true
+        contentView.layer.cornerRadius = SizesAndDistances.defaultCornerRadius
     }
     
     private func createSpaceView(withHeight height: CGFloat) -> UIView {
@@ -438,11 +472,15 @@ public class StatusAlert: UIView {
                     delay: 0,
                     options: UIViewAnimationOptions.curveEaseOut,
                     animations: {
-                        if #available(iOS 11, *) {
-                            self.alpha = 1
+                        if self.isBlurAvailable {
+                            if #available(iOS 11, *) {
+                                self.alpha = 1
+                            } else {
+                                self.contentView.contentView.alpha = 1
+                                self.contentView.effect = self.blurEffect
+                            }
                         } else {
-                            self.contentView.contentView.alpha = 1
-                            self.contentView.effect = self.blurEffect
+                            self.alpha = 1
                         }
                         self.contentView.transform = CGAffineTransform.identity
                 },
@@ -464,11 +502,15 @@ public class StatusAlert: UIView {
                     delay: 0,
                     options: UIViewAnimationOptions.curveEaseOut,
                     animations: {
-                        if #available(iOS 11, *) {
-                            self.alpha = 0
+                        if self.isBlurAvailable {
+                            if #available(iOS 11, *) {
+                                self.alpha = 0
+                            } else {
+                                self.alpha = 0
+                                self.contentView.contentView.alpha = 0
+                            }
                         } else {
                             self.alpha = 0
-                            self.contentView.contentView.alpha = 0
                         }
                         self.contentView.transform = CGAffineTransform.identity.scaledBy(x: scale, y: scale)
                 },
