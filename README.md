@@ -9,7 +9,7 @@
 StatusAlert is an iOS framework that displays status alerts similar to Apple's system self-hiding alerts. It is well suited for notifying user without interrupting user flow in iOS-like way.
 
 It looks very similar to the alerts displayed in Podcasts, Apple Music and News apps.
-![Author StatusAlert](Assets/iPhonesWithSystemAlerts.png)
+![System StatusAlert](Assets/iPhonesWithSystemAlerts.png)
 
  - [Features](#features)
  - [Requirements](#requirements)
@@ -64,7 +64,7 @@ github "LowKostKustomz/StatusAlert" ~> 0.9.3
 
 Demo application is included in the `StatusAlert` workspace. To run it clone the repo.
 
-![Author StatusAlert](Assets/iPhonesWithStatusAlert.png)
+![Demo StatusAlert](Assets/iPhonesWithStatusAlert.png)
 
 ## Usage
 
@@ -74,13 +74,13 @@ import StatusAlert
 
 // Creating StatusAlert instance
 let statusAlert = StatusAlert.instantiate(withImage: UIImage(named: "Some image name"),
-title: "StatusAlert title",
-message: "Message to show beyond title",
-canBePickedOrDismissed: isUserInteractionAllowed)
+					  title: "StatusAlert title",
+					  message: "Message to show beyond title",
+					  canBePickedOrDismissed: isUserInteractionAllowed)
 
 // Presenting created instance
 statusAlert.show(in: viewShowAlertIn,
-withVerticalPosition: .center(offset: 0))
+		 withVerticalPosition: .center(offset: 0))
 ```
 > All the alert components (`image`, `title`, `message`) are optional, but at least one should be present. Otherwise `show()` method will be ignored.
 >
@@ -124,7 +124,7 @@ You can also pass `canBePickedOrDismissed: true` into `StatusAlert`'s `instantia
 
 [BitxfyAppStoreLink]: https://itunes.apple.com/us/app/bitxfy-bitcoin-wallet/id1326910438?ls=1&mt=8
 
-###• <img src="Assets/BitxfyIcon.png" align="center" width="40"> [Bitxfy][BitxfyAppstoreLink]
+### • <img src="Assets/BitxfyIcon.png" align="center" width="40"> [Bitxfy][BitxfyAppstoreLink]
 
 [![BitxfyScreenShot](Assets/BitxfyStatusAlert.png)][BitxfyAppstoreLink]
 
@@ -138,8 +138,7 @@ You can also pass `canBePickedOrDismissed: true` into `StatusAlert`'s `instantia
 
 [<img src="https://assets.gitlab-static.net/ZEBSTER/FrameworksAssets/raw/master/Socials/Twitter.png" width="80">](https://twitter.com/LowKostKustomz)
 [<img src="https://assets.gitlab-static.net/ZEBSTER/FrameworksAssets/raw/master/Socials/Email.png" width="80">](mierosh@gmail.com)
-[<img src="https://assets.gitlab-static.net/ZEBSTER/FrameworksAssets/raw/master/Socials/Portfolio.png" width="80">]
-[FrameworksRepo]
+[<img src="https://assets.gitlab-static.net/ZEBSTER/FrameworksAssets/raw/master/Socials/Portfolio.png" width="80">][FrameworksRepo]
 
 ## License
 
