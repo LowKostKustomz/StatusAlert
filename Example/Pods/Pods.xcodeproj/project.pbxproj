@@ -16,6 +16,10 @@
 		B8877B1C709A549EAF40EB3ABC725D08 /* Pods-StatusAlert_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B746A6736ABCB89A80FE6BA1E1231B6 /* Pods-StatusAlert_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DAF5E30E91CCD3C2ADE29523131E89C6 /* Pods-StatusAlert_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F4507E95E56530104B6985479945756 /* Pods-StatusAlert_Example-dummy.m */; };
 		E4C9CB3D5DC8197F044EF44225940DEB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
+		E92B11BA1FF91B5A009FEA6C /* UIDevice+Blur.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92B11B81FF91B5A009FEA6C /* UIDevice+Blur.swift */; };
+		E92B11BB1FF91B5A009FEA6C /* UIDevice+Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92B11B91FF91B5A009FEA6C /* UIDevice+Platform.swift */; };
+		E92B11C11FF92445009FEA6C /* UIDevice+Blur.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92B11B81FF91B5A009FEA6C /* UIDevice+Blur.swift */; };
+		E92B11C21FF92447009FEA6C /* UIDevice+Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92B11B91FF91B5A009FEA6C /* UIDevice+Platform.swift */; };
 		E9DBB34E1FDAD78E00A2733A /* StatusAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DBB34B1FDAD78D00A2733A /* StatusAlert.swift */; };
 		E9DBB34F1FDAD78E00A2733A /* StatusAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DBB34B1FDAD78D00A2733A /* StatusAlert.swift */; };
 		E9DBB3501FDAD78E00A2733A /* StatusAlertUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DBB34C1FDAD78D00A2733A /* StatusAlertUtils.swift */; };
@@ -62,6 +66,8 @@
 		D5F5C595060C971E4117D9BC9412F816 /* Pods-StatusAlert_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-StatusAlert_Example.modulemap"; sourceTree = "<group>"; };
 		E65C0D5F8507C566F3EC8C67C31ACBCC /* Pods-StatusAlert_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-StatusAlert_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		E70F1DA815DAD34018B69FD248986FFF /* StatusAlert-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "StatusAlert-prefix.pch"; sourceTree = "<group>"; };
+		E92B11B81FF91B5A009FEA6C /* UIDevice+Blur.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIDevice+Blur.swift"; sourceTree = "<group>"; };
+		E92B11B91FF91B5A009FEA6C /* UIDevice+Platform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIDevice+Platform.swift"; sourceTree = "<group>"; };
 		E9DBB34B1FDAD78D00A2733A /* StatusAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StatusAlert.swift; path = StatusAlert/Classes/StatusAlert.swift; sourceTree = "<group>"; };
 		E9DBB34C1FDAD78D00A2733A /* StatusAlertUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StatusAlertUtils.swift; path = StatusAlert/Classes/StatusAlertUtils.swift; sourceTree = "<group>"; };
 		ED643340F9C743F1E94C7938F8DBEF34 /* Pods-StatusAlert_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-StatusAlert_Example.release.xcconfig"; sourceTree = "<group>"; };
@@ -203,12 +209,23 @@
 		E4A30A6582A10CF70B2C920CF7F58FAB /* StatusAlert */ = {
 			isa = PBXGroup;
 			children = (
+				E92B11B71FF91B3E009FEA6C /* Extensions */,
 				E9DBB34B1FDAD78D00A2733A /* StatusAlert.swift */,
 				E9DBB34C1FDAD78D00A2733A /* StatusAlertUtils.swift */,
 				1E38C29C87BD401AE9B4618E511889EC /* Support Files */,
 			);
 			name = StatusAlert;
 			path = ../..;
+			sourceTree = "<group>";
+		};
+		E92B11B71FF91B3E009FEA6C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				E92B11B81FF91B5A009FEA6C /* UIDevice+Blur.swift */,
+				E92B11B91FF91B5A009FEA6C /* UIDevice+Platform.swift */,
+			);
+			name = Extensions;
+			path = StatusAlert/Classes/Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -334,6 +351,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E92B11C11FF92445009FEA6C /* UIDevice+Blur.swift in Sources */,
+				E92B11C21FF92447009FEA6C /* UIDevice+Platform.swift in Sources */,
 				E9DBB3511FDAD78E00A2733A /* StatusAlertUtils.swift in Sources */,
 				77C7DE7C0E4AACFA07375529956BE17C /* StatusAlert-dummy.m in Sources */,
 				E9DBB34F1FDAD78E00A2733A /* StatusAlert.swift in Sources */,
@@ -344,6 +363,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E92B11BA1FF91B5A009FEA6C /* UIDevice+Blur.swift in Sources */,
+				E92B11BB1FF91B5A009FEA6C /* UIDevice+Platform.swift in Sources */,
 				E9DBB3501FDAD78E00A2733A /* StatusAlertUtils.swift in Sources */,
 				DAF5E30E91CCD3C2ADE29523131E89C6 /* Pods-StatusAlert_Example-dummy.m in Sources */,
 				E9DBB34E1FDAD78E00A2733A /* StatusAlert.swift in Sources */,
