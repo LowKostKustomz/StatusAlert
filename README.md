@@ -11,17 +11,34 @@ StatusAlert is an iOS framework that displays status alerts similar to Apple's s
 It looks very similar to the alerts displayed in Podcasts, Apple Music and News apps.
 ![Author StatusAlert](Assets/iPhonesWithSystemAlerts.png)
 
+ - [Features](#features)
+ - [Requirements](#requirements)
+ - [Installation](#installation)
+	- [CocoaPods](#cocoapods)
+	- [Carthage](#carthage)
+ - [Demo](#demo)
+ - [Usage](#usage)
+ - [Customization](#customization)
+ 	- [Different configurations](#different-configurations)
+ 	- [Vertical position](#vertical-position)
+ 	- [Appearance](#appearance)
+ 	- [Dismissal](#dismissal)
+ - [Apps Using _StatusAlert_](#apps-using-statusalert)
+ - [Author](#author)
+ - [License](#license)
+
+## Features
+
+* System-like look and feel
+* "Reduce transparency" mode support
+* Safe Areas support
+* Universal (iPhone & iPad)
+
 ## Requirements
 
 * Xcode 9.0 or later
 * iOS 9.0 or later
 * Swift 4.0
-
-## Features
-
-* System-like look and feel
-* Safe Areas support
-* Universal (iPhone & iPad)
 
 ## Installation
 
@@ -72,15 +89,15 @@ withVerticalPosition: .center(offset: 0))
 
 ## Customization
 
-#### Different configurations
+### Different configurations
 
 Present alert with any set of image, title and message
 
-#### Vertical position
+### Vertical position
 
 Display alert anywhere you want, either on the top, in the center or at the bottom of the view, and with any offset.
 
-#### Appearance
+### Appearance
 
 You can customize a single alert's appearance via the `StatusAlert`'s properties
 
@@ -97,7 +114,7 @@ public static var messageFont: UIFont
 public static var contentColor: UIColor
 ```
 
-#### Dismissal
+### Dismissal
 
 Alert will hide itself after 2 seconds timeout.
 
@@ -107,37 +124,43 @@ You can also pass `canBePickedOrDismissed: true` into `StatusAlert`'s `instantia
 
 [BitxfyAppStoreLink]: https://itunes.apple.com/us/app/bitxfy-bitcoin-wallet/id1326910438?ls=1&mt=8
 
-# [<img src="Assets/BitxfyIcon.png" width="50"> Bitxfy][BitxfyAppstoreLink]
+###• <img src="Assets/BitxfyIcon.png" align="center" width="40"> [Bitxfy][BitxfyAppstoreLink]
 
 [![BitxfyScreenShot](Assets/BitxfyStatusAlert.png)][BitxfyAppstoreLink]
-
-------
 
 > Feel free to submit pull request if you are using this framework in your apps.
 
 ## Author
 
+[FrameworksRepo]: https://github.com/LowKostKustomz/Frameworks
+
 ![Author ActionsList](https://assets.gitlab-static.net/ZEBSTER/FrameworksAssets/raw/master/ActionsList/ActionsListAuthor.png)
 
 [<img src="https://assets.gitlab-static.net/ZEBSTER/FrameworksAssets/raw/master/Socials/Twitter.png" width="80">](https://twitter.com/LowKostKustomz)
 [<img src="https://assets.gitlab-static.net/ZEBSTER/FrameworksAssets/raw/master/Socials/Email.png" width="80">](mierosh@gmail.com)
-
-### All projects
-
-[ActionsListLink]: https://github.com/LowKostKustomz/ActionsList
-
-#### [ActionsList][ActionsListLink]
-
-[![ActionsList](https://assets.gitlab-static.net/ZEBSTER/FrameworksAssets/raw/master/ActionsList/ActionsListHeader.png)][ActionsListLink]
-
-------
-
-[StatusAlertLink]: https://github.com/LowKostKustomz/StatusAlert
-
-#### [StatusAlert][StatusAlertLink]
-
-[![StatusAlert](https://assets.gitlab-static.net/ZEBSTER/FrameworksAssets/raw/master/StatusAlert/StatusAlertHeader.png)][StatusAlertLink]
+[<img src="https://assets.gitlab-static.net/ZEBSTER/FrameworksAssets/raw/master/Socials/Portfolio.png" width="80">]
+[FrameworksRepo]
 
 ## License
 
-> StatusAlert is available under the MIT license. See the [LICENSE](https://github.com/LowKostKustomz/ActionsList/blob/master/LICENSE) file for more info.
+> The MIT License (MIT)
+>
+> Copyright (c) 2017 LowKostKustomz <mierosh@gmail.com>
+>
+> Permission is hereby granted, free of charge, to any person obtaining a copy
+> of this software and associated documentation files (the "Software"), to deal
+> in the Software without restriction, including without limitation the rights
+> to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+> copies of the Software, and to permit persons to whom the Software is
+> furnished to do so, subject to the following conditions:
+> 
+> The above copyright notice and this permission notice shall be included in
+> all copies or substantial portions of the Software.
+> 
+> THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+> IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+> FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+> AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+> LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+> OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+> THE SOFTWARE.
