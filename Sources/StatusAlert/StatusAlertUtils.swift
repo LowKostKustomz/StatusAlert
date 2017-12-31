@@ -3,7 +3,7 @@
 //  Copyright © 2017 Yegor Miroshnichenko. Licensed under the MIT license.
 //
 
-import Foundation
+import UIKit
 
 extension StatusAlert {
     public enum Appearance {

@@ -180,7 +180,7 @@
 				E9A189F91FDC1ABD00F3B75B /* StatusAlertUtils.swift */,
 			);
 			name = Sources;
-			path = ../Sources;
+			path = ../Sources/StatusAlert;
 			sourceTree = "<group>";
 		};
 		E9A189EC1FDC1A7D00F3B75B /* StatusAlert */ = {
