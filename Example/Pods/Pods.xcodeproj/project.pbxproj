@@ -68,8 +68,8 @@
 		E70F1DA815DAD34018B69FD248986FFF /* StatusAlert-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "StatusAlert-prefix.pch"; sourceTree = "<group>"; };
 		E92B11B81FF91B5A009FEA6C /* UIDevice+Blur.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIDevice+Blur.swift"; sourceTree = "<group>"; };
 		E92B11B91FF91B5A009FEA6C /* UIDevice+Platform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIDevice+Platform.swift"; sourceTree = "<group>"; };
-		E9DBB34B1FDAD78D00A2733A /* StatusAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StatusAlert.swift; path = StatusAlert/Classes/StatusAlert.swift; sourceTree = "<group>"; };
-		E9DBB34C1FDAD78D00A2733A /* StatusAlertUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StatusAlertUtils.swift; path = StatusAlert/Classes/StatusAlertUtils.swift; sourceTree = "<group>"; };
+		E9DBB34B1FDAD78D00A2733A /* StatusAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StatusAlert.swift; path = Sources/StatusAlert.swift; sourceTree = "<group>"; };
+		E9DBB34C1FDAD78D00A2733A /* StatusAlertUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StatusAlertUtils.swift; path = Sources/StatusAlertUtils.swift; sourceTree = "<group>"; };
 		ED643340F9C743F1E94C7938F8DBEF34 /* Pods-StatusAlert_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-StatusAlert_Example.release.xcconfig"; sourceTree = "<group>"; };
 		F830D11142FBD6C5A8944EE6D2DF9838 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -225,7 +225,7 @@
 				E92B11B91FF91B5A009FEA6C /* UIDevice+Platform.swift */,
 			);
 			name = Extensions;
-			path = StatusAlert/Classes/Extensions;
+			path = Sources/Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
