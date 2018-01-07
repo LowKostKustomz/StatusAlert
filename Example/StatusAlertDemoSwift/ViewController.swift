@@ -15,11 +15,11 @@ class ViewController: UIViewController {
         let action: () -> Void
     }
     
-    private let cellReuseIdentifier = "reuseIdentifier"
+    fileprivate let cellReuseIdentifier = "reuseIdentifier"
     private let tableView = UITableView(frame: .zero,
                                         style: .grouped)
     
-    private var sections: [Section] = []
+    fileprivate var sections: [Section] = []
     private var preferredPosition: StatusAlert.VerticalPosition = .center
     private var isPickable: Bool = true
     

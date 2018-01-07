@@ -475,7 +475,7 @@ import UIKit
         
         let attributedText = NSAttributedString(
             string: title,
-            attributes: [NSAttributedStringKey.kern : 0.01])
+            attributes: [NSKernAttributeName : 0.01])
         titleLabel.attributedText = attributedText
         
         return titleLabel
@@ -495,8 +495,8 @@ import UIKit
         paragraphStyle.alignment = .center
         let attributedText = NSAttributedString(
             string: message,
-            attributes: [NSAttributedStringKey.kern : 0.01,
-                         NSAttributedStringKey.paragraphStyle : paragraphStyle])
+            attributes: [NSKernAttributeName : 0.01,
+                         NSParagraphStyleAttributeName : paragraphStyle])
         messageLabel.attributedText = attributedText
         
         return messageLabel
@@ -589,3 +589,10 @@ import UIKit
         precondition(Thread.isMainThread, "`StatusAlert` must only be used from the main thread.")
     }
 }
+
+// Compatibility
+
+#if swift(>=4.0)
+    private let NSKernAttributeName = NSAttributedStringKey.kern
+    private let NSParagraphStyleAttributeName = NSAttributedStringKey.paragraphStyle
+#endif

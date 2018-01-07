@@ -1,7 +1,7 @@
 ![Author StatusAlert](https://assets.gitlab-static.net/ZEBSTER/FrameworksAssets/raw/master/StatusAlert/StatusAlertHeader.png)
 
 <p align="center">
-<a href=""><img alt="Swift" src="https://img.shields.io/badge/Swift-4.0-orange.svg?style=flat" /></a>
+<a href=""><img alt="Swift" src="https://img.shields.io/badge/Swift-3.2+-orange.svg?style=flat" /></a>
 <a href=""><img alt="Objective-C" src="https://img.shields.io/badge/Objective--C-supported-blue.svg?style=flat" /></a>
 <a href="http://cocoapods.org/pods/StatusAlert"><img alt="Platform" src="https://img.shields.io/cocoapods/p/StatusAlert.svg?style=flat&label=Platform" /></a>
 <a href="https://raw.githubusercontent.com/LowKostKustomz/StatusAlert/master/LICENSE"><img alt="License" src="https://img.shields.io/cocoapods/l/StatusAlert.svg?style=flat&label=License" /></a>
@@ -49,7 +49,7 @@ It looks very similar to the alerts displayed in Podcasts, Apple Music and News 
 
 * Xcode 9.0 or later
 * iOS 9.0 or later
-* Swift 4.0
+* Swift 3.2 and later
 
 ## Installation
 

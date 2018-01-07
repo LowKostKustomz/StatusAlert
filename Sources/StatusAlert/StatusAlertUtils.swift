@@ -13,10 +13,10 @@ import UIKit
         @objc public static let common: Appearance = Appearance()
         
         /// - Note: Do not change to save system look
-        @objc public var titleFont: UIFont = UIFont.systemFont(ofSize: 23, weight: UIFont.Weight.semibold)
+        @objc public var titleFont: UIFont = UIFont.systemFont(ofSize: 23, weight: UIFontWeightSemibold)
         
         /// - Note: Do not change to save system look
-        @objc public var messageFont: UIFont = UIFont.systemFont(ofSize: 16, weight: UIFont.Weight.regular)
+        @objc public var messageFont: UIFont = UIFont.systemFont(ofSize: 16, weight: UIFontWeightRegular)
         
         /// - Note: Do not change to save system look
         @objc public var tintColor: UIColor = UIColor.darkGray
@@ -59,3 +59,10 @@ import UIKit
         static let defaultTitleBottomSpace: CGFloat = 5
     }
 }
+
+// Compatibility
+
+#if swift(>=4.0)
+    private let UIFontWeightSemibold = UIFont.Weight.semibold
+    private let UIFontWeightRegular = UIFont.Weight.regular
+#endif
