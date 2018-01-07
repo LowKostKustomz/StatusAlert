@@ -11,7 +11,7 @@ import UIKit
     
     /// - Note: Do not change to save system look
     /// - Note: Changes while showing will have no effect
-    @objc public var appearance: StatusAlertAppearance = StatusAlertAppearance.common
+    @objc public var appearance: Appearance = Appearance.common
     
     // MARK: - Private fields -
     

@@ -39,7 +39,7 @@
 {
     NSArray<Section*>* sections;
     NSString* cellReuseIdentifier;
-    VerticalPosition preferredVerticalPosition;
+    StatusAlertVerticalPosition preferredVerticalPosition;
     BOOL isPickable;
 }
 
@@ -53,7 +53,7 @@
     [super viewDidLoad];
     
     cellReuseIdentifier = @"reuseIdentifier";
-    preferredVerticalPosition = VerticalPositionCenter;
+    preferredVerticalPosition = StatusAlertVerticalPositionCenter;
     isPickable = true;
     
     [self setupNavigationItems];
@@ -192,13 +192,13 @@
     NSString* leftTitle;
     
     switch (preferredVerticalPosition) {
-        case VerticalPositionTop:
+        case StatusAlertVerticalPositionTop:
             leftTitle = @"Top";
             break;
-        case VerticalPositionCenter:
+        case StatusAlertVerticalPositionCenter:
             leftTitle = @"Center";
             break;
-        case VerticalPositionBottom:
+        case StatusAlertVerticalPositionBottom:
             leftTitle = @"Bottom";
             break;
     }
@@ -230,19 +230,19 @@
     UIAlertAction* topAction = [UIAlertAction actionWithTitle:@"Top"
                                                         style:UIAlertActionStyleDefault
                                                       handler:^(UIAlertAction * _Nonnull action) {
-                                                          preferredVerticalPosition = VerticalPositionTop;
+                                                          preferredVerticalPosition = StatusAlertVerticalPositionTop;
                                                           [weakSelf setupNavigationItems];
                                                       }];
     UIAlertAction* centerAction = [UIAlertAction actionWithTitle:@"Center"
                                                            style:UIAlertActionStyleDefault
                                                          handler:^(UIAlertAction * _Nonnull action) {
-                                                             preferredVerticalPosition = VerticalPositionCenter;
+                                                             preferredVerticalPosition = StatusAlertVerticalPositionCenter;
                                                              [weakSelf setupNavigationItems];
                                                          }];
     UIAlertAction* bottomAction = [UIAlertAction actionWithTitle:@"Bottom"
                                                            style:UIAlertActionStyleDefault
                                                          handler:^(UIAlertAction * _Nonnull action) {
-                                                             preferredVerticalPosition = VerticalPositionBottom;
+                                                             preferredVerticalPosition = StatusAlertVerticalPositionBottom;
                                                              [weakSelf setupNavigationItems];
                                                          }];
     UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"Cancel"
