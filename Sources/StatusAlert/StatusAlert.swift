@@ -130,7 +130,8 @@ import UIKit
     /// - Note: must be called from the main thread only
     @objc(showWithVerticalPosition:)
     public func show(withVerticalPosition verticalPosition: VerticalPosition) {
-        show(withVerticalPosition: verticalPosition)
+        show(with: verticalPosition,
+             offset: 0)
     }
     
     /// Shows `StatusAlert` in the center of `keyWindow` with `offset`
@@ -153,7 +154,7 @@ import UIKit
     public func show(in presenter: UIView,
                      withVerticalPosition verticalPosition: VerticalPosition) {
         show(inPresenter: presenter,
-             withVerticalPosition: verticalPosition)
+             with: verticalPosition)
     }
     
     /// Shows `StatusAlert` in the center of `presenter`
@@ -178,7 +179,7 @@ import UIKit
     @objc(showWithVerticalPosition:offset:)
     public func show(withVerticalPosition verticalPosition: VerticalPosition,
                      offset: CGFloat) {
-        show(withVerticalPosition: verticalPosition,
+        show(with: verticalPosition,
              offset: offset)
     }
     
@@ -194,14 +195,14 @@ import UIKit
                      withVerticalPosition verticalPosition: VerticalPosition,
                      offset: CGFloat) {
         show(inPresenter: presenter,
-             withVerticalPosition: verticalPosition,
+             with: verticalPosition,
              offset: offset)
     }
     
     // MARK: - Private methods -
     
     private func show(inPresenter presenter: UIView = UIApplication.shared.keyWindow ?? UIView(),
-                      withVerticalPosition verticalPosition: VerticalPosition = .center,
+                      with verticalPosition: VerticalPosition = .center,
                       offset: CGFloat? = nil) {
         guard canBeShowed
             else {
