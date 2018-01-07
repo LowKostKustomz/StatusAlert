@@ -88,7 +88,6 @@
 		E97FDC9220026FBA00450C12 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		E97FDC9320026FBA00450C12 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		E9A189EB1FDC1A7D00F3B75B /* StatusAlert.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StatusAlert.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E9A189ED1FDC1A7D00F3B75B /* StatusAlert.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StatusAlert.h; sourceTree = "<group>"; };
 		E9A189F81FDC1ABD00F3B75B /* StatusAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusAlert.swift; sourceTree = "<group>"; };
 		E9A189F91FDC1ABD00F3B75B /* StatusAlertUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusAlertUtils.swift; sourceTree = "<group>"; };
 		F24C75C8BB4C927F99C69D3C /* Pods-StatusAlertObjCDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StatusAlertObjCDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-StatusAlertObjCDemo/Pods-StatusAlertObjCDemo.release.xcconfig"; sourceTree = "<group>"; };
@@ -140,7 +139,6 @@
 				E92B11C31FF93EE6009FEA6C /* Sources */,
 				607FACF51AFB993E008FA782 /* Podspec Metadata */,
 				607FACD21AFB9204008FA782 /* StatusAlertDemoSwift */,
-				E9A189EC1FDC1A7D00F3B75B /* StatusAlert */,
 				E97CF1B720019E2400A6C870 /* StatusAlertDemoObjectiveC */,
 				607FACD11AFB9204008FA782 /* Products */,
 				1DA8AD8F3027921AABFB56D3 /* Pods */,
@@ -227,15 +225,6 @@
 				E97FDC9320026FBA00450C12 /* Images.xcassets */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		E9A189EC1FDC1A7D00F3B75B /* StatusAlert */ = {
-			isa = PBXGroup;
-			children = (
-				E9A189ED1FDC1A7D00F3B75B /* StatusAlert.h */,
-			);
-			name = StatusAlert;
-			path = StatusAlertDemoSwift;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
