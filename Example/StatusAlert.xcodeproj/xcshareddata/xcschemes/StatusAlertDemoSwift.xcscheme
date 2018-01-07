@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "607FACCF1AFB9204008FA782"
-               BuildableName = "StatusAlertExample.app"
-               BlueprintName = "StatusAlertExample"
+               BuildableName = "StatusAlertSwiftDemo.app"
+               BlueprintName = "StatusAlertSwiftDemo"
                ReferencedContainer = "container:StatusAlert.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -58,8 +58,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "607FACCF1AFB9204008FA782"
-            BuildableName = "StatusAlertExample.app"
-            BlueprintName = "StatusAlertExample"
+            BuildableName = "StatusAlertSwiftDemo.app"
+            BlueprintName = "StatusAlertSwiftDemo"
             ReferencedContainer = "container:StatusAlert.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -82,8 +82,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "607FACCF1AFB9204008FA782"
-            BuildableName = "StatusAlertExample.app"
-            BlueprintName = "StatusAlertExample"
+            BuildableName = "StatusAlertSwiftDemo.app"
+            BlueprintName = "StatusAlertSwiftDemo"
             ReferencedContainer = "container:StatusAlert.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -101,8 +101,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "607FACCF1AFB9204008FA782"
-            BuildableName = "StatusAlertExample.app"
-            BlueprintName = "StatusAlertExample"
+            BuildableName = "StatusAlertSwiftDemo.app"
+            BlueprintName = "StatusAlertSwiftDemo"
             ReferencedContainer = "container:StatusAlert.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

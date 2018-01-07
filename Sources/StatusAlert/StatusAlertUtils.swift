@@ -5,35 +5,39 @@
 
 import UIKit
 
-extension StatusAlert {
-    public enum Appearance {
-        /// - Note: Do not change to save system look
-        public static var titleFont: UIFont = UIFont.systemFont(ofSize: 23, weight: UIFont.Weight.semibold)
+@objc extension StatusAlert {
+    
+    @objc(StatusAlertAppearance)
+    public final class Appearance: NSObject {
+        
+        @objc public static let common: Appearance = Appearance()
         
         /// - Note: Do not change to save system look
-        public static var messageFont: UIFont = UIFont.systemFont(ofSize: 16, weight: UIFont.Weight.regular)
+        @objc public var titleFont: UIFont = UIFont.systemFont(ofSize: 23, weight: UIFont.Weight.semibold)
         
         /// - Note: Do not change to save system look
-        public static var contentColor: UIColor = UIColor.darkGray
+        @objc public var messageFont: UIFont = UIFont.systemFont(ofSize: 16, weight: UIFont.Weight.regular)
+        
+        /// - Note: Do not change to save system look
+        @objc public var tintColor: UIColor = UIColor.darkGray
         
         /// Used if device does not support blur or if `Reduce Transparency` toggle
         /// in `General->Accessibility->Increase Contrast` is on
         /// - Note: Do not change to save system look
-        public static var backgroundColor: UIColor = UIColor.groupTableViewBackground
+        @objc public var backgroundColor: UIColor = UIColor.groupTableViewBackground
     }
     
-    public enum VerticalPosition {
-        /// position in the center of the view with given `offset`
-        /// - Note: Pass nil to save system look
-        case center(offset: CGFloat?)
+    @objc(StatusAlertVerticalPosition)
+    public enum VerticalPosition: Int {
         
-        /// position on the top of the view with given `offset`
-        /// - Note: Pass nil to save default value
-        case top(offset: CGFloat?)
+        /// Position in the center of the view
+        case center
         
-        /// position at the bottom of the view with given `offset`
-        /// - Note: Pass nil to save default value
-        case bottom(offset: CGFloat?)
+        /// Position on the top of the view
+        case top
+        
+        /// Position at the bottom of the view
+        case bottom
     }
     
     enum SizesAndDistances {

@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double Pods_StatusAlert_TestsVersionNumber;
-FOUNDATION_EXPORT const unsigned char Pods_StatusAlert_TestsVersionString[];
+FOUNDATION_EXPORT double Pods_StatusAlertObjCDemoVersionNumber;
+FOUNDATION_EXPORT const unsigned char Pods_StatusAlertObjCDemoVersionString[];
 

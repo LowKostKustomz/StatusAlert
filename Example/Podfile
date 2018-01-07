@@ -1,11 +1,9 @@
 use_frameworks!
 
-target 'StatusAlert_Example' do
+target 'StatusAlertSwiftDemo' do
   pod 'StatusAlert', :path => '../'
+end
 
-  target 'StatusAlert_Tests' do
-    inherit! :search_paths
-
-    
-  end
+target 'StatusAlertObjCDemo' do
+    pod 'StatusAlert', :path => '../'
 end

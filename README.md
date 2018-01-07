@@ -2,6 +2,7 @@
 
 <p align="center">
 <a href=""><img alt="Swift" src="https://img.shields.io/badge/Swift-4.0-orange.svg?style=flat" /></a>
+<a href=""><img alt="Objective-C" src="https://img.shields.io/badge/Objective--C-supported-blue.svg?style=flat" /></a>
 <a href="http://cocoapods.org/pods/StatusAlert"><img alt="Platform" src="https://img.shields.io/cocoapods/p/StatusAlert.svg?style=flat&label=Platform" /></a>
 <a href="https://raw.githubusercontent.com/LowKostKustomz/StatusAlert/master/LICENSE"><img alt="License" src="https://img.shields.io/cocoapods/l/StatusAlert.svg?style=flat&label=License" /></a>
 <br /><br />Dependency managers<br />
@@ -42,6 +43,7 @@ It looks very similar to the alerts displayed in Podcasts, Apple Music and News 
 * "Reduce transparency" mode support
 * Safe Areas support
 * Universal (iPhone & iPad)
+* Objective-C support
 
 ## Requirements
 
@@ -103,7 +105,8 @@ let statusAlert = StatusAlert.instantiate(withImage: UIImage(named: "Some image 
 
 // Presenting created instance
 statusAlert.show(in: viewShowAlertIn,
-		 withVerticalPosition: .center(offset: 0))
+		 withVerticalPosition: .center,
+		 offset: 0)
 ```
 > All the alert components (`image`, `title`, `message`) are optional, but at least one should be present. Otherwise `show()` method will be ignored.
 >
@@ -122,19 +125,13 @@ Display alert anywhere you want, either on the top, in the center or at the bott
 
 ### Appearance
 
-You can customize a single alert's appearance via the `StatusAlert`'s properties
+You can customize a single alert's appearance via the `StatusAlert`'s `appearance` property or for all alerts at once with `StatusAlert.Appearance`'s `common` property
 
 ```swift
-public var titleFont: UIFont
-public var messageFont: UIFont
-public var contentColor: UIColor
-```
-or for all alerts at once with `StatusAlert.Appearance`'s properties
-
-```swift
-public static var titleFont: UIFont
-public static var messageFont: UIFont
-public static var contentColor: UIColor
+var titleFont: UIFont
+var messageFont: UIFont
+var tintColor: UIColor
+var backgroundColor: UIColor
 ```
 
 ### Dismissal
