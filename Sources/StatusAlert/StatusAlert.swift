@@ -13,6 +13,9 @@ import UIKit
     /// - Note: Changes while showing will have no effect
     @objc public var appearance: Appearance = Appearance.common
     
+    /// Announced to VoiceOver when the alert gets presented
+    @objc public var accessibilityAnnouncement: String? = nil
+    
     // MARK: - Private fields -
     
     /// Used to present only one `StatusAlert` at once
@@ -220,6 +223,9 @@ import UIKit
     /// Must be called before the `StatusAlert` presenting
     private func prepare() {
         assertIsMainThread()
+        
+        isAccessibilityElement = false
+        accessibilityTraits = UIAccessibilityTraitNone
         
         let stackView = createStackView()
         
@@ -450,6 +456,8 @@ import UIKit
         let imageView = UIImageView(image: image)
         imageView.contentMode = .scaleAspectFit
         imageView.tintColor = appearance.tintColor
+        imageView.isAccessibilityElement = false
+        imageView.accessibilityTraits = UIAccessibilityTraitNone
         
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView
@@ -507,6 +515,8 @@ import UIKit
         label.textAlignment = .center
         label.numberOfLines = 0
         label.textColor = appearance.tintColor
+        label.isAccessibilityElement = false
+        label.accessibilityTraits = UIAccessibilityTraitNone
         return label
     }
     
@@ -548,7 +558,9 @@ import UIKit
                     }
                     self.contentView.transform = CGAffineTransform.identity
             },
-                completion: nil)
+                completion: { [weak self] (finished) in
+                    UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, self?.accessibilityAnnouncement)
+            })
         }
     }
     

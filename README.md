@@ -40,7 +40,8 @@ It looks very similar to the alerts displayed in Podcasts, Apple Music and News 
 ## Features
 
 * System-like look and feel
-* "Reduce transparency" mode support
+* Reduce transparency mode support
+* VoiceOver support
 * Safe Areas support
 * Universal (iPhone & iPad)
 * Objective-C support
@@ -100,9 +101,7 @@ let statusAlert = StatusAlert.instantiate(withImage: UIImage(named: "Some image 
 					  canBePickedOrDismissed: isUserInteractionAllowed)
 
 // Presenting created instance
-statusAlert.show(in: viewShowAlertIn,
-		 withVerticalPosition: .center,
-		 offset: 0)
+statusAlert.showInKeyWindow()
 ```
 > All the alert components (`image`, `title`, `message`) are optional, but at least one should be present. Otherwise `show()` method will be ignored.
 >
