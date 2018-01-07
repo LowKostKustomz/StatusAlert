@@ -18,7 +18,7 @@
 StatusAlert is an iOS framework that displays status alerts similar to Apple's system self-hiding alerts. It is well suited for notifying user without interrupting user flow in iOS-like way.
 
 It looks very similar to the alerts displayed in Podcasts, Apple Music and News apps.
-![System StatusAlert](Assets/iPhonesWithSystemAlerts.png)
+![System StatusAlert](https://raw.githubusercontent.com/LowKostKustomz/StatusAlert/master/Assets/iPhonesWithSystemAlerts.png)
 
  - [Features](#features)
  - [Requirements](#requirements)
@@ -89,7 +89,7 @@ dependencies: [
 
 Demo application is included in the `StatusAlert` workspace. To run it clone the repo.
 
-![Demo StatusAlert](Assets/iPhonesWithStatusAlert.png)
+![Demo StatusAlert](https://raw.githubusercontent.com/LowKostKustomz/StatusAlert/master/Assets/iPhonesWithStatusAlert.png)
 
 ## Usage
 
@@ -144,9 +144,9 @@ You can also pass `canBePickedOrDismissed: true` into `StatusAlert`'s `instantia
 
 [BitxfyAppStoreLink]: https://itunes.apple.com/us/app/bitxfy-bitcoin-wallet/id1326910438?ls=1&mt=8
 
-### • <img src="Assets/BitxfyIcon.png" align="center" width="40"> [Bitxfy][BitxfyAppstoreLink]
+### • <img src="https://raw.githubusercontent.com/LowKostKustomz/StatusAlert/master/Assets/BitxfyIcon.png" align="center" width="40"> [Bitxfy][BitxfyAppstoreLink]
 
-[![BitxfyScreenShot](Assets/BitxfyStatusAlert.png)][BitxfyAppstoreLink]
+[![BitxfyScreenShot](https://raw.githubusercontent.com/LowKostKustomz/StatusAlert/master/Assets/BitxfyStatusAlert.png)][BitxfyAppstoreLink]
 
 > Feel free to submit pull request if you are using this framework in your apps.
 
