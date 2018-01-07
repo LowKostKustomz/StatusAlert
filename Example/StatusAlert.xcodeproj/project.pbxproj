@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		26D405C8A596B84616635E78 /* Pods_StatusAlert_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7470C016B9F420B578D98654 /* Pods_StatusAlert_Example.framework */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
+		97A2FAB08B0235866A6B0F31 /* Pods_StatusAlertSwiftDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D10039612BCB7DFE8C1A422 /* Pods_StatusAlertSwiftDemo.framework */; };
+		ABE734CCAC64EC1143721692 /* Pods_StatusAlertObjCDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C11B2DCF6B626ABDCD0A2BD5 /* Pods_StatusAlertObjCDemo.framework */; };
 		E92B11BF1FF92412009FEA6C /* UIDevice+Blur.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92B11BD1FF92409009FEA6C /* UIDevice+Blur.swift */; };
 		E92B11C01FF92412009FEA6C /* UIDevice+Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92B11BE1FF92409009FEA6C /* UIDevice+Platform.swift */; };
 		E97CF1BA20019E2400A6C870 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E97CF1B920019E2400A6C870 /* AppDelegate.m */; };
@@ -19,13 +20,18 @@
 		E97FDC9720026FD200450C12 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E97FDC9320026FBA00450C12 /* Images.xcassets */; };
 		E97FDC9820026FDD00450C12 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = E97FDC9120026FBA00450C12 /* LaunchScreen.xib */; };
 		E97FDC9920026FDD00450C12 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E97FDC9320026FBA00450C12 /* Images.xcassets */; };
-		E9A189F21FDC1A7D00F3B75B /* StatusAlert.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9A189EB1FDC1A7D00F3B75B /* StatusAlert.framework */; };
-		E9A189F31FDC1A7D00F3B75B /* StatusAlert.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E9A189EB1FDC1A7D00F3B75B /* StatusAlert.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E9A189FA1FDC1ABD00F3B75B /* StatusAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A189F81FDC1ABD00F3B75B /* StatusAlert.swift */; };
 		E9A189FB1FDC1ABD00F3B75B /* StatusAlertUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A189F91FDC1ABD00F3B75B /* StatusAlertUtils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		E97FDC9D200275CB00450C12 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 607FACC81AFB9204008FA782 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E9A189EA1FDC1A7D00F3B75B;
+			remoteInfo = StatusAlert;
+		};
 		E9A189F01FDC1A7D00F3B75B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 607FACC81AFB9204008FA782 /* Project object */;
@@ -36,13 +42,22 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		E97FDC9F200275CB00450C12 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E9A189F71FDC1A7D00F3B75B /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				E9A189F31FDC1A7D00F3B75B /* StatusAlert.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -50,17 +65,16 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		02A1E32D00CC1249994E4ECF /* Pods-StatusAlert_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StatusAlert_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StatusAlert_Tests/Pods-StatusAlert_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		165C8F002F97597DCD7D0E8F /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
-		4A60AF17A8578EE176C83BEE /* Pods-StatusAlert_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StatusAlert_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-StatusAlert_Example/Pods-StatusAlert_Example.release.xcconfig"; sourceTree = "<group>"; };
+		23B5CC4B3C0BB1DA45A13343 /* Pods-StatusAlertSwiftDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StatusAlertSwiftDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-StatusAlertSwiftDemo/Pods-StatusAlertSwiftDemo.release.xcconfig"; sourceTree = "<group>"; };
+		319819D1900BB8BB9A45B1A8 /* Pods-StatusAlertSwiftDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StatusAlertSwiftDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StatusAlertSwiftDemo/Pods-StatusAlertSwiftDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* StatusAlertSwiftDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StatusAlertSwiftDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		607FACD71AFB9204008FA782 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		684FC704590441A5AD7E5CE9 /* Pods-StatusAlert_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StatusAlert_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StatusAlert_Example/Pods-StatusAlert_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		7470C016B9F420B578D98654 /* Pods_StatusAlert_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StatusAlert_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		99BC2B2A64FB51C61F06DDE3 /* Pods_StatusAlert_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StatusAlert_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B6DCF47810F7CB5D542EE2AD /* Pods-StatusAlert_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StatusAlert_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-StatusAlert_Tests/Pods-StatusAlert_Tests.release.xcconfig"; sourceTree = "<group>"; };
+		7D10039612BCB7DFE8C1A422 /* Pods_StatusAlertSwiftDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StatusAlertSwiftDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		86418015C6A00C5A36471684 /* Pods-StatusAlertObjCDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StatusAlertObjCDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StatusAlertObjCDemo/Pods-StatusAlertObjCDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		C11B2DCF6B626ABDCD0A2BD5 /* Pods_StatusAlertObjCDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StatusAlertObjCDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E22DBC2D161C23A75FD86CD2 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		E92B11BD1FF92409009FEA6C /* UIDevice+Blur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Blur.swift"; sourceTree = "<group>"; };
 		E92B11BE1FF92409009FEA6C /* UIDevice+Platform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Platform.swift"; sourceTree = "<group>"; };
@@ -77,6 +91,7 @@
 		E9A189ED1FDC1A7D00F3B75B /* StatusAlert.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StatusAlert.h; sourceTree = "<group>"; };
 		E9A189F81FDC1ABD00F3B75B /* StatusAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusAlert.swift; sourceTree = "<group>"; };
 		E9A189F91FDC1ABD00F3B75B /* StatusAlertUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusAlertUtils.swift; sourceTree = "<group>"; };
+		F24C75C8BB4C927F99C69D3C /* Pods-StatusAlertObjCDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StatusAlertObjCDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-StatusAlertObjCDemo/Pods-StatusAlertObjCDemo.release.xcconfig"; sourceTree = "<group>"; };
 		F9F31DA03D850F944EE3E8AF /* StatusAlert.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = StatusAlert.podspec; path = ../StatusAlert.podspec; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -85,8 +100,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				26D405C8A596B84616635E78 /* Pods_StatusAlert_Example.framework in Frameworks */,
-				E9A189F21FDC1A7D00F3B75B /* StatusAlert.framework in Frameworks */,
+				97A2FAB08B0235866A6B0F31 /* Pods_StatusAlertSwiftDemo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,6 +108,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ABE734CCAC64EC1143721692 /* Pods_StatusAlertObjCDemo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -110,10 +125,10 @@
 		1DA8AD8F3027921AABFB56D3 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				684FC704590441A5AD7E5CE9 /* Pods-StatusAlert_Example.debug.xcconfig */,
-				4A60AF17A8578EE176C83BEE /* Pods-StatusAlert_Example.release.xcconfig */,
-				02A1E32D00CC1249994E4ECF /* Pods-StatusAlert_Tests.debug.xcconfig */,
-				B6DCF47810F7CB5D542EE2AD /* Pods-StatusAlert_Tests.release.xcconfig */,
+				86418015C6A00C5A36471684 /* Pods-StatusAlertObjCDemo.debug.xcconfig */,
+				F24C75C8BB4C927F99C69D3C /* Pods-StatusAlertObjCDemo.release.xcconfig */,
+				319819D1900BB8BB9A45B1A8 /* Pods-StatusAlertSwiftDemo.debug.xcconfig */,
+				23B5CC4B3C0BB1DA45A13343 /* Pods-StatusAlertSwiftDemo.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -146,9 +161,9 @@
 		607FACD21AFB9204008FA782 /* StatusAlertDemoSwift */ = {
 			isa = PBXGroup;
 			children = (
+				607FACD41AFB9204008FA782 /* Info.plist */,
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
-				607FACD41AFB9204008FA782 /* Info.plist */,
 			);
 			path = StatusAlertDemoSwift;
 			sourceTree = "<group>";
@@ -166,8 +181,8 @@
 		9AE53F72F28BA88E415996E7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				7470C016B9F420B578D98654 /* Pods_StatusAlert_Example.framework */,
-				99BC2B2A64FB51C61F06DDE3 /* Pods_StatusAlert_Tests.framework */,
+				C11B2DCF6B626ABDCD0A2BD5 /* Pods_StatusAlertObjCDemo.framework */,
+				7D10039612BCB7DFE8C1A422 /* Pods_StatusAlertSwiftDemo.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -197,10 +212,10 @@
 			children = (
 				E97CF1B820019E2400A6C870 /* AppDelegate.h */,
 				E97CF1B920019E2400A6C870 /* AppDelegate.m */,
-				E97CF1BB20019E2400A6C870 /* ViewController.h */,
-				E97CF1BC20019E2500A6C870 /* ViewController.m */,
 				E97CF1C620019E2500A6C870 /* Info.plist */,
 				E97CF1C720019E2500A6C870 /* main.m */,
+				E97CF1BB20019E2400A6C870 /* ViewController.h */,
+				E97CF1BC20019E2500A6C870 /* ViewController.m */,
 			);
 			path = StatusAlertDemoObjectiveC;
 			sourceTree = "<group>";
@@ -262,13 +277,18 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E97CF1C920019E2500A6C870 /* Build configuration list for PBXNativeTarget "StatusAlertObjCDemo" */;
 			buildPhases = (
+				941A3836E4AF3283A2600734 /* [CP] Check Pods Manifest.lock */,
 				E97CF1B220019E2400A6C870 /* Sources */,
 				E97CF1B320019E2400A6C870 /* Frameworks */,
 				E97CF1B420019E2400A6C870 /* Resources */,
+				EF70A6A1C40DC63A5874DB59 /* [CP] Embed Pods Frameworks */,
+				57B797B54B050AAB4487CF08 /* [CP] Copy Pods Resources */,
+				E97FDC9F200275CB00450C12 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				E97FDC9E200275CB00450C12 /* PBXTargetDependency */,
 			);
 			name = StatusAlertObjCDemo;
 			productName = StatusAlertDemoObjectiveC;
@@ -370,6 +390,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		57B797B54B050AAB4487CF08 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StatusAlertObjCDemo/Pods-StatusAlertObjCDemo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		7A2B368E972ED2F1D32C2D0A /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -382,7 +417,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StatusAlert_Example/Pods-StatusAlert_Example-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StatusAlertSwiftDemo/Pods-StatusAlertSwiftDemo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		941A3836E4AF3283A2600734 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-StatusAlertObjCDemo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		9E847D7A482576E27D7726F6 /* [CP] Embed Pods Frameworks */ = {
@@ -391,7 +444,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-StatusAlert_Example/Pods-StatusAlert_Example-frameworks.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-StatusAlertSwiftDemo/Pods-StatusAlertSwiftDemo-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/StatusAlert/StatusAlert.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -400,7 +453,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StatusAlert_Example/Pods-StatusAlert_Example-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StatusAlertSwiftDemo/Pods-StatusAlertSwiftDemo-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		A35CEA9FE84669886E7CE110 /* [CP] Check Pods Manifest.lock */ = {
@@ -414,11 +467,29 @@
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-StatusAlert_Example-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-StatusAlertSwiftDemo-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EF70A6A1C40DC63A5874DB59 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-StatusAlertObjCDemo/Pods-StatusAlertObjCDemo-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/StatusAlert/StatusAlert.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/StatusAlert.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StatusAlertObjCDemo/Pods-StatusAlertObjCDemo-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -457,6 +528,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		E97FDC9E200275CB00450C12 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E9A189EA1FDC1A7D00F3B75B /* StatusAlert */;
+			targetProxy = E97FDC9D200275CB00450C12 /* PBXContainerItemProxy */;
+		};
 		E9A189F11FDC1A7D00F3B75B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = E9A189EA1FDC1A7D00F3B75B /* StatusAlert */;
@@ -577,7 +653,7 @@
 		};
 		607FACF01AFB9204008FA782 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 684FC704590441A5AD7E5CE9 /* Pods-StatusAlert_Example.debug.xcconfig */;
+			baseConfigurationReference = 319819D1900BB8BB9A45B1A8 /* Pods-StatusAlertSwiftDemo.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -601,7 +677,7 @@
 		};
 		607FACF11AFB9204008FA782 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4A60AF17A8578EE176C83BEE /* Pods-StatusAlert_Example.release.xcconfig */;
+			baseConfigurationReference = 23B5CC4B3C0BB1DA45A13343 /* Pods-StatusAlertSwiftDemo.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -624,7 +700,9 @@
 		};
 		E97CF1CA20019E2500A6C870 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 86418015C6A00C5A36471684 /* Pods-StatusAlertObjCDemo.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -636,6 +714,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = E8RRW68D5D;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = StatusAlertDemoObjectiveC/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleAppObjectiveC;
@@ -647,7 +726,9 @@
 		};
 		E97CF1CB20019E2500A6C870 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F24C75C8BB4C927F99C69D3C /* Pods-StatusAlertObjCDemo.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -658,6 +739,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = E8RRW68D5D;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = StatusAlertDemoObjectiveC/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleAppObjectiveC;

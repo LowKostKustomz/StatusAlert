@@ -20,7 +20,7 @@ class ViewController: UIViewController {
                                         style: .grouped)
     
     private var sections: [Section] = []
-    private var preferredPosition: StatusAlert.VerticalPosition = .center(offset: nil)
+    private var preferredPosition: StatusAlert.VerticalPosition = .center
     private var isPickable: Bool = true
     
     static func instantiate() -> ViewController {
@@ -118,9 +118,9 @@ class ViewController: UIViewController {
                                  title: String?,
                                  message: String?) {
         let statusAlert = StatusAlert.instantiate(withImage: image,
-                                            title: title,
-                                            message: message,
-                                            canBePickedOrDismissed: isPickable)
+                                                  title: title,
+                                                  message: message,
+                                                  canBePickedOrDismissed: isPickable)
         statusAlert.show(withVerticalPosition: preferredPosition)
     }
     
@@ -132,21 +132,21 @@ class ViewController: UIViewController {
         actionSheet.addAction(UIAlertAction(title: "Top",
                                             style: .default,
                                             handler: { [weak self] (_) in
-                                                self?.preferredPosition = .top(offset: nil)
+                                                self?.preferredPosition = .top
                                                 self?.setNavigationItems()
         }))
         
         actionSheet.addAction(UIAlertAction(title: "Center",
                                             style: .default,
                                             handler: { [weak self] (_) in
-                                                self?.preferredPosition = .center(offset: nil)
+                                                self?.preferredPosition = .center
                                                 self?.setNavigationItems()
         }))
         
         actionSheet.addAction(UIAlertAction(title: "Bottom",
                                             style: .default,
                                             handler: { [weak self] (_) in
-                                                self?.preferredPosition = .bottom(offset: nil)
+                                                self?.preferredPosition = .bottom
                                                 self?.setNavigationItems()
         }))
         

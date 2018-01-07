@@ -4,12 +4,12 @@
 //
 
 #import "ViewController.h"
+@import StatusAlert;
 
 @interface TableViewCellModel : NSObject
 
 @property (nonatomic, strong) NSString* title;
 @property (nonatomic, copy, nonnull) void (^action)(void);
-// TODO: - add action block
 
 @end
 
@@ -39,6 +39,8 @@
 {
     NSArray<Section*>* sections;
     NSString* cellReuseIdentifier;
+    VerticalPosition preferredVerticalPosition;
+    BOOL isPickable;
 }
 
 - (instancetype)instantiate {
@@ -51,6 +53,10 @@
     [super viewDidLoad];
     
     cellReuseIdentifier = @"reuseIdentifier";
+    preferredVerticalPosition = VerticalPositionCenter;
+    isPickable = true;
+    
+    [self setupNavigationItems];
     
     UITableView* tableView = [[UITableView alloc] initWithFrame:CGRectZero
                                                           style:UITableViewStyleGrouped];
@@ -175,7 +181,110 @@
 }
 
 - (void)showStatusAlertWithImageNamed:(NSString*)imageName title:(NSString*)title message:(NSString*)message {
+    StatusAlert* statusAlert = [StatusAlert statusAlertWithImage:[UIImage imageNamed:imageName]
+                                                           title:title
+                                                         message:message
+                                          canBePickedOrDismissed:isPickable];
+    [statusAlert showInView:self.view withVerticalPosition:preferredVerticalPosition];
+}
+
+- (void)setupNavigationItems {
+    NSString* leftTitle;
     
+    switch (preferredVerticalPosition) {
+        case VerticalPositionTop:
+            leftTitle = @"Top";
+            break;
+        case VerticalPositionCenter:
+            leftTitle = @"Center";
+            break;
+        case VerticalPositionBottom:
+            leftTitle = @"Bottom";
+            break;
+    }
+    
+    [self.navigationItem setLeftBarButtonItems:@[[[UIBarButtonItem alloc] initWithTitle:leftTitle
+                                                                                  style:UIBarButtonItemStylePlain
+                                                                                 target:self
+                                                                                 action:@selector(selectVerticalPosition)]]];
+    
+    NSString* rightTitle;
+    
+    if (isPickable) {
+        rightTitle = @"Pickable";
+    } else {
+        rightTitle = @"Not pickable";
+    }
+    
+    [self.navigationItem setRightBarButtonItems:@[[[UIBarButtonItem alloc] initWithTitle:rightTitle
+                                                                                   style:UIBarButtonItemStylePlain
+                                                                                  target:self
+                                                                                  action:@selector(selectPickable)]]];
+}
+
+- (void)selectVerticalPosition {
+    UIAlertController* actionSheet = [UIAlertController alertControllerWithTitle:@"Pickable"
+                                                                         message:@"If the StatusAlert can be picked or dismissed by tap"
+                                                                  preferredStyle:UIAlertControllerStyleActionSheet];
+    __weak ViewController* weakSelf = self;
+    UIAlertAction* topAction = [UIAlertAction actionWithTitle:@"Top"
+                                                        style:UIAlertActionStyleDefault
+                                                      handler:^(UIAlertAction * _Nonnull action) {
+                                                          preferredVerticalPosition = VerticalPositionTop;
+                                                          [weakSelf setupNavigationItems];
+                                                      }];
+    UIAlertAction* centerAction = [UIAlertAction actionWithTitle:@"Center"
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction * _Nonnull action) {
+                                                             preferredVerticalPosition = VerticalPositionCenter;
+                                                             [weakSelf setupNavigationItems];
+                                                         }];
+    UIAlertAction* bottomAction = [UIAlertAction actionWithTitle:@"Bottom"
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction * _Nonnull action) {
+                                                             preferredVerticalPosition = VerticalPositionBottom;
+                                                             [weakSelf setupNavigationItems];
+                                                         }];
+    UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"Cancel"
+                                                           style:UIAlertActionStyleCancel
+                                                         handler:NULL];
+    
+    [actionSheet addAction:topAction];
+    [actionSheet addAction:centerAction];
+    [actionSheet addAction:bottomAction];
+    [actionSheet addAction:cancelAction];
+    
+    [actionSheet.popoverPresentationController setBarButtonItem:self.navigationItem.leftBarButtonItems.firstObject];
+    [self presentViewController:actionSheet
+                       animated:YES
+                     completion:NULL];
+}
+
+- (void)selectPickable {
+    UIAlertController* actionSheet = [UIAlertController alertControllerWithTitle:@"Pickable"
+                                                                         message:@"If the StatusAlert can be picked or dismissed by tap"
+                                                                  preferredStyle:UIAlertControllerStyleActionSheet];
+    __weak ViewController* weakSelf = self;
+    UIAlertAction* yesAction = [UIAlertAction actionWithTitle:@"Yes"
+                                                        style:UIAlertActionStyleDefault
+                                                      handler:^(UIAlertAction * _Nonnull action) {
+                                                          isPickable = true;
+                                                          [weakSelf setupNavigationItems];
+                                                      }];
+    UIAlertAction* noAction = [UIAlertAction actionWithTitle:@"No"
+                                                       style:UIAlertActionStyleDefault
+                                                     handler:^(UIAlertAction * _Nonnull action) {
+                                                         isPickable = false;
+                                                         [weakSelf setupNavigationItems];
+                                                     }];
+    
+    [actionSheet addAction:yesAction];
+    [actionSheet addAction:noAction];
+    
+    [actionSheet.popoverPresentationController setBarButtonItem:self.navigationItem.rightBarButtonItems.firstObject];
+    [self presentViewController:actionSheet
+                       animated:YES
+                     completion:NULL];
 }
 
 #pragma mark UITableViewDelegate
