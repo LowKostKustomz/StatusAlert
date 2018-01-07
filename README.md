@@ -49,7 +49,7 @@ It looks very similar to the alerts displayed in Podcasts, Apple Music and News 
 
 * Xcode 9.0 or later
 * iOS 9.0 or later
-* Swift 3.2 and later
+* Swift 3.2 or later
 
 ## Installation
 
@@ -76,13 +76,9 @@ github "LowKostKustomz/StatusAlert" ~> 0.9.4
 To install StatusAlert using [Swift Package Manager](https://github.com/apple/swift-package-manager) add this to your dependencies in a `Package.swift` file:
 
 ```swift
-...
 dependencies: [
-	...
-	.package(url: "https://github.com/LowKostKustomz/StatusAlert.git", .exact("0.9.4"))
-	...
-],
-...
+    .package(url: "https://github.com/LowKostKustomz/StatusAlert.git", .exact("0.9.4"))
+]
 ```
 
 ## Demo
