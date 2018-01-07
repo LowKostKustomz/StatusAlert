@@ -1,6 +1,6 @@
 //
 //  StatusAlert
-//  Copyright (c) 2017 LowKostKustomz. All rights reserved.
+//  Copyright (c) 2017-2018 LowKostKustomz. All rights reserved.
 //
 
 import UIKit

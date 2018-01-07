@@ -3,7 +3,7 @@
 //  StatusAlert
 //
 //  Created by Yegor Miroshnichenko on 12/9/17.
-//  Copyright © 2017 CocoaPods. All rights reserved.
+//  Copyright © 2017-2018 CocoaPods. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
