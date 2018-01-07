@@ -105,22 +105,42 @@ import UIKit
         return statusAlert
     }
     
-    // MARK: - Public methods -
+    // MARK: - Show methods -
     
-    /// Shows `StatusAlert` in `presenter`
+    /// Shows `StatusAlert` in the center of the `keyWindow`
+    /// - Note: must be called from the main thread only
+    @objc public func showInKeyWindow() {
+        show()
+    }
+    
+    /// Shows `StatusAlert` in the center of `presenter`
     ///
     /// - Parameters:
     ///   - presenter: view present `StatusAlert` in
-    ///   - verticalPosition: `StatusAlert` position in `presenter`
-    ///   - offset: offset for `verticalPosition` in `presenter`. To use default offset see the same method but without offset parameter.
     /// - Note: must be called from the main thread only
-    @objc(showInView:withVerticalPosition:offset:)
-    public func show(in presenter: UIView = UIApplication.shared.keyWindow ?? UIView(),
-                     withVerticalPosition verticalPosition: VerticalPosition = .center,
-                     offset: CGFloat) {
-        show(inPresenter: presenter,
-             withVerticalPosition: verticalPosition,
-             offset: offset)
+    @objc(showInView:)
+    public func show(in presenter: UIView) {
+        show(inPresenter: presenter)
+    }
+    
+    /// Shows `StatusAlert` in `keyWindow`
+    ///
+    /// - Parameters:
+    ///   - verticalPosition: `StatusAlert` position in `keyWindow`
+    /// - Note: must be called from the main thread only
+    @objc(showWithVerticalPosition:)
+    public func show(withVerticalPosition verticalPosition: VerticalPosition) {
+        show(withVerticalPosition: verticalPosition)
+    }
+    
+    /// Shows `StatusAlert` in the center of `keyWindow` with `offset`
+    ///
+    /// - Parameters:
+    ///   - offset: offset from center of `keyWindow`
+    /// - Note: must be called from the main thread only
+    @objc(showWithOffset:)
+    public func show(withOffset offset: CGFloat) {
+        show(offset: offset)
     }
     
     /// Shows `StatusAlert` in `presenter`
@@ -130,18 +150,59 @@ import UIKit
     ///   - verticalPosition: `StatusAlert` position in `presenter`
     /// - Note: must be called from the main thread only
     @objc(showInView:withVerticalPosition:)
-    public func show(in presenter: UIView = UIApplication.shared.keyWindow ?? UIView(),
-                     withVerticalPosition verticalPosition: VerticalPosition = .center) {
+    public func show(in presenter: UIView,
+                     withVerticalPosition verticalPosition: VerticalPosition) {
+        show(inPresenter: presenter,
+             withVerticalPosition: verticalPosition)
+    }
+    
+    /// Shows `StatusAlert` in the center of `presenter`
+    ///
+    /// - Parameters:
+    ///   - presenter: view present `StatusAlert` in
+    ///   - offset: offset from center in `presenter`
+    /// - Note: must be called from the main thread only
+    @objc(showInView:withOffset:)
+    public func show(in presenter: UIView,
+                     withOffset offset: CGFloat) {
+        show(inPresenter: presenter,
+             offset: offset)
+    }
+    
+    /// Shows `StatusAlert` in `keyWindow`
+    ///
+    /// - Parameters:
+    ///   - verticalPosition: `StatusAlert` position in `keyWindow`
+    ///   - offset: offset for `verticalPosition` in `keyWindow`
+    /// - Note: must be called from the main thread only
+    @objc(showWithVerticalPosition:offset:)
+    public func show(withVerticalPosition verticalPosition: VerticalPosition,
+                     offset: CGFloat) {
+        show(withVerticalPosition: verticalPosition,
+             offset: offset)
+    }
+    
+    /// Shows `StatusAlert` in `presenter`
+    ///
+    /// - Parameters:
+    ///   - presenter: view present `StatusAlert` in
+    ///   - verticalPosition: `StatusAlert` position in `presenter`
+    ///   - offset: offset for `verticalPosition` in `presenter`. To use default offset see the same method but without offset parameter.
+    /// - Note: must be called from the main thread only
+    @objc(showInView:withVerticalPosition:offset:)
+    public func show(in presenter: UIView,
+                     withVerticalPosition verticalPosition: VerticalPosition,
+                     offset: CGFloat) {
         show(inPresenter: presenter,
              withVerticalPosition: verticalPosition,
-             offset: nil)
+             offset: offset)
     }
     
     // MARK: - Private methods -
     
-    private func show(inPresenter presenter: UIView,
-                      withVerticalPosition verticalPosition: VerticalPosition,
-                      offset: CGFloat?) {
+    private func show(inPresenter presenter: UIView = UIApplication.shared.keyWindow ?? UIView(),
+                      withVerticalPosition verticalPosition: VerticalPosition = .center,
+                      offset: CGFloat? = nil) {
         guard canBeShowed
             else {
                 return
