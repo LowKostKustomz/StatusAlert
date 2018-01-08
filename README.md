@@ -26,6 +26,8 @@ It looks very similar to the alerts displayed in Podcasts, Apple Music and News 
 	- [CocoaPods](#cocoapods)
 	- [Carthage](#carthage)
 	- [Swift Package Manager](#swift-package-manager)
+	- [Manual installation](#manual-installation)
+	- [Objective-C integration](#objective-c-integration)
  - [Demo](#demo)
  - [Usage](#usage)
  - [Customization](#customization)
@@ -54,8 +56,6 @@ It looks very similar to the alerts displayed in Podcasts, Apple Music and News 
 
 ## Installation
 
-StatusAlert is available via CocoaPods, Carthage and Swift Package Manager.
-
 ### CocoaPods
 
 To install StatusAlert using [CocoaPods](http://cocoapods.org), add the following line to your `Podfile`:
@@ -80,6 +80,20 @@ To install StatusAlert using [Swift Package Manager](https://github.com/apple/sw
 dependencies: [
     .package(url: "https://github.com/LowKostKustomz/StatusAlert.git", .exact("0.10.0"))
 ]
+```
+
+### Manual installation
+
+You can also add this project:
+ * as git submodule;
+ * simply download and copy source files to your project.
+
+### Objective-C integration
+
+StatusAlert is fully compatible with Objective-C. To import it to your project just add the following line:
+
+```objective-c
+@import StatusAlert;
 ```
 
 ## Demo
