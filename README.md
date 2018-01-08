@@ -61,7 +61,7 @@ StatusAlert is available via CocoaPods, Carthage and Swift Package Manager.
 To install StatusAlert using [CocoaPods](http://cocoapods.org), add the following line to your `Podfile`:
 
 ```ruby
-pod 'StatusAlert', '~> 0.9.4'
+pod 'StatusAlert', '~> 0.10.0'
 ```
 
 ### Carthage
@@ -69,7 +69,7 @@ pod 'StatusAlert', '~> 0.9.4'
 To install StatusAlert using [Carthage](https://github.com/Carthage/Carthage), add the following line to your `Cartfile`:
 
 ```ruby
-github "LowKostKustomz/StatusAlert" ~> 0.9.4
+github "LowKostKustomz/StatusAlert" ~> 0.10.0
 ```
 
 ### Swift Package Manager
@@ -78,7 +78,7 @@ To install StatusAlert using [Swift Package Manager](https://github.com/apple/sw
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/LowKostKustomz/StatusAlert.git", .exact("0.9.4"))
+    .package(url: "https://github.com/LowKostKustomz/StatusAlert.git", .exact("0.10.0"))
 ]
 ```
 
