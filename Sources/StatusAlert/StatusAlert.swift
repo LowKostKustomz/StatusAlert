@@ -87,18 +87,19 @@ import UIKit
     ///   - canBePickedOrDismissed: determines wether StatusAlert can be picked or dismissed by tap
     /// - Returns: `StatusAlert` instance
     @objc(statusAlertWithImage:title:message:canBePickedOrDismissed:)
-    public static func instantiate(withImage image: UIImage?,
-                                   title: String?,
-                                   message: String?,
-                                   canBePickedOrDismissed: Bool = false) -> StatusAlert {
+    public static func instantiate(
+        withImage image: UIImage?,
+        title: String?,
+        message: String?,
+        canBePickedOrDismissed: Bool = false) -> StatusAlert {
+        
         let statusAlert = StatusAlert()
         
-        NotificationCenter
-            .default
-            .addObserver(statusAlert,
-                         selector: #selector(setupContentViewBackground),
-                         name: NSNotification.Name.UIAccessibilityReduceTransparencyStatusDidChange,
-                         object: nil)
+        NotificationCenter.default.addObserver(
+            statusAlert,
+            selector: #selector(setupContentViewBackground),
+            name: NSNotification.Name.UIAccessibilityReduceTransparencyStatusDidChange,
+            object: nil)
         
         statusAlert.image = image
         statusAlert.title = title
@@ -154,8 +155,10 @@ import UIKit
     ///   - verticalPosition: `StatusAlert` position in `presenter`
     /// - Note: must be called from the main thread only
     @objc(showInView:withVerticalPosition:)
-    public func show(in presenter: UIView,
-                     withVerticalPosition verticalPosition: VerticalPosition) {
+    public func show(
+        in presenter: UIView,
+        withVerticalPosition verticalPosition: VerticalPosition) {
+        
         show(inPresenter: presenter,
              with: verticalPosition)
     }
@@ -167,8 +170,10 @@ import UIKit
     ///   - offset: offset from center in `presenter`
     /// - Note: must be called from the main thread only
     @objc(showInView:withOffset:)
-    public func show(in presenter: UIView,
-                     withOffset offset: CGFloat) {
+    public func show(
+        in presenter: UIView,
+        withOffset offset: CGFloat) {
+        
         show(inPresenter: presenter,
              offset: offset)
     }
@@ -180,8 +185,10 @@ import UIKit
     ///   - offset: offset for `verticalPosition` in `keyWindow`
     /// - Note: must be called from the main thread only
     @objc(showWithVerticalPosition:offset:)
-    public func show(withVerticalPosition verticalPosition: VerticalPosition,
-                     offset: CGFloat) {
+    public func show(
+        withVerticalPosition verticalPosition: VerticalPosition,
+        offset: CGFloat) {
+        
         show(with: verticalPosition,
              offset: offset)
     }
@@ -194,9 +201,11 @@ import UIKit
     ///   - offset: offset for `verticalPosition` in `presenter`. To use default offset see the same method but without offset parameter.
     /// - Note: must be called from the main thread only
     @objc(showInView:withVerticalPosition:offset:)
-    public func show(in presenter: UIView,
-                     withVerticalPosition verticalPosition: VerticalPosition,
-                     offset: CGFloat) {
+    public func show(
+        in presenter: UIView,
+        withVerticalPosition verticalPosition: VerticalPosition,
+        offset: CGFloat) {
+        
         show(inPresenter: presenter,
              with: verticalPosition,
              offset: offset)
@@ -204,17 +213,20 @@ import UIKit
     
     // MARK: - Private methods -
     
-    private func show(inPresenter presenter: UIView = UIApplication.shared.keyWindow ?? UIView(),
-                      with verticalPosition: VerticalPosition = .center,
-                      offset: CGFloat? = nil) {
+    private func show(
+        inPresenter presenter: UIView = UIApplication.shared.keyWindow ?? UIView(),
+        with verticalPosition: VerticalPosition = .center,
+        offset: CGFloat? = nil) {
+        
         guard canBeShowed
             else {
                 return
         }
         prepare()
-        position(inPresenter: presenter,
-                 withVerticalPosition: verticalPosition,
-                 offset: offset)
+        position(
+            inPresenter: presenter,
+            withVerticalPosition: verticalPosition,
+            offset: offset)
         present()
     }
     
@@ -225,6 +237,7 @@ import UIKit
         assertIsMainThread()
         
         isAccessibilityElement = false
+        accessibilityElementsHidden = true
         accessibilityTraits = UIAccessibilityTraitNone
         
         let stackView = createStackView()
@@ -262,46 +275,31 @@ import UIKit
         }
     }
     
-    private func position(inPresenter presenter: UIView,
-                          withVerticalPosition verticalPosition: VerticalPosition,
-                          offset: CGFloat?) {
+    private func position(
+        inPresenter presenter: UIView,
+        withVerticalPosition verticalPosition: VerticalPosition,
+        offset: CGFloat?) {
+        
         assertIsMainThread()
         
         presenter.addSubview(self)
         
-        centerXAnchor
-            .constraint(equalTo: presenter.centerXAnchor)
-            .isActive = true
+        centerXAnchor.constraint(equalTo: presenter.centerXAnchor).isActive = true
         
         switch verticalPosition {
         case .center:
-            centerYAnchor
-                .constraint(equalTo: presenter.centerYAnchor,
-                            constant: offset ?? 0)
-                .isActive = true
+            centerYAnchor.constraint(equalTo: presenter.centerYAnchor, constant: offset ?? 0).isActive = true
         case .top:
             if #available(iOS 11, *) {
-                topAnchor
-                    .constraint(equalTo: presenter.safeAreaLayoutGuide.topAnchor,
-                                constant: offset ?? SizesAndDistances.defaultTopOffset)
-                    .isActive = true
+                topAnchor.constraint(equalTo: presenter.safeAreaLayoutGuide.topAnchor, constant: offset ?? SizesAndDistances.defaultTopOffset).isActive = true
             } else {
-                topAnchor
-                    .constraint(equalTo: presenter.topAnchor,
-                                constant: offset ?? SizesAndDistances.defaultTopOffset)
-                    .isActive = true
+                topAnchor.constraint(equalTo: presenter.topAnchor, constant: offset ?? SizesAndDistances.defaultTopOffset).isActive = true
             }
         case .bottom:
             if #available(iOS 11, *) {
-                bottomAnchor
-                    .constraint(equalTo: presenter.safeAreaLayoutGuide.bottomAnchor,
-                                constant: offset ?? -SizesAndDistances.defaultBottomOffset)
-                    .isActive = true
+                bottomAnchor.constraint(equalTo: presenter.safeAreaLayoutGuide.bottomAnchor, constant: offset ?? -SizesAndDistances.defaultBottomOffset).isActive = true
             } else {
-                bottomAnchor
-                    .constraint(equalTo: presenter.bottomAnchor,
-                                constant: offset ?? -SizesAndDistances.defaultBottomOffset)
-                    .isActive = true
+                bottomAnchor.constraint(equalTo: presenter.bottomAnchor, constant: offset ?? -SizesAndDistances.defaultBottomOffset).isActive = true
             }
         }
     }
@@ -313,22 +311,10 @@ import UIKit
         addSubview(contentView)
         
         contentView.translatesAutoresizingMaskIntoConstraints = false
-        contentView
-            .leadingAnchor
-            .constraint(equalTo: leadingAnchor)
-            .isActive = true
-        contentView
-            .trailingAnchor
-            .constraint(equalTo: trailingAnchor)
-            .isActive = true
-        contentView
-            .topAnchor
-            .constraint(equalTo: topAnchor)
-            .isActive = true
-        contentView
-            .bottomAnchor
-            .constraint(equalTo: bottomAnchor)
-            .isActive = true
+        contentView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        contentView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        contentView.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        contentView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         
         isUserInteractionEnabled = canBePickedOrDismissed
         if canBePickedOrDismissed {
@@ -347,62 +333,23 @@ import UIKit
         contentView.contentView.addSubview(stackView)
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView
-            .leftAnchor
-            .constraint(equalTo: contentView.leftAnchor,
-                        constant: SizesAndDistances.stackViewSideSpace)
-            .isActive = true
-        stackView
-            .rightAnchor
-            .constraint(equalTo: contentView.rightAnchor,
-                        constant: -SizesAndDistances.stackViewSideSpace)
-            .isActive = true
-        stackView
-            .bottomAnchor
-            .constraint(greaterThanOrEqualTo: contentView.bottomAnchor,
-                        constant: -SizesAndDistances.minimumStackViewBottomSpace)
-            .isActive = true
-        stackView
-            .centerXAnchor
-            .constraint(equalTo: contentView.centerXAnchor)
-            .isActive = true
+        stackView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: SizesAndDistances.stackViewSideSpace).isActive = true
+        stackView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -SizesAndDistances.stackViewSideSpace).isActive = true
+        stackView.bottomAnchor.constraint(greaterThanOrEqualTo: contentView.bottomAnchor, constant: -SizesAndDistances.minimumStackViewBottomSpace).isActive = true
+        stackView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         
         if image != nil
             && (title != nil || message != nil) {
-            contentView
-                .heightAnchor
-                .constraint(greaterThanOrEqualToConstant: SizesAndDistances.minimumAlertHeight)
-                .isActive = true
-            contentView
-                .widthAnchor
-                .constraint(equalToConstant: SizesAndDistances.defaultAlertWidth)
-                .isActive = true
-            stackView
-                .topAnchor
-                .constraint(greaterThanOrEqualTo: contentView.topAnchor,
-                            constant: SizesAndDistances.minimumStackViewTopSpace)
-                .isActive = true
-            stackView
-                .centerYAnchor
-                .constraint(equalTo: contentView.centerYAnchor,
-                            constant: (SizesAndDistances.minimumStackViewTopSpace - SizesAndDistances.minimumStackViewBottomSpace) / 2)
-                .isActive = true
+            contentView.heightAnchor.constraint(greaterThanOrEqualToConstant: SizesAndDistances.minimumAlertHeight).isActive = true
+            contentView.widthAnchor.constraint(equalToConstant: SizesAndDistances.defaultAlertWidth).isActive = true
+            stackView.topAnchor.constraint(greaterThanOrEqualTo: contentView.topAnchor, constant: SizesAndDistances.minimumStackViewTopSpace).isActive = true
+            stackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: (SizesAndDistances.minimumStackViewTopSpace - SizesAndDistances.minimumStackViewBottomSpace) / 2).isActive = true
         } else {
             if image == nil {
-                contentView
-                    .widthAnchor
-                    .constraint(equalToConstant: SizesAndDistances.defaultAlertWidth)
-                    .isActive = true
+                contentView.widthAnchor.constraint(equalToConstant: SizesAndDistances.defaultAlertWidth).isActive = true
             }
-            stackView
-                .topAnchor
-                .constraint(greaterThanOrEqualTo: contentView.topAnchor,
-                            constant: SizesAndDistances.minimumStackViewBottomSpace)
-                .isActive = true
-            stackView
-                .centerYAnchor
-                .constraint(equalTo: contentView.centerYAnchor)
-                .isActive = true
+            stackView.topAnchor.constraint(greaterThanOrEqualTo: contentView.topAnchor, constant: SizesAndDistances.minimumStackViewBottomSpace).isActive = true
+            stackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
         }
         return stackView
     }
@@ -440,10 +387,7 @@ import UIKit
         let spaceView = UIView()
         spaceView.backgroundColor = UIColor.clear
         spaceView.translatesAutoresizingMaskIntoConstraints = false
-        spaceView
-            .heightAnchor
-            .constraint(equalToConstant: height)
-            .isActive = true
+        spaceView.heightAnchor.constraint(equalToConstant: height).isActive = true
         return spaceView
     }
     
@@ -460,14 +404,8 @@ import UIKit
         imageView.accessibilityTraits = UIAccessibilityTraitNone
         
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView
-            .widthAnchor
-            .constraint(equalTo: imageView.heightAnchor)
-            .isActive = true
-        imageView
-            .widthAnchor
-            .constraint(equalToConstant: SizesAndDistances.defaultImageWidth)
-            .isActive = true
+        imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor).isActive = true
+        imageView.widthAnchor.constraint(equalToConstant: SizesAndDistances.defaultImageWidth).isActive = true
         
         return imageView
     }
@@ -503,8 +441,9 @@ import UIKit
         paragraphStyle.alignment = .center
         let attributedText = NSAttributedString(
             string: message,
-            attributes: [NSKernAttributeName : 0.01,
-                         NSParagraphStyleAttributeName : paragraphStyle])
+            attributes: [
+                NSKernAttributeName : 0.01,
+                NSParagraphStyleAttributeName : paragraphStyle])
         messageLabel.attributedText = attributedText
         
         return messageLabel
@@ -536,8 +475,9 @@ import UIKit
                 userInfo: nil,
                 repeats: false)
             if let timer = timer {
-                RunLoop.main.add(timer,
-                                 forMode: RunLoopMode.commonModes)
+                RunLoop.main.add(
+                    timer,
+                    forMode: RunLoopMode.commonModes)
             }
             contentView.transform = CGAffineTransform.identity.scaledBy(x: scale, y: scale)
             
