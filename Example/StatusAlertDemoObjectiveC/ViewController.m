@@ -185,6 +185,16 @@
                                                            title:title
                                                          message:message
                                           canBePickedOrDismissed:isPickable];
+    if (title) {
+        if (message) {
+            statusAlert.accessibilityAnnouncement = [[title stringByAppendingString:@", "] stringByAppendingString:message]
+        } else {
+            statusAlert.accessibilityAnnouncement = title
+        }
+    } else if (message) {
+        statusAlert.accessibilityAnnouncement = message
+    }
+    
     [statusAlert showInView:self.view withVerticalPosition:preferredVerticalPosition];
 }
 

@@ -143,6 +143,17 @@ class ViewController: UIViewController {
             title: title,
             message: message,
             canBePickedOrDismissed: isPickable)
+        statusAlert.accessibilityAnnouncement = {
+            if let title = title {
+                if let message = message {
+                    return [title, ", ", message].joined()
+                }
+                return title
+            } else if let message = message {
+                return message
+            }
+            return nil
+        }()
         statusAlert.show(withVerticalPosition: preferredPosition)
     }
     
