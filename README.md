@@ -1,14 +1,15 @@
 ![Author StatusAlert](https://assets.gitlab-static.net/ZEBSTER/FrameworksAssets/raw/master/StatusAlert/StatusAlertHeader.png)
 
 <p align="center">
-<a href=""><img alt="Swift" src="https://img.shields.io/badge/Swift-3.2+-orange.svg?style=flat" /></a>
-<a href=""><img alt="Objective-C" src="https://img.shields.io/badge/Objective--C-supported-blue.svg?style=flat" /></a>
-<a href="http://cocoapods.org/pods/StatusAlert"><img alt="Platform" src="https://img.shields.io/cocoapods/p/StatusAlert.svg?style=flat&label=Platform" /></a>
+<a><img alt="Swift" src="https://img.shields.io/badge/Swift-3.2+-orange.svg?style=flat&colorB=f87b47" /></a>
+<a><img alt="Objective-C" src="https://img.shields.io/badge/Objective--C-supported-blue.svg?style=flat" /></a>
+<a href="https://github.com/LowKostKustomz/StatusAlert/wiki"><img alt="Wiki" src="https://img.shields.io/badge/Wiki-available-lightgrey.svg?style=flat" /></a>
 <a href="https://raw.githubusercontent.com/LowKostKustomz/StatusAlert/master/LICENSE"><img alt="License" src="https://img.shields.io/cocoapods/l/StatusAlert.svg?style=flat&label=License" /></a>
+<a><img alt="Platform" src="https://img.shields.io/cocoapods/p/StatusAlert.svg?style=flat&label=Platform" /></a>
 <br /><br />Dependency managers<br />
-<a href="http://cocoapods.org/pods/StatusAlert"><img alt="Cocoapods" src="https://img.shields.io/cocoapods/v/StatusAlert.svg?style=flat&label=Cocoapods" /></a>
+<a href="http://cocoapods.org/pods/StatusAlert"><img alt="CocoaPods" src="https://img.shields.io/cocoapods/v/StatusAlert.svg?style=flat&label=CocoaPods&colorB=f80d1d" /></a>
 <a href="https://github.com/Carthage/Carthage"><img alt="Carthage" src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat" /></a>
-<a href="https://swiftpkgs.ng.bluemix.net/package/LowKostKustomz/StatusAlert"><img alt="SwiftPackageManager" src="https://img.shields.io/badge/Swift_Package_Manager-compatible-orange.svg?style=flat" /></a>
+<a href="https://swiftpkgs.ng.bluemix.net/package/LowKostKustomz/StatusAlert"><img alt="SwiftPackageManager" src="https://img.shields.io/badge/Swift_Package_Manager-compatible-orange.svg?style=flat^colorB=f87b47" /></a>
 <br />
 </p>
 
@@ -109,10 +110,11 @@ Demo application is included in the `StatusAlert` workspace. To run it clone the
 import StatusAlert
 
 // Creating StatusAlert instance
-let statusAlert = StatusAlert.instantiate(withImage: UIImage(named: "Some image name"),
-					  title: "StatusAlert title",
-					  message: "Message to show beyond title",
-					  canBePickedOrDismissed: isUserInteractionAllowed)
+let statusAlert = StatusAlert.instantiate(
+    withImage: UIImage(named: "Some image name"),
+    title: "StatusAlert title",
+    message: "Message to show beyond title",
+    canBePickedOrDismissed: isUserInteractionAllowed)
 
 // Presenting created instance
 statusAlert.showInKeyWindow()
@@ -163,7 +165,7 @@ You can also pass `canBePickedOrDismissed: true` into `StatusAlert`'s `instantia
 
 [FrameworksRepo]: https://github.com/LowKostKustomz/Frameworks
 
-![Author ActionsList](https://assets.gitlab-static.net/ZEBSTER/FrameworksAssets/raw/master/ActionsList/ActionsListAuthor.png)
+[![Author ActionsList](https://assets.gitlab-static.net/ZEBSTER/FrameworksAssets/raw/master/ActionsList/ActionsListAuthor.png)][FrameworksRepo]
 
 [<img src="https://assets.gitlab-static.net/ZEBSTER/FrameworksAssets/raw/master/Socials/Twitter.png" width="80">](https://twitter.com/LowKostKustomz)
 [<img src="https://assets.gitlab-static.net/ZEBSTER/FrameworksAssets/raw/master/Socials/Email.png" width="80">](mierosh@gmail.com)
