@@ -11,7 +11,7 @@ import UIKit
     
     /// - Note: Do not change to save system look
     /// - Note: Changes while showing will have no effect
-    @objc public var appearance: Appearance = Appearance.common
+    @objc public var appearance: Appearance = Appearance.copyCommon()
     
     /// Announced to VoiceOver when the alert gets presented
     @objc public var accessibilityAnnouncement: String? = nil

@@ -656,7 +656,7 @@
 				INFOPLIST_FILE = StatusAlertDemoSwift/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleAppSwift;
-				PRODUCT_BUNDLE_IDENTIFIER = com.lowkostkustomz.StatusAlertDemoSwift;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lowkostkustomz.StatusAlertDemoAppSwift;
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME)";
 				PRODUCT_NAME = StatusAlert;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -681,7 +681,7 @@
 				INFOPLIST_FILE = StatusAlertDemoSwift/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleAppSwift;
-				PRODUCT_BUNDLE_IDENTIFIER = com.lowkostkustomz.StatusAlertDemoSwift;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lowkostkustomz.StatusAlertDemoAppSwift;
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME)";
 				PRODUCT_NAME = StatusAlert;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -711,7 +711,7 @@
 				INFOPLIST_FILE = StatusAlertDemoObjectiveC/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleAppObjectiveC;
-				PRODUCT_BUNDLE_IDENTIFIER = com.lowkostkustomz.StatusAlertDemoObjectiveC;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lowkostkustomz.StatusAlertDemoAppObjectiveC;
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME)";
 				PRODUCT_NAME = StatusAlert;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -737,7 +737,7 @@
 				INFOPLIST_FILE = StatusAlertDemoObjectiveC/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleAppObjectiveC;
-				PRODUCT_BUNDLE_IDENTIFIER = com.lowkostkustomz.StatusAlertDemoObjectiveC;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lowkostkustomz.StatusAlertDemoAppObjectiveC;
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME)";
 				PRODUCT_NAME = StatusAlert;
 				TARGETED_DEVICE_FAMILY = "1,2";

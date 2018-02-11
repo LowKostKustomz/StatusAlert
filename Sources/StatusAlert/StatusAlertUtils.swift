@@ -25,6 +25,16 @@ import UIKit
         /// in `General->Accessibility->Increase Contrast` is on
         /// - Note: Do not change to save system look
         @objc public var backgroundColor: UIColor = UIColor.groupTableViewBackground
+        
+        static func copyCommon() -> Appearance {
+            let common = Appearance.common
+            let copy = Appearance()
+            copy.titleFont          = common.titleFont
+            copy.messageFont        = common.messageFont
+            copy.tintColor          = common.tintColor
+            copy.backgroundColor    = common.backgroundColor
+            return copy
+        }
     }
     
     @objc(StatusAlertVerticalPosition)
