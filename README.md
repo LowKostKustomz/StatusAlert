@@ -1,15 +1,15 @@
 ![Author StatusAlert](https://assets.gitlab-static.net/ZEBSTER/FrameworksAssets/raw/master/StatusAlert/StatusAlertHeader.png)
 
 <p align="center">
-<a><img alt="Swift" src="https://img.shields.io/badge/Swift-3.2+-orange.svg?style=flat&colorB=f87b47" /></a>
-<a><img alt="Objective-C" src="https://img.shields.io/badge/Objective--C-supported-blue.svg?style=flat" /></a>
+<a><img alt="Swift" src="https://img.shields.io/badge/Swift-3.2+-F57C00.svg?style=flat" /></a>
+<a><img alt="Objective-C" src="https://img.shields.io/badge/Objective--C-supported-1976D2.svg?style=flat" /></a>
 <a href="https://github.com/LowKostKustomz/StatusAlert/wiki"><img alt="Wiki" src="https://img.shields.io/badge/Wiki-available-lightgrey.svg?style=flat" /></a>
 <a href="https://raw.githubusercontent.com/LowKostKustomz/StatusAlert/master/LICENSE"><img alt="License" src="https://img.shields.io/cocoapods/l/StatusAlert.svg?style=flat&label=License" /></a>
 <a><img alt="Platform" src="https://img.shields.io/cocoapods/p/StatusAlert.svg?style=flat&label=Platform" /></a>
 <br /><br />Dependency managers<br />
-<a href="http://cocoapods.org/pods/StatusAlert"><img alt="CocoaPods" src="https://img.shields.io/cocoapods/v/StatusAlert.svg?style=flat&label=CocoaPods&colorB=f80d1d" /></a>
+<a href="http://cocoapods.org/pods/StatusAlert"><img alt="CocoaPods" src="https://img.shields.io/cocoapods/v/StatusAlert.svg?style=flat&label=CocoaPods&colorB=d32f2f" /></a>
 <a href="https://github.com/Carthage/Carthage"><img alt="Carthage" src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat" /></a>
-<a href="https://swiftpkgs.ng.bluemix.net/package/LowKostKustomz/StatusAlert"><img alt="SwiftPackageManager" src="https://img.shields.io/badge/Swift_Package_Manager-compatible-orange.svg?style=flat^colorB=f87b47" /></a>
+<a href="https://swiftpkgs.ng.bluemix.net/package/LowKostKustomz/StatusAlert"><img alt="SwiftPackageManager" src="https://img.shields.io/badge/Swift_Package_Manager-compatible-F57C00.svg?style=flat" /></a>
 <br />
 </p>
 
@@ -86,8 +86,8 @@ dependencies: [
 ### Manual installation
 
 You can also add this project:
- * as git submodule;
- * simply download and copy source files to your project.
+ * as git submodule
+ * simply download and copy source files to your project
 
 ### Objective-C integration
 
@@ -125,6 +125,8 @@ statusAlert.showInKeyWindow()
 >  > The alert must be presented only from the main thread, otherwise application will crash with an appropriate error.
 
 ## Customization
+
+> [Wiki](https://github.com/LowKostKustomz/StatusAlert/wiki) with more content and examples available
 
 ### Different configurations
 
