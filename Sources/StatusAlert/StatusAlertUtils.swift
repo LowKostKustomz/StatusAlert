@@ -50,24 +50,48 @@ import UIKit
         case bottom
     }
     
-    enum SizesAndDistances {
-        static let defaultInitialScale: CGFloat = 0.9
-        static let defaultCornerRadius: CGFloat = 10
+    @objc (StatusAlertSizesAndDistances)
+    public final class SizesAndDistances: NSObject {
         
-        static let defaultTopOffset: CGFloat = 32
-        static let defaultBottomOffset: CGFloat = 32
+        @objc public static let common: SizesAndDistances = SizesAndDistances()
         
-        static let defaultImageWidth: CGFloat = 90
-        static let defaultAlertWidth: CGFloat = 258
-        static let minimumAlertHeight: CGFloat = 240
+        @objc public var defaultInitialScale: CGFloat = 0.9
+        @objc public var defaultCornerRadius: CGFloat = 10
         
-        static let minimumStackViewTopSpace: CGFloat = 44
-        static let minimumStackViewBottomSpace: CGFloat = 24
-        static let stackViewSideSpace: CGFloat = 24
+        @objc public var defaultTopOffset: CGFloat = 32
+        @objc public var defaultBottomOffset: CGFloat = 32
         
-        static let defaultImageBottomSpace: CGFloat = 30
-        static let defaultTitleBottomSpace: CGFloat = 5
-        static let defaultImageToMessageSpace: CGFloat = 24
+        @objc public var defaultImageWidth: CGFloat = 90
+        @objc public var defaultAlertWidth: CGFloat = 258
+        @objc public var minimumAlertHeight: CGFloat = 240
+        
+        @objc public var minimumStackViewTopSpace: CGFloat = 44
+        @objc public var minimumStackViewBottomSpace: CGFloat = 24
+        @objc public var stackViewSideSpace: CGFloat = 24
+        
+        @objc public var defaultImageBottomSpace: CGFloat = 30
+        @objc public var defaultTitleBottomSpace: CGFloat = 5
+        @objc public var defaultImageToMessageSpace: CGFloat = 24
+        
+        @objc public static func copyCommon() -> SizesAndDistances {
+            let common = SizesAndDistances.common
+            let copy = SizesAndDistances()
+            
+            copy.defaultInitialScale            = common.defaultInitialScale
+            copy.defaultCornerRadius            = common.defaultCornerRadius
+            copy.defaultTopOffset               = common.defaultTopOffset
+            copy.defaultBottomOffset            = common.defaultBottomOffset
+            copy.defaultImageWidth              = common.defaultImageWidth
+            copy.defaultAlertWidth              = common.defaultAlertWidth
+            copy.minimumAlertHeight             = common.minimumAlertHeight
+            copy.minimumStackViewTopSpace       = common.minimumStackViewTopSpace
+            copy.minimumStackViewBottomSpace    = common.minimumStackViewBottomSpace
+            copy.stackViewSideSpace             = common.stackViewSideSpace
+            copy.defaultImageBottomSpace        = common.defaultImageBottomSpace
+            copy.defaultTitleBottomSpace        = common.defaultTitleBottomSpace
+            copy.defaultImageToMessageSpace     = common.defaultImageToMessageSpace
+            return copy
+        }
     }
 }
 

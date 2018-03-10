@@ -1,5 +1,5 @@
 PODS:
-  - StatusAlert (0.9.4)
+  - StatusAlert (0.10.1)
 
 DEPENDENCIES:
   - StatusAlert (from `../`)
@@ -9,7 +9,7 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  StatusAlert: ca9c4aa07c6ca1c772a79924ce016147124e7b30
+  StatusAlert: cb0392d42c47012a5163ee8358182f98c21d4a78
 
 PODFILE CHECKSUM: 951ba9893a9a5d668588518877668840ab9527c6
 
