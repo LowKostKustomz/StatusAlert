@@ -16,12 +16,17 @@ import UIKit
     /// Announced to VoiceOver when the alert gets presented
     @objc public var accessibilityAnnouncement: String? = nil
     
+    /// How long StatusAlert should on screen.
+    ///
+    /// - Note: This time should include fade animation duration (which `UINavigationControllerHideShowBarDuration`)
+    /// - Note: Changes while showing will have no effect
+    @objc public var alertShowingDuration: TimeInterval = 2
+    
     // MARK: - Private fields -
     
     /// Used to present only one `StatusAlert` at once
     private static var isPresenting: Bool = false
     
-    private let defaultDisappearTimerTimeInterval: TimeInterval = 2
     private let defaultFadeAnimationDuration: TimeInterval = TimeInterval(UINavigationControllerHideShowBarDuration)
     private let blurEffect: UIBlurEffect = UIBlurEffect(style: .light)
     
@@ -471,7 +476,7 @@ import UIKit
             
             let scale: CGFloat = SizesAndDistances.defaultInitialScale
             timer = Timer.scheduledTimer(
-                timeInterval: defaultDisappearTimerTimeInterval - defaultFadeAnimationDuration,
+                timeInterval: alertShowingDuration - defaultFadeAnimationDuration,
                 target: self,
                 selector: #selector(dismiss),
                 userInfo: nil,
