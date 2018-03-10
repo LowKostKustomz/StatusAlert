@@ -22,9 +22,12 @@ import UIKit
     /// - Note: Changes while showing will have no effect
     @objc public var alertShowingDuration: TimeInterval = 2
     
+    /// If multiple alerts can be on screen at once
+    @objc public static var shouldShowMultipleAlertsSimultaneously: Bool = false
+    
     // MARK: - Private fields -
     
-    /// Used to present only one `StatusAlert` at once
+    /// Used to present only one `StatusAlert` at once if `shouldShowMultipleAlertsSimultaneously` is `false`
     private static var isPresenting: Bool = false
     
     private let defaultFadeAnimationDuration: TimeInterval = TimeInterval(UINavigationControllerHideShowBarDuration)
@@ -41,7 +44,8 @@ import UIKit
     
     /// Determines whether `StatusAlert` can be showed
     private var canBeShowed: Bool {
-        if StatusAlert.isPresenting {
+        if !StatusAlert.shouldShowMultipleAlertsSimultaneously
+            && StatusAlert.isPresenting {
             return false
         }
         if image == nil,
@@ -471,7 +475,7 @@ import UIKit
     private func present() {
         assertIsMainThread()
         
-        if !StatusAlert.isPresenting {
+        if canBeShowed {
             StatusAlert.isPresenting = true
             
             let scale: CGFloat = SizesAndDistances.defaultInitialScale
