@@ -67,6 +67,7 @@ import UIKit
         
         static let defaultImageBottomSpace: CGFloat = 30
         static let defaultTitleBottomSpace: CGFloat = 5
+        static let defaultImageToMessageSpace: CGFloat = 24
     }
 }
 

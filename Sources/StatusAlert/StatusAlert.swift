@@ -247,6 +247,8 @@ import UIKit
             
             if title != nil && message != nil {
                 customSpace = SizesAndDistances.defaultImageBottomSpace
+            } else if title == nil {
+                customSpace = SizesAndDistances.defaultImageToMessageSpace
             } else {
                 customSpace = SizesAndDistances.defaultTitleBottomSpace
             }
