@@ -26,7 +26,7 @@ import UIKit
         /// - Note: Do not change to save system look
         @objc public var backgroundColor: UIColor = UIColor.groupTableViewBackground
         
-        static func copyCommon() -> Appearance {
+        @objc public static func copyCommon() -> Appearance {
             let common = Appearance.common
             let copy = Appearance()
             copy.titleFont          = common.titleFont
