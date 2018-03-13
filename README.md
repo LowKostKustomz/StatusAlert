@@ -6,7 +6,12 @@
 <a href="https://github.com/LowKostKustomz/StatusAlert/wiki"><img alt="Wiki" src="https://img.shields.io/badge/Wiki-available-lightgrey.svg?style=flat" /></a>
 <a href="https://raw.githubusercontent.com/LowKostKustomz/StatusAlert/master/LICENSE"><img alt="License" src="https://img.shields.io/cocoapods/l/StatusAlert.svg?style=flat&label=License" /></a>
 <a><img alt="Platform" src="https://img.shields.io/cocoapods/p/StatusAlert.svg?style=flat&label=Platform" /></a>
-<br /><br />Dependency managers<br />
+</p>
+<p align="center">
+<b>Dependency managers</b>
+</p>
+
+<p align="center">
 <a href="http://cocoapods.org/pods/StatusAlert"><img alt="CocoaPods" src="https://img.shields.io/cocoapods/v/StatusAlert.svg?style=flat&label=CocoaPods&colorB=d32f2f" /></a>
 <a href="https://github.com/Carthage/Carthage"><img alt="Carthage" src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat" /></a>
 <a href="https://swiftpkgs.ng.bluemix.net/package/LowKostKustomz/StatusAlert"><img alt="SwiftPackageManager" src="https://img.shields.io/badge/Swift_Package_Manager-compatible-F57C00.svg?style=flat" /></a>
@@ -14,31 +19,18 @@
 </p>
 
 
-
+<p align="center">
+	<strong><a href="#features"> Features </a></strong> |
+	<strong><a href="#installation"> Installation </a></strong> |
+	<strong><a href="#usage"> Usage </a></strong> |
+	<strong><a href="#customization"> Customization </a></strong>
+</p>
 
 StatusAlert is an iOS framework that displays status alerts similar to Apple's system self-hiding alerts. It is well suited for notifying user without interrupting user flow in iOS-like way.
 
 It looks very similar to the alerts displayed in Podcasts, Apple Music and News apps.
 ![System StatusAlert](https://raw.githubusercontent.com/LowKostKustomz/StatusAlert/master/Assets/iPhonesWithSystemAlerts.png)
 
- - [Features](#features)
- - [Requirements](#requirements)
- - [Installation](#installation)
-	- [CocoaPods](#cocoapods)
-	- [Carthage](#carthage)
-	- [Swift Package Manager](#swift-package-manager)
-	- [Manual installation](#manual-installation)
-	- [Objective-C integration](#objective-c-integration)
- - [Demo](#demo)
- - [Usage](#usage)
- - [Customization](#customization)
- 	- [Different configurations](#different-configurations)
- 	- [Vertical position](#vertical-position)
- 	- [Appearance](#appearance)
- 	- [Dismissal](#dismissal)
- - [Apps Using _StatusAlert_](#apps-using-statusalert)
- - [Author](#author)
- - [License](#license)
 
 ## Features
 
@@ -157,7 +149,15 @@ You can also pass `canBePickedOrDismissed: true` into `StatusAlert`'s `instantia
 
 [BitxfyAppStoreLink]: https://itunes.apple.com/us/app/bitxfy-bitcoin-wallet/id1326910438?ls=1&mt=8
 
-### • <img src="https://raw.githubusercontent.com/LowKostKustomz/StatusAlert/master/Assets/BitxfyIcon.png" align="center" width="40"> [Bitxfy][BitxfyAppstoreLink]
+<p align="center">
+<a href="https://itunes.apple.com/us/app/bitxfy-bitcoin-wallet/id1326910438?ls=1&mt=8">
+<img src="https://raw.githubusercontent.com/LowKostKustomz/StatusAlert/master/Assets/BitxfyIcon.png" align="center" width="40">
+</a>
+<br>
+<strong><a href="https://itunes.apple.com/us/app/bitxfy-bitcoin-wallet/id1326910438?ls=1&mt=8">
+Bitxfy
+</strong>
+</p>
 
 [![BitxfyScreenShot](https://raw.githubusercontent.com/LowKostKustomz/StatusAlert/master/Assets/BitxfyStatusAlert.png)][BitxfyAppstoreLink]
 
@@ -167,11 +167,15 @@ You can also pass `canBePickedOrDismissed: true` into `StatusAlert`'s `instantia
 
 [FrameworksRepo]: https://github.com/LowKostKustomz/Frameworks
 
-[![Author ActionsList](https://assets.gitlab-static.net/ZEBSTER/FrameworksAssets/raw/master/ActionsList/ActionsListAuthor.png)][FrameworksRepo]
+[![Author ActionsList](https://assets.gitlab-static.net/ZEBSTER/FrameworksAssets/raw/master/StatusAlert/StatusAlertAuthor.png)][FrameworksRepo]
 
-[<img src="https://assets.gitlab-static.net/ZEBSTER/FrameworksAssets/raw/master/Socials/Twitter.png" width="80">](https://twitter.com/LowKostKustomz)
-[<img src="https://assets.gitlab-static.net/ZEBSTER/FrameworksAssets/raw/master/Socials/Email.png" width="80">](mierosh@gmail.com)
-[<img src="https://assets.gitlab-static.net/ZEBSTER/FrameworksAssets/raw/master/Socials/Portfolio.png" width="80">][FrameworksRepo]
+<p align="center">
+<a href="https://twitter.com/LowKostKustomz"><img alt="https://twitter.com/LowKostKustomz" src="https://assets.gitlab-static.net/ZEBSTER/FrameworksAssets/raw/master/Socials/Twitter.png" width="80"/></a>
+<a href="https://www.instagram.com/lowkostkustomz/"><img alt="https://www.instagram.com/lowkostkustomz/" src="https://assets.gitlab-static.net/ZEBSTER/FrameworksAssets/raw/master/Socials/Instagram.png" width="80"/></a>
+<a href="https://stackoverflow.com/users/9076809/lowkostkustomz"><img alt="https://stackoverflow.com/users/9076809/lowkostkustomz" src="https://assets.gitlab-static.net/ZEBSTER/FrameworksAssets/raw/master/Socials/StackOverflow.png" width="80"/></a>
+<a href="mierosh@gmail.com"><img alt="mierosh@gmail.com" src="https://assets.gitlab-static.net/ZEBSTER/FrameworksAssets/raw/master/Socials/Email.png" width="80"/></a>
+<a href="https://github.com/LowKostKustomz/Frameworks"><img alt="https://github.com/LowKostKustomz/Frameworks" src="https://assets.gitlab-static.net/ZEBSTER/FrameworksAssets/raw/master/Socials/Portfolio.png" width="80"/></a>
+</p>
 
 ## License
 
