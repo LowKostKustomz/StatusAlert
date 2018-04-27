@@ -147,14 +147,14 @@ You can also pass `canBePickedOrDismissed: true` into `StatusAlert`'s `instantia
 
 ## Apps Using _StatusAlert_
 
-[BitxfyAppStoreLink]: https://itunes.apple.com/us/app/bitxfy-bitcoin-wallet/id1326910438?ls=1&mt=8
+[BitxfyAppStoreLink]: https://bitxfy.com
 
 <p align="center">
-<a href="https://itunes.apple.com/us/app/bitxfy-bitcoin-wallet/id1326910438?ls=1&mt=8">
+<a href="https://bitxfy.com">
 <img src="https://raw.githubusercontent.com/LowKostKustomz/StatusAlert/master/Assets/BitxfyIcon.png" align="center" width="40">
 </a>
 <br>
-<strong><a href="https://itunes.apple.com/us/app/bitxfy-bitcoin-wallet/id1326910438?ls=1&mt=8">
+<strong><a href="https://bitxfy.com">
 Bitxfy
 </strong>
 </p>
