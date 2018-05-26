@@ -199,27 +199,43 @@
 }
 
 - (void)setupNavigationItems {
-    NSString* leftTitle;
-    
+    NSString* verticalPositionTitle;
     switch (preferredVerticalPosition) {
         case StatusAlertVerticalPositionTop:
-            leftTitle = @"Top";
+            verticalPositionTitle = @"Top";
             break;
         case StatusAlertVerticalPositionCenter:
-            leftTitle = @"Center";
+            verticalPositionTitle = @"Center";
             break;
         case StatusAlertVerticalPositionBottom:
-            leftTitle = @"Bottom";
+            verticalPositionTitle = @"Bottom";
             break;
     }
-    
-    [self.navigationItem setLeftBarButtonItems:@[[[UIBarButtonItem alloc] initWithTitle:leftTitle
+    UIBarButtonItem* verticalPositionItem = [[UIBarButtonItem alloc] initWithTitle:verticalPositionTitle
+                                                                             style:UIBarButtonItemStylePlain
+                                                                            target:self
+                                                                            action:@selector(selectVerticalPosition)];
+
+    NSString* presentationsBehaviorTitle;
+    switch (StatusAlert.multiplePresentationsBehavior) {
+        case StatusAlertMultiplePresentationsBehaviorIgnoreIfAlreadyPresenting:
+            presentationsBehaviorTitle = @"Only one";
+            break;
+        case StatusAlertMultiplePresentationsBehaviorDismissCurrentlyPresented:
+            presentationsBehaviorTitle = @"Dismiss current";
+            break;
+        case StatusAlertMultiplePresentationsBehaviorShowMultiple:
+            presentationsBehaviorTitle = @"Display all";
+            break;
+    }
+    UIBarButtonItem* multiplePresentationsItem = [[UIBarButtonItem alloc] initWithTitle:presentationsBehaviorTitle
                                                                                   style:UIBarButtonItemStylePlain
                                                                                  target:self
-                                                                                 action:@selector(selectVerticalPosition)]]];
+                                                                                 action:@selector(selectPresentationsBehavior)];
+    
+    [self.navigationItem setLeftBarButtonItems:@[verticalPositionItem, multiplePresentationsItem]];
     
     NSString* rightTitle;
-    
     if (isPickable) {
         rightTitle = @"Pickable";
     } else {
@@ -264,6 +280,44 @@
     [actionSheet addAction:bottomAction];
     [actionSheet addAction:cancelAction];
     
+    [actionSheet.popoverPresentationController setBarButtonItem:self.navigationItem.leftBarButtonItems.firstObject];
+    [self presentViewController:actionSheet
+                       animated:YES
+                     completion:NULL];
+}
+
+- (void)selectPresentationsBehavior {
+    UIAlertController* actionSheet = [UIAlertController alertControllerWithTitle:@"Pickable"
+                                                                         message:@"If the StatusAlert can be picked or dismissed by tap"
+                                                                  preferredStyle:UIAlertControllerStyleActionSheet];
+    __weak ViewController* weakSelf = self;
+    UIAlertAction* topAction = [UIAlertAction actionWithTitle:@"Only one"
+                                                        style:UIAlertActionStyleDefault
+                                                      handler:^(UIAlertAction * _Nonnull action) {
+                                                          StatusAlert.multiplePresentationsBehavior = StatusAlertMultiplePresentationsBehaviorIgnoreIfAlreadyPresenting;
+                                                          [weakSelf setupNavigationItems];
+                                                      }];
+    UIAlertAction* centerAction = [UIAlertAction actionWithTitle:@"Dismiss current"
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction * _Nonnull action) {
+                                                             StatusAlert.multiplePresentationsBehavior = StatusAlertMultiplePresentationsBehaviorDismissCurrentlyPresented;
+                                                             [weakSelf setupNavigationItems];
+                                                         }];
+    UIAlertAction* bottomAction = [UIAlertAction actionWithTitle:@"Display all"
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction * _Nonnull action) {
+                                                             StatusAlert.multiplePresentationsBehavior = StatusAlertMultiplePresentationsBehaviorShowMultiple;
+                                                             [weakSelf setupNavigationItems];
+                                                         }];
+    UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"Cancel"
+                                                           style:UIAlertActionStyleCancel
+                                                         handler:NULL];
+
+    [actionSheet addAction:topAction];
+    [actionSheet addAction:centerAction];
+    [actionSheet addAction:bottomAction];
+    [actionSheet addAction:cancelAction];
+
     [actionSheet.popoverPresentationController setBarButtonItem:self.navigationItem.leftBarButtonItems.firstObject];
     [self presentViewController:actionSheet
                        animated:YES
