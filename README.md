@@ -85,7 +85,7 @@ You can also add this project:
 
 StatusAlert is fully compatible with Objective-C. To import it to your project just add the following line:
 
-```objective-c
+```objectiveс
 @import StatusAlert;
 ```
 
@@ -106,7 +106,8 @@ let statusAlert = StatusAlert.instantiate(
     withImage: UIImage(named: "Some image name"),
     title: "StatusAlert title",
     message: "Message to show beyond title",
-    canBePickedOrDismissed: isUserInteractionAllowed)
+    canBePickedOrDismissed: isUserInteractionAllowed
+)
 
 // Presenting created instance
 statusAlert.showInKeyWindow()
