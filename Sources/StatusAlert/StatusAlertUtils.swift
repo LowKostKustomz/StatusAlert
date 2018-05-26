@@ -23,6 +23,7 @@ import UIKit
         
         /// Used if device does not support blur or if `Reduce Transparency` toggle
         /// in `General->Accessibility->Increase Contrast` is on
+        ///
         /// - Note: Do not change to save system look
         @objc public var backgroundColor: UIColor = UIColor.groupTableViewBackground
         
