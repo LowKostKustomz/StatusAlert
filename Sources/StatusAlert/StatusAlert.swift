@@ -25,14 +25,27 @@ import UIKit
     /// - Note: This time should include fade animation duration (which is `UINavigationControllerHideShowBarDuration`)
     /// - Note: Changes while showing will have no effect
     @objc public var alertShowingDuration: TimeInterval = 2
+
+    /// Multiple presentation requests behavior
+    @objc public static var multiplePresentationsBehavior: MultiplePresentationsBehavior = .dismissCurrentlyPresented
     
     /// If multiple alerts can be on screen at once
-    @objc public static var shouldShowMultipleAlertsSimultaneously: Bool = false
+    @available(*, deprecated: 9.0)
+    @objc public static var shouldShowMultipleAlertsSimultaneously: Bool = false {
+        didSet {
+            if self.shouldShowMultipleAlertsSimultaneously {
+                self.multiplePresentationsBehavior = .showMultiple
+            } else {
+                self.multiplePresentationsBehavior = .ignoreIfAlreadyPresenting
+            }
+        }
+    }
     
     // MARK: - Private fields -
     
-    /// Used to present only one `StatusAlert` at once if `shouldShowMultipleAlertsSimultaneously` is `false`
-    private static var isPresenting: Bool = false
+    /// Used to present only one `StatusAlert` at once if `multiplePresentationsBehavior` is `ignoreIfAlreadyPresenting`
+    /// or to dismiss currently presented alerts if `multiplePresentationsBehavior` is `dismissCurrentlyPresented`
+    private static var currentlyPresentedStatusAlerts: [StatusAlert] = []
     
     private let defaultFadeAnimationDuration: TimeInterval = TimeInterval(UINavigationControllerHideShowBarDuration)
     private let blurEffect: UIBlurEffect = UIBlurEffect(style: .light)
@@ -46,10 +59,10 @@ import UIKit
     
     private var timer: Timer?
     
-        if !StatusAlert.shouldShowMultipleAlertsSimultaneously
-            && StatusAlert.isPresenting {
     /// Determines whether `StatusAlert` can be shown
     private var canBeShown: Bool {
+        if StatusAlert.multiplePresentationsBehavior == .ignoreIfAlreadyPresenting
+            && !StatusAlert.currentlyPresentedStatusAlerts.isEmpty {
             return false
         }
         if self.image == nil,
@@ -539,58 +552,85 @@ import UIKit
     // MARK: Presentation methods
     
     private func present() {
-        assertIsMainThread()
-        
-        if canBeShowed {
-            StatusAlert.isPresenting = true
-            
-            let scale: CGFloat = sizesAndDistances.defaultInitialScale
-            timer = Timer.scheduledTimer(
-                timeInterval: alertShowingDuration - defaultFadeAnimationDuration,
-                target: self,
-                selector: #selector(dismiss),
-                userInfo: nil,
-                repeats: false)
-            if let timer = timer {
-                RunLoop.main.add(
-                    timer,
-                    forMode: RunLoopMode.commonModes)
+        self.assertIsMainThread()
+
+        switch StatusAlert.multiplePresentationsBehavior {
+        case .ignoreIfAlreadyPresenting:
+            guard StatusAlert.currentlyPresentedStatusAlerts.isEmpty
+                else {
+                    return
             }
-            contentView.transform = CGAffineTransform.identity.scaledBy(x: scale, y: scale)
-            
-            UIView.animate(
-                withDuration: defaultFadeAnimationDuration,
-                delay: 0,
-                options: UIViewAnimationOptions.curveEaseOut,
-                animations: {
-                    if self.isBlurAvailable {
-                        if #available(iOS 11, *) {
-                            self.alpha = 1
-                        } else {
-                            self.contentView.contentView.alpha = 1
-                            self.contentView.effect = self.blurEffect
-                        }
-                    } else {
-                        self.alpha = 1
-                    }
-                    self.contentView.transform = CGAffineTransform.identity
-            },
-                completion: { [weak self] (finished) in
-                    UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, self?.accessibilityAnnouncement)
-            })
+            self.presentationMethod()
+        case .showMultiple:
+            self.presentationMethod()
+        case .dismissCurrentlyPresented:
+            let group = DispatchGroup()
+            for alert in StatusAlert.currentlyPresentedStatusAlerts {
+                group.enter()
+                alert.dismiss {
+                    group.leave()
+                }
+            }
+            group.notify(queue: DispatchQueue.main) { [weak self] in
+                self?.presentationMethod()
+            }
         }
     }
+
+    private func presentationMethod() {
+        StatusAlert.currentlyPresentedStatusAlerts.append(self)
+
+        let scale: CGFloat = self.sizesAndDistances.defaultInitialScale
+        self.timer = Timer.scheduledTimer(
+            timeInterval: self.alertShowingDuration - self.defaultFadeAnimationDuration,
+            target: self,
+            selector: #selector(self.dismissByTimer),
+            userInfo: nil,
+            repeats: false)
+        if let timer = self.timer {
+            RunLoop.main.add(
+                timer,
+                forMode: RunLoopMode.commonModes
+            )
+        }
+        self.contentView.transform = CGAffineTransform.identity.scaledBy(x: scale, y: scale)
+
+        UIView.animate(
+            withDuration: self.defaultFadeAnimationDuration,
+            delay: 0,
+            options: UIViewAnimationOptions.curveEaseOut,
+            animations: {
+                if self.isBlurAvailable {
+                    if #available(iOS 11, *) {
+                        self.alpha = 1
+                    } else {
+                        self.contentView.contentView.alpha = 1
+                        self.contentView.effect = self.blurEffect
+                    }
+                } else {
+                    self.alpha = 1
+                }
+                self.contentView.transform = CGAffineTransform.identity
+        },
+            completion: { [weak self] (_) in
+                UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, self?.accessibilityAnnouncement)
+        })
+    }
+
+    @objc private func dismissByTimer() {
+        self.dismiss(completion: nil)
+    }
     
-    @objc private func dismiss() {
-        let scale: CGFloat = sizesAndDistances.defaultInitialScale
-        timer?.invalidate()
+    private func dismiss(completion: (() -> Void)?) {
+        let scale: CGFloat = self.sizesAndDistances.defaultInitialScale
+        self.timer?.invalidate()
         
-        if pickGesture?.state != .changed
-            && pickGesture?.state != .began {
-            isUserInteractionEnabled = false
-            StatusAlert.isPresenting = false
+        if self.pickGesture?.state != .changed
+            && self.pickGesture?.state != .began {
+
+            self.isUserInteractionEnabled = false
             UIView.animate(
-                withDuration: defaultFadeAnimationDuration,
+                withDuration: self.defaultFadeAnimationDuration,
                 delay: 0,
                 options: UIViewAnimationOptions.curveEaseOut,
                 animations: {
@@ -606,8 +646,13 @@ import UIKit
                     }
                     self.contentView.transform = CGAffineTransform.identity.scaledBy(x: scale, y: scale)
             },
-                completion: { _ in
-                    self.removeFromSuperview()
+                completion: { [weak self] (_) in
+                    if let strongSelf = self,
+                        let index = StatusAlert.currentlyPresentedStatusAlerts.index(of: strongSelf) {
+                        StatusAlert.currentlyPresentedStatusAlerts.remove(at: index)
+                        self?.removeFromSuperview()
+                    }
+                    completion?()
             })
         }
     }

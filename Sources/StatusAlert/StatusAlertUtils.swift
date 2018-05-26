@@ -6,6 +6,19 @@
 import UIKit
 
 @objc extension StatusAlert {
+
+    @objc(StatusAlertMultiplePresentationsBehavior)
+    public enum MultiplePresentationsBehavior: Int {
+
+        /// Not more than one StatusAlert will be shown at once
+        case ignoreIfAlreadyPresenting
+
+        /// Currently presented StatusAlerts will be dismissed before presenting another one
+        case dismissCurrentlyPresented
+
+        /// All requested StatusAlerts will be shown
+        case showMultiple
+    }
     
     @objc(StatusAlertAppearance)
     public final class Appearance: NSObject {
