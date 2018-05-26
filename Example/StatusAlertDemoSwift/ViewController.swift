@@ -161,31 +161,19 @@ class ViewController: UIViewController {
         let actionSheet = UIAlertController(
             title: "StatusAlert vertical position",
             message: nil,
-            preferredStyle: .actionSheet)
-        
-        actionSheet.addAction(UIAlertAction(
-            title: "Top",
-            style: .default,
-            handler: { [weak self] (_) in
-                self?.preferredPosition = .top
-                self?.setNavigationItems()
-        }))
-        
-        actionSheet.addAction(UIAlertAction(
-            title: "Center",
-            style: .default,
-            handler: { [weak self] (_) in
-                self?.preferredPosition = .center
-                self?.setNavigationItems()
-        }))
-        
-        actionSheet.addAction(UIAlertAction(
-            title: "Bottom",
-            style: .default,
-            handler: { [weak self] (_) in
-                self?.preferredPosition = .bottom
-                self?.setNavigationItems()
-        }))
+            preferredStyle: .actionSheet
+        )
+
+        let positions: [StatusAlert.VerticalPosition] = StatusAlert.VerticalPosition.allValues
+        positions.forEach { (position) in
+            actionSheet.addAction(UIAlertAction(
+                title: position.title,
+                style: .default,
+                handler: { [weak self] (_) in
+                    self?.preferredPosition = position
+                    self?.setNavigationItems()
+            }))
+        }
         
         actionSheet.addAction(UIAlertAction(
             title: "Cancel",
@@ -195,7 +183,38 @@ class ViewController: UIViewController {
         present(
             actionSheet,
             animated: true,
-            completion: nil)
+            completion: nil
+        )
+    }
+
+    @objc private func selectMultiplePresentationsBehavior() {
+        let actionSheet = UIAlertController(
+            title: "StatusAlert multiple presentations behavior",
+            message: nil,
+            preferredStyle: .actionSheet
+        )
+
+        let behaviors: [StatusAlert.MultiplePresentationsBehavior] = StatusAlert.MultiplePresentationsBehavior.allValues
+        behaviors.forEach { (behavior) in
+            actionSheet.addAction(UIAlertAction(
+                title: behavior.title,
+                style: .default,
+                handler: { [weak self] (_) in
+                    StatusAlert.multiplePresentationsBehavior = behavior
+                    self?.setNavigationItems()
+            }))
+        }
+
+        actionSheet.addAction(UIAlertAction(
+            title: "Cancel",
+            style: .cancel,
+            handler: nil))
+        actionSheet.popoverPresentationController?.barButtonItem = navigationItem.leftBarButtonItems?.first
+        present(
+            actionSheet,
+            animated: true,
+            completion: nil
+        )
     }
     
     @objc private func selectPickable() {
@@ -227,22 +246,26 @@ class ViewController: UIViewController {
     }
     
     private func setNavigationItems() {
-        var leftTitle: String
-        
-        switch preferredPosition {
-        case .top:
-            leftTitle = "Top"
-        case .center:
-            leftTitle = "Center"
-        case .bottom:
-            leftTitle = "Bottom"
-        }
-        
-        navigationItem.leftBarButtonItems = [UIBarButtonItem(
-            title: leftTitle,
+        let verticalPositionItemTitle: String = preferredPosition.title
+        let verticalPositionBarButtonItem = UIBarButtonItem(
+            title: verticalPositionItemTitle,
             style: .plain,
             target: self,
-            action: #selector(selectVerticalPosition))]
+            action: #selector(selectVerticalPosition)
+        )
+
+        let multiplePresentationsBehaviorTitle: String = StatusAlert.multiplePresentationsBehavior.title
+        let multiplePresentationsBehaviorBarButtonItem = UIBarButtonItem(
+            title: multiplePresentationsBehaviorTitle,
+            style: .plain,
+            target: self,
+            action: #selector(selectMultiplePresentationsBehavior)
+        )
+        
+        navigationItem.leftBarButtonItems = [
+            verticalPositionBarButtonItem,
+            multiplePresentationsBehaviorBarButtonItem
+        ]
         
         var rightTitle: String
         
@@ -295,5 +318,49 @@ extension ViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         return sections[section].footer
+    }
+}
+
+// MARK: -
+
+private extension StatusAlert.MultiplePresentationsBehavior {
+    var title: String {
+        switch self {
+        case .ignoreIfAlreadyPresenting:
+            return "Only one"
+        case .dismissCurrentlyPresented:
+            return "Dismiss current"
+        case .showMultiple:
+            return "Display all"
+        }
+    }
+
+    static var allValues: [StatusAlert.MultiplePresentationsBehavior] {
+        return [
+            .ignoreIfAlreadyPresenting,
+            .dismissCurrentlyPresented,
+            .showMultiple
+        ]
+    }
+}
+
+private extension StatusAlert.VerticalPosition {
+    var title: String {
+        switch self {
+        case .top:
+            return "Top"
+        case .center:
+            return "Center"
+        case .bottom:
+            return "Bottom"
+        }
+    }
+
+    static var allValues: [StatusAlert.VerticalPosition] {
+        return [
+            .top,
+            .center,
+            .bottom
+        ]
     }
 }

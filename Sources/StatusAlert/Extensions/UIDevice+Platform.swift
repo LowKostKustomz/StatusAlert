@@ -81,14 +81,19 @@ extension UIDevice {
         
         func isNewerThan<Device: ComparableDevice>(_ another: Device) -> Bool {
             switch (self, another) {
+
             case (.iPhone(let model), let anotherPhone as iPhoneModel):
                 return model.isNewerThan(anotherPhone)
+
             case (.iPodTouch(let model), let anotherPod as iPodTouchModel):
                 return model.isNewerThan(anotherPod)
+
             case (.iPad(let model), let anotherPad as iPadModel):
                 return model.isNewerThan(anotherPad)
+
             default:
                 return false
+
             }
         }
     }

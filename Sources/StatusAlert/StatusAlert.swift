@@ -20,19 +20,32 @@ import UIKit
     /// Announced to VoiceOver when the alert gets presented
     @objc public var accessibilityAnnouncement: String? = nil
     
-    /// How long StatusAlert should on screen.
+    /// How long StatusAlert should be on screen.
     ///
-    /// - Note: This time should include fade animation duration (which `UINavigationControllerHideShowBarDuration`)
+    /// - Note: This time should include fade animation duration (which is `UINavigationControllerHideShowBarDuration`)
     /// - Note: Changes while showing will have no effect
     @objc public var alertShowingDuration: TimeInterval = 2
+
+    /// Multiple presentation requests behavior
+    @objc public static var multiplePresentationsBehavior: MultiplePresentationsBehavior = .dismissCurrentlyPresented
     
     /// If multiple alerts can be on screen at once
-    @objc public static var shouldShowMultipleAlertsSimultaneously: Bool = false
+    @available(*, deprecated: 9.0)
+    @objc public static var shouldShowMultipleAlertsSimultaneously: Bool = false {
+        didSet {
+            if self.shouldShowMultipleAlertsSimultaneously {
+                self.multiplePresentationsBehavior = .showMultiple
+            } else {
+                self.multiplePresentationsBehavior = .ignoreIfAlreadyPresenting
+            }
+        }
+    }
     
     // MARK: - Private fields -
     
-    /// Used to present only one `StatusAlert` at once if `shouldShowMultipleAlertsSimultaneously` is `false`
-    private static var isPresenting: Bool = false
+    /// Used to present only one `StatusAlert` at once if `multiplePresentationsBehavior` is `ignoreIfAlreadyPresenting`
+    /// or to dismiss currently presented alerts if `multiplePresentationsBehavior` is `dismissCurrentlyPresented`
+    private static var currentlyPresentedStatusAlerts: [StatusAlert] = []
     
     private let defaultFadeAnimationDuration: TimeInterval = TimeInterval(UINavigationControllerHideShowBarDuration)
     private let blurEffect: UIBlurEffect = UIBlurEffect(style: .light)
@@ -46,15 +59,15 @@ import UIKit
     
     private var timer: Timer?
     
-    /// Determines whether `StatusAlert` can be showed
-    private var canBeShowed: Bool {
-        if !StatusAlert.shouldShowMultipleAlertsSimultaneously
-            && StatusAlert.isPresenting {
+    /// Determines whether `StatusAlert` can be shown
+    private var canBeShown: Bool {
+        if StatusAlert.multiplePresentationsBehavior == .ignoreIfAlreadyPresenting
+            && !StatusAlert.currentlyPresentedStatusAlerts.isEmpty {
             return false
         }
-        if image == nil,
-            title == nil,
-            message == nil {
+        if self.image == nil,
+            self.title == nil,
+            self.message == nil {
             return false
         }
         return true
@@ -69,23 +82,24 @@ import UIKit
     private var canBePickedOrDismissed: Bool = false
     private var pickGesture: UILongPressGestureRecognizer? {
         didSet {
-            pickGesture?.allowableMovement = CGFloat.greatestFiniteMagnitude
-            pickGesture?.minimumPressDuration = 0
-            pickGesture?.cancelsTouchesInView = true
+            self.pickGesture?.allowableMovement = CGFloat.greatestFiniteMagnitude
+            self.pickGesture?.minimumPressDuration = 0
+            self.pickGesture?.cancelsTouchesInView = true
         }
     }
     
     // MARK: - Interaction methods
     
     @objc private func pick() {
-        guard canBePickedOrDismissed
+        guard self.canBePickedOrDismissed
             else {
                 return
         }
-        if pickGesture?.state == .cancelled
-            || pickGesture?.state == .ended
-            || pickGesture?.state == .failed {
-            dismiss()
+        if self.pickGesture?.state == .cancelled
+            || self.pickGesture?.state == .ended
+            || self.pickGesture?.state == .failed {
+
+            self.dismiss(completion: nil)
         }
     }
     
@@ -104,15 +118,17 @@ import UIKit
         withImage image: UIImage?,
         title: String?,
         message: String?,
-        canBePickedOrDismissed: Bool = false) -> StatusAlert {
+        canBePickedOrDismissed: Bool = false
+        ) -> StatusAlert {
         
         let statusAlert = StatusAlert()
         
         NotificationCenter.default.addObserver(
             statusAlert,
-            selector: #selector(setupContentViewBackground),
+            selector: #selector(statusAlert.reduceTransparencyStatusDidChange),
             name: NSNotification.Name.UIAccessibilityReduceTransparencyStatusDidChange,
-            object: nil)
+            object: nil
+        )
         
         statusAlert.image = image
         statusAlert.title = title
@@ -127,7 +143,7 @@ import UIKit
     /// Shows `StatusAlert` in the center of the `keyWindow`
     /// - Note: must be called from the main thread only
     @objc public func showInKeyWindow() {
-        show()
+        self.show()
     }
     
     /// Shows `StatusAlert` in the center of `presenter`
@@ -137,7 +153,8 @@ import UIKit
     /// - Note: must be called from the main thread only
     @objc(showInView:)
     public func show(in presenter: UIView) {
-        show(inPresenter: presenter)
+
+        self.show(inPresenter: presenter)
     }
     
     /// Shows `StatusAlert` in `keyWindow`
@@ -147,8 +164,8 @@ import UIKit
     /// - Note: must be called from the main thread only
     @objc(showWithVerticalPosition:)
     public func show(withVerticalPosition verticalPosition: VerticalPosition) {
-        show(with: verticalPosition,
-             offset: 0)
+
+        self.show(with: verticalPosition, offset: 0)
     }
     
     /// Shows `StatusAlert` in the center of `keyWindow` with `offset`
@@ -158,7 +175,7 @@ import UIKit
     /// - Note: must be called from the main thread only
     @objc(showWithOffset:)
     public func show(withOffset offset: CGFloat) {
-        show(offset: offset)
+        self.show(offset: offset)
     }
     
     /// Shows `StatusAlert` in `presenter`
@@ -170,10 +187,10 @@ import UIKit
     @objc(showInView:withVerticalPosition:)
     public func show(
         in presenter: UIView,
-        withVerticalPosition verticalPosition: VerticalPosition) {
+        withVerticalPosition verticalPosition: VerticalPosition
+        ) {
         
-        show(inPresenter: presenter,
-             with: verticalPosition)
+        self.show(inPresenter: presenter, with: verticalPosition)
     }
     
     /// Shows `StatusAlert` in the center of `presenter`
@@ -185,10 +202,10 @@ import UIKit
     @objc(showInView:withOffset:)
     public func show(
         in presenter: UIView,
-        withOffset offset: CGFloat) {
+        withOffset offset: CGFloat
+        ) {
         
-        show(inPresenter: presenter,
-             offset: offset)
+        self.show(inPresenter: presenter, offset: offset)
     }
     
     /// Shows `StatusAlert` in `keyWindow`
@@ -200,10 +217,10 @@ import UIKit
     @objc(showWithVerticalPosition:offset:)
     public func show(
         withVerticalPosition verticalPosition: VerticalPosition,
-        offset: CGFloat) {
+        offset: CGFloat
+        ) {
         
-        show(with: verticalPosition,
-             offset: offset)
+        self.show(with: verticalPosition, offset: offset)
     }
     
     /// Shows `StatusAlert` in `presenter`
@@ -217,11 +234,14 @@ import UIKit
     public func show(
         in presenter: UIView,
         withVerticalPosition verticalPosition: VerticalPosition,
-        offset: CGFloat) {
+        offset: CGFloat
+        ) {
         
-        show(inPresenter: presenter,
-             with: verticalPosition,
-             offset: offset)
+        self.show(
+            inPresenter: presenter,
+            with: verticalPosition,
+            offset: offset
+        )
     }
     
     // MARK: - Private methods -
@@ -229,63 +249,65 @@ import UIKit
     private func show(
         inPresenter presenter: UIView = UIApplication.shared.keyWindow ?? UIView(),
         with verticalPosition: VerticalPosition = .center,
-        offset: CGFloat? = nil) {
+        offset: CGFloat? = nil
+        ) {
         
-        guard canBeShowed
+        guard self.canBeShown
             else {
                 return
         }
-        prepare()
-        position(
+        self.prepare()
+        self.position(
             inPresenter: presenter,
             withVerticalPosition: verticalPosition,
-            offset: offset)
-        present()
+            offset: offset
+        )
+        self.present()
     }
     
     // MARK: Creation methods
     
     /// Must be called before the `StatusAlert` presenting
     private func prepare() {
-        assertIsMainThread()
+        self.assertIsMainThread()
         
-        isAccessibilityElement = false
-        accessibilityElementsHidden = true
-        accessibilityTraits = UIAccessibilityTraitNone
+        self.isAccessibilityElement = false
+        self.accessibilityElementsHidden = true
+        self.accessibilityTraits = UIAccessibilityTraitNone
         
-        let stackView = createStackView()
+        let stackView = self.createStackView()
         
-        if let imageView = createImageViewIfPossible() {
+        if let imageView = self.createImageViewIfPossible() {
             let customSpace: CGFloat
             
-            if title != nil && message != nil {
-                customSpace = sizesAndDistances.defaultImageBottomSpace
-            } else if title == nil {
-                customSpace = sizesAndDistances.defaultImageToMessageSpace
+            if self.title != nil && self.message != nil {
+                customSpace = self.sizesAndDistances.defaultImageBottomSpace
+            } else if self.title == nil {
+                customSpace = self.sizesAndDistances.defaultImageToMessageSpace
             } else {
-                customSpace = sizesAndDistances.defaultTitleBottomSpace
+                customSpace = self.sizesAndDistances.defaultTitleBottomSpace
             }
             
             stackView.addArrangedSubview(imageView)
             if #available(iOS 11.0, *) {
                 stackView.setCustomSpacing(customSpace, after: imageView)
-            } else if title != nil || message != nil {
-                let spaceView = createSpaceView(withHeight: customSpace)
+            } else if self.title != nil || self.message != nil {
+                let spaceView = self.createSpaceView(withHeight: customSpace)
                 stackView.addArrangedSubview(spaceView)
             }
         }
         
-        if let titleLabel = createTitleLabelIfPossible() {
+        if let titleLabel = self.createTitleLabelIfPossible() {
             stackView.addArrangedSubview(titleLabel)
             if #available(iOS 11.0, *) {
-                stackView.setCustomSpacing(sizesAndDistances.defaultTitleBottomSpace, after: titleLabel)
-            } else if message != nil {
-                let spaceView = createSpaceView(withHeight: sizesAndDistances.defaultTitleBottomSpace)
+                stackView.setCustomSpacing(self.sizesAndDistances.defaultTitleBottomSpace, after: titleLabel)
+            } else if self.message != nil {
+                let spaceView = self.createSpaceView(withHeight: self.sizesAndDistances.defaultTitleBottomSpace)
                 stackView.addArrangedSubview(spaceView)
             }
         }
         
-        if let messageLabel = createMessageLabelIfPossible() {
+        if let messageLabel = self.createMessageLabelIfPossible() {
             stackView.addArrangedSubview(messageLabel)
         }
     }
@@ -293,49 +315,65 @@ import UIKit
     private func position(
         inPresenter presenter: UIView,
         withVerticalPosition verticalPosition: VerticalPosition,
-        offset: CGFloat?) {
+        offset: CGFloat?
+        ) {
         
-        assertIsMainThread()
+        self.assertIsMainThread()
         
         presenter.addSubview(self)
         
-        centerXAnchor.constraint(equalTo: presenter.centerXAnchor).isActive = true
+        self.centerXAnchor.constraint(equalTo: presenter.centerXAnchor).isActive = true
         
         switch verticalPosition {
         case .center:
-            centerYAnchor.constraint(equalTo: presenter.centerYAnchor, constant: offset ?? 0).isActive = true
+            self.centerYAnchor.constraint(
+                equalTo: presenter.centerYAnchor,
+                constant: offset ?? 0
+                ).isActive = true
         case .top:
             if #available(iOS 11, *) {
-                topAnchor.constraint(equalTo: presenter.safeAreaLayoutGuide.topAnchor, constant: offset ?? sizesAndDistances.defaultTopOffset).isActive = true
+                self.topAnchor.constraint(
+                    equalTo: presenter.safeAreaLayoutGuide.topAnchor,
+                    constant: offset ?? self.sizesAndDistances.defaultTopOffset
+                    ).isActive = true
             } else {
-                topAnchor.constraint(equalTo: presenter.topAnchor, constant: offset ?? sizesAndDistances.defaultTopOffset).isActive = true
+                self.topAnchor.constraint(
+                    equalTo: presenter.topAnchor,
+                    constant: offset ?? self.sizesAndDistances.defaultTopOffset
+                    ).isActive = true
             }
         case .bottom:
             if #available(iOS 11, *) {
-                bottomAnchor.constraint(equalTo: presenter.safeAreaLayoutGuide.bottomAnchor, constant: offset ?? -sizesAndDistances.defaultBottomOffset).isActive = true
+                self.bottomAnchor.constraint(
+                    equalTo: presenter.safeAreaLayoutGuide.bottomAnchor,
+                    constant: offset ?? -self.sizesAndDistances.defaultBottomOffset
+                    ).isActive = true
             } else {
-                bottomAnchor.constraint(equalTo: presenter.bottomAnchor, constant: offset ?? -sizesAndDistances.defaultBottomOffset).isActive = true
+                self.bottomAnchor.constraint(
+                    equalTo: presenter.bottomAnchor,
+                    constant: offset ?? -self.sizesAndDistances.defaultBottomOffset
+                    ).isActive = true
             }
         }
     }
     
     private func createStackView() -> UIStackView {
-        translatesAutoresizingMaskIntoConstraints = false
-        contentView = UIVisualEffectView()
-        setupContentView()
-        addSubview(contentView)
+        self.translatesAutoresizingMaskIntoConstraints = false
+        self.contentView = UIVisualEffectView()
+        self.setupContentView()
+        self.addSubview(self.contentView)
         
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-        contentView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-        contentView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-        contentView.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        contentView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        self.contentView.translatesAutoresizingMaskIntoConstraints = false
+        self.contentView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+        self.contentView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        self.contentView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        self.contentView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         
-        isUserInteractionEnabled = canBePickedOrDismissed
-        if canBePickedOrDismissed {
-            pickGesture = UILongPressGestureRecognizer(target: self, action: #selector(pick))
-            if let gesture = pickGesture {
-                contentView.addGestureRecognizer(gesture)
+        self.isUserInteractionEnabled = self.canBePickedOrDismissed
+        if self.canBePickedOrDismissed {
+            self.pickGesture = UILongPressGestureRecognizer(target: self, action: #selector(self.pick))
+            if let gesture = self.pickGesture {
+                self.contentView.addGestureRecognizer(gesture)
             }
         }
         
@@ -345,60 +383,97 @@ import UIKit
         stackView.alignment = .center
         stackView.spacing = 0
         
-        contentView.contentView.addSubview(stackView)
+        self.contentView.contentView.addSubview(stackView)
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: sizesAndDistances.stackViewSideSpace).isActive = true
-        stackView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -sizesAndDistances.stackViewSideSpace).isActive = true
-        stackView.bottomAnchor.constraint(greaterThanOrEqualTo: contentView.bottomAnchor, constant: -sizesAndDistances.minimumStackViewBottomSpace).isActive = true
-        stackView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+        stackView.leftAnchor.constraint(
+            equalTo: self.contentView.leftAnchor,
+            constant: self.sizesAndDistances.stackViewSideSpace
+            ).isActive = true
+        stackView.rightAnchor.constraint(
+            equalTo: self.contentView.rightAnchor,
+            constant: -self.sizesAndDistances.stackViewSideSpace
+            ).isActive = true
+        stackView.bottomAnchor.constraint(
+            greaterThanOrEqualTo: self.contentView.bottomAnchor,
+            constant: -self.sizesAndDistances.minimumStackViewBottomSpace
+            ).isActive = true
+        stackView.centerXAnchor.constraint(
+            equalTo: self.contentView.centerXAnchor
+            ).isActive = true
         
-        if image != nil
-            && (title != nil || message != nil) {
-            contentView.heightAnchor.constraint(greaterThanOrEqualToConstant: sizesAndDistances.minimumAlertHeight).isActive = true
-            contentView.widthAnchor.constraint(equalToConstant: sizesAndDistances.defaultAlertWidth).isActive = true
-            stackView.topAnchor.constraint(greaterThanOrEqualTo: contentView.topAnchor, constant: sizesAndDistances.minimumStackViewTopSpace).isActive = true
-            stackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: (sizesAndDistances.minimumStackViewTopSpace - sizesAndDistances.minimumStackViewBottomSpace) / 2).isActive = true
+        if self.image != nil
+            && (self.title != nil || self.message != nil) {
+            self.contentView.heightAnchor.constraint(
+                greaterThanOrEqualToConstant: self.sizesAndDistances.minimumAlertHeight
+                ).isActive = true
+            self.contentView.widthAnchor.constraint(
+                equalToConstant: self.sizesAndDistances.defaultAlertWidth
+                ).isActive = true
+            stackView.topAnchor.constraint(
+                greaterThanOrEqualTo: self.contentView.topAnchor,
+                constant: self.sizesAndDistances.minimumStackViewTopSpace
+                ).isActive = true
+            stackView.centerYAnchor.constraint(
+                equalTo: self.contentView.centerYAnchor,
+                constant: (self.sizesAndDistances.minimumStackViewTopSpace - self.sizesAndDistances.minimumStackViewBottomSpace) / 2
+                ).isActive = true
         } else {
-            if image == nil {
-                contentView.widthAnchor.constraint(equalToConstant: sizesAndDistances.defaultAlertWidth).isActive = true
+            if self.image == nil {
+                self.contentView.widthAnchor.constraint(
+                    equalToConstant: self.sizesAndDistances.defaultAlertWidth
+                    ).isActive = true
             }
-            stackView.topAnchor.constraint(greaterThanOrEqualTo: contentView.topAnchor, constant: sizesAndDistances.minimumStackViewBottomSpace).isActive = true
-            stackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+            stackView.topAnchor.constraint(
+                greaterThanOrEqualTo: self.contentView.topAnchor,
+                constant: self.sizesAndDistances.minimumStackViewBottomSpace
+                ).isActive = true
+            stackView.centerYAnchor.constraint(
+                equalTo: self.contentView.centerYAnchor
+                ).isActive = true
         }
         return stackView
     }
+
+    @objc private func reduceTransparencyStatusDidChange() {
+        self.setupContentViewBackground()
+    }
     
-    @objc private func setupContentViewBackground() {
-        if isBlurAvailable {
+    private func setupContentViewBackground() {
+        if self.isBlurAvailable {
+            self.contentView.backgroundColor = nil
             if #available(iOS 11, *) {
-                contentView.effect = blurEffect
-            } else if StatusAlert.isPresenting {
-                contentView.effect = blurEffect
+                self.contentView.effect = self.blurEffect
+            } else if StatusAlert.currentlyPresentedStatusAlerts.contains(self) {
+                self.contentView.effect = self.blurEffect
             }
         } else {
-            contentView.backgroundColor = appearance.backgroundColor
+            self.contentView.effect = nil
+            self.contentView.backgroundColor = self.appearance.backgroundColor
         }
     }
     
     private func setupContentView() {
-        setupContentViewBackground()
+        self.setupContentViewBackground()
         
-        if isBlurAvailable {
+        if self.isBlurAvailable {
             if #available(iOS 11, *) {
-                alpha = 0
+                self.alpha = 0
             } else {
-                contentView.contentView.alpha = 0
+                self.contentView.contentView.alpha = 0
             }
         } else {
-            alpha = 0
+            self.alpha = 0
         }
         
-        contentView.clipsToBounds = true
-        contentView.layer.cornerRadius = sizesAndDistances.defaultCornerRadius
+        self.contentView.clipsToBounds = true
+        self.contentView.layer.cornerRadius = self.sizesAndDistances.defaultCornerRadius
     }
     
-    private func createSpaceView(withHeight height: CGFloat) -> UIView {
+    private func createSpaceView(
+        withHeight height: CGFloat
+        ) -> UIView {
+
         let spaceView = UIView()
         spaceView.backgroundColor = UIColor.clear
         spaceView.translatesAutoresizingMaskIntoConstraints = false
@@ -407,14 +482,14 @@ import UIKit
     }
     
     private func createImageViewIfPossible() -> UIImageView? {
-        guard let image = image
+        guard let image = self.image
             else {
                 return nil
         }
         
         let imageView = UIImageView(image: image)
         imageView.contentMode = .scaleAspectFit
-        imageView.tintColor = appearance.tintColor
+        imageView.tintColor = self.appearance.tintColor
         imageView.isAccessibilityElement = false
         imageView.accessibilityTraits = UIAccessibilityTraitNone
         
@@ -426,13 +501,13 @@ import UIKit
     }
     
     private func createTitleLabelIfPossible() -> UILabel? {
-        guard let title = title
+        guard let title = self.title
             else {
                 return nil
         }
         
-        let titleLabel = createBaseLabel()
-        titleLabel.font = appearance.titleFont
+        let titleLabel = self.createBaseLabel()
+        titleLabel.font = self.appearance.titleFont
         
         let attributedText = NSAttributedString(
             string: title,
@@ -443,13 +518,13 @@ import UIKit
     }
     
     private func createMessageLabelIfPossible() -> UILabel? {
-        guard let message = message
+        guard let message = self.message
             else {
                 return nil
         }
         
-        let messageLabel = createBaseLabel()
-        messageLabel.font = appearance.messageFont
+        let messageLabel = self.createBaseLabel()
+        messageLabel.font = self.appearance.messageFont
         
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = 3
@@ -468,7 +543,7 @@ import UIKit
         let label = UILabel()
         label.textAlignment = .center
         label.numberOfLines = 0
-        label.textColor = appearance.tintColor
+        label.textColor = self.appearance.tintColor
         label.isAccessibilityElement = false
         label.accessibilityTraits = UIAccessibilityTraitNone
         return label
@@ -477,58 +552,85 @@ import UIKit
     // MARK: Presentation methods
     
     private func present() {
-        assertIsMainThread()
-        
-        if canBeShowed {
-            StatusAlert.isPresenting = true
-            
-            let scale: CGFloat = sizesAndDistances.defaultInitialScale
-            timer = Timer.scheduledTimer(
-                timeInterval: alertShowingDuration - defaultFadeAnimationDuration,
-                target: self,
-                selector: #selector(dismiss),
-                userInfo: nil,
-                repeats: false)
-            if let timer = timer {
-                RunLoop.main.add(
-                    timer,
-                    forMode: RunLoopMode.commonModes)
+        self.assertIsMainThread()
+
+        switch StatusAlert.multiplePresentationsBehavior {
+        case .ignoreIfAlreadyPresenting:
+            guard StatusAlert.currentlyPresentedStatusAlerts.isEmpty
+                else {
+                    return
             }
-            contentView.transform = CGAffineTransform.identity.scaledBy(x: scale, y: scale)
-            
-            UIView.animate(
-                withDuration: defaultFadeAnimationDuration,
-                delay: 0,
-                options: UIViewAnimationOptions.curveEaseOut,
-                animations: {
-                    if self.isBlurAvailable {
-                        if #available(iOS 11, *) {
-                            self.alpha = 1
-                        } else {
-                            self.contentView.contentView.alpha = 1
-                            self.contentView.effect = self.blurEffect
-                        }
-                    } else {
-                        self.alpha = 1
-                    }
-                    self.contentView.transform = CGAffineTransform.identity
-            },
-                completion: { [weak self] (finished) in
-                    UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, self?.accessibilityAnnouncement)
-            })
+            self.presentationMethod()
+        case .showMultiple:
+            self.presentationMethod()
+        case .dismissCurrentlyPresented:
+            let group = DispatchGroup()
+            for alert in StatusAlert.currentlyPresentedStatusAlerts {
+                group.enter()
+                alert.dismiss {
+                    group.leave()
+                }
+            }
+            group.notify(queue: DispatchQueue.main) { [weak self] in
+                self?.presentationMethod()
+            }
         }
     }
+
+    private func presentationMethod() {
+        StatusAlert.currentlyPresentedStatusAlerts.append(self)
+
+        let scale: CGFloat = self.sizesAndDistances.defaultInitialScale
+        self.timer = Timer.scheduledTimer(
+            timeInterval: self.alertShowingDuration - self.defaultFadeAnimationDuration,
+            target: self,
+            selector: #selector(self.dismissByTimer),
+            userInfo: nil,
+            repeats: false)
+        if let timer = self.timer {
+            RunLoop.main.add(
+                timer,
+                forMode: RunLoopMode.commonModes
+            )
+        }
+        self.contentView.transform = CGAffineTransform.identity.scaledBy(x: scale, y: scale)
+
+        UIView.animate(
+            withDuration: self.defaultFadeAnimationDuration,
+            delay: 0,
+            options: UIViewAnimationOptions.curveEaseOut,
+            animations: {
+                if self.isBlurAvailable {
+                    if #available(iOS 11, *) {
+                        self.alpha = 1
+                    } else {
+                        self.contentView.contentView.alpha = 1
+                        self.contentView.effect = self.blurEffect
+                    }
+                } else {
+                    self.alpha = 1
+                }
+                self.contentView.transform = CGAffineTransform.identity
+        },
+            completion: { [weak self] (_) in
+                UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, self?.accessibilityAnnouncement)
+        })
+    }
+
+    @objc private func dismissByTimer() {
+        self.dismiss(completion: nil)
+    }
     
-    @objc private func dismiss() {
-        let scale: CGFloat = sizesAndDistances.defaultInitialScale
-        timer?.invalidate()
+    private func dismiss(completion: (() -> Void)?) {
+        let scale: CGFloat = self.sizesAndDistances.defaultInitialScale
+        self.timer?.invalidate()
         
-        if pickGesture?.state != .changed
-            && pickGesture?.state != .began {
-            isUserInteractionEnabled = false
-            StatusAlert.isPresenting = false
+        if self.pickGesture?.state != .changed
+            && self.pickGesture?.state != .began {
+
+            self.isUserInteractionEnabled = false
             UIView.animate(
-                withDuration: defaultFadeAnimationDuration,
+                withDuration: self.defaultFadeAnimationDuration,
                 delay: 0,
                 options: UIViewAnimationOptions.curveEaseOut,
                 animations: {
@@ -544,8 +646,13 @@ import UIKit
                     }
                     self.contentView.transform = CGAffineTransform.identity.scaledBy(x: scale, y: scale)
             },
-                completion: { _ in
-                    self.removeFromSuperview()
+                completion: { [weak self] (_) in
+                    if let strongSelf = self,
+                        let index = StatusAlert.currentlyPresentedStatusAlerts.index(of: strongSelf) {
+                        StatusAlert.currentlyPresentedStatusAlerts.remove(at: index)
+                        self?.removeFromSuperview()
+                    }
+                    completion?()
             })
         }
     }
@@ -560,6 +667,6 @@ import UIKit
 // Compatibility
 
 #if swift(>=4.0)
-    private let NSKernAttributeName = NSAttributedStringKey.kern
-    private let NSParagraphStyleAttributeName = NSAttributedStringKey.paragraphStyle
+private let NSKernAttributeName = NSAttributedStringKey.kern
+private let NSParagraphStyleAttributeName = NSAttributedStringKey.paragraphStyle
 #endif
