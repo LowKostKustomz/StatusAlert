@@ -30,7 +30,7 @@ import UIKit
     @objc public static var multiplePresentationsBehavior: MultiplePresentationsBehavior = .ignoreIfAlreadyPresenting
     
     /// If multiple alerts can be on screen at once
-    @available(*, deprecated)
+    @available(*, deprecated, message: "Use multiplePresentationsBehavior instead")
     @objc public static var shouldShowMultipleAlertsSimultaneously: Bool = false {
         didSet {
             if self.shouldShowMultipleAlertsSimultaneously {
