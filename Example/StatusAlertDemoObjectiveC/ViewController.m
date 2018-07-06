@@ -181,10 +181,12 @@
 }
 
 - (void)showStatusAlertWithImageNamed:(NSString*)imageName title:(NSString*)title message:(NSString*)message {
-    StatusAlert* statusAlert = [StatusAlert statusAlertWithImage:[UIImage imageNamed:imageName]
-                                                           title:title
-                                                         message:message
-                                          canBePickedOrDismissed:isPickable];
+    StatusAlert* statusAlert = [[StatusAlert alloc] init];
+    [statusAlert setImage: [UIImage imageNamed:imageName]];
+    [statusAlert setTitle:title];
+    [statusAlert setMessage:message];
+    [statusAlert setCanBePickedOrDismissed:isPickable];
+    
     if (title) {
         if (message) {
             statusAlert.accessibilityAnnouncement = [[title stringByAppendingString:@", "] stringByAppendingString:message];

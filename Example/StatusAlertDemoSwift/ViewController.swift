@@ -47,7 +47,7 @@ class ViewController: UIViewController {
                 title: "With image, title and message",
                 action: { [weak self] in
                     self?.showStatusAlert(
-                        withImage: UIImage(named: "Success image"),
+                        withImage: #imageLiteral(resourceName: "Success image"),
                         title: "StatusAlert",
                         message: "With image, title and message")
             }),
@@ -55,7 +55,7 @@ class ViewController: UIViewController {
                 title: "With image and title only",
                 action: { [weak self] in
                     self?.showStatusAlert(
-                        withImage: UIImage(named: "Success image"),
+                        withImage: #imageLiteral(resourceName: "Success image"),
                         title: "StatusAlert with image and title",
                         message: nil)
             }),
@@ -63,7 +63,7 @@ class ViewController: UIViewController {
                 title: "With image and message only",
                 action: { [weak self] in
                     self?.showStatusAlert(
-                        withImage: UIImage(named: "Success image"),
+                        withImage: #imageLiteral(resourceName: "Success image"),
                         title: nil,
                         message: "StatusAlert with image and message")
             }),
@@ -79,7 +79,7 @@ class ViewController: UIViewController {
                 title: "Only with image",
                 action: { [weak self] in
                     self?.showStatusAlert(
-                        withImage: UIImage(named: "Success image"),
+                        withImage: #imageLiteral(resourceName: "Success image"),
                         title: nil,
                         message: nil)
             }),
@@ -107,7 +107,7 @@ class ViewController: UIViewController {
                 title: "From the Apple Music app",
                 action:  { [weak self] in
                     self?.showStatusAlert(
-                        withImage: UIImage(named: "Loved icon"),
+                        withImage: #imageLiteral(resourceName: "Loved icon"),
                         title: "Loved",
                         message: "We’ll recommend more like this in For You.")
             }),
@@ -115,7 +115,7 @@ class ViewController: UIViewController {
                 title: "From the Podcasts app",
                 action:  { [weak self] in
                     self?.showStatusAlert(
-                        withImage: UIImage(named: "Success icon"),
+                        withImage: #imageLiteral(resourceName: "Success icon"),
                         title: "С подпиской",
                         message: nil)
                }),
@@ -123,7 +123,7 @@ class ViewController: UIViewController {
                 title: "From the News app",
                 action:  { [weak self] in
                     self?.showStatusAlert(
-                        withImage: UIImage(named: "Loved icon"),
+                        withImage: #imageLiteral(resourceName: "Loved icon"),
                         title: "Loved",
                         message: "We’ll show more stories about this in For You.")
                })]
@@ -138,11 +138,12 @@ class ViewController: UIViewController {
         withImage image: UIImage?,
         title: String?,
         message: String?) {
-        let statusAlert = StatusAlert.instantiate(
-            withImage: image,
-            title: title,
-            message: message,
-            canBePickedOrDismissed: isPickable)
+
+        let statusAlert = StatusAlert()
+        statusAlert.image = image
+        statusAlert.title = title
+        statusAlert.message = message
+        statusAlert.canBePickedOrDismissed = isPickable
         statusAlert.accessibilityAnnouncement = {
             if let title = title {
                 if let message = message {

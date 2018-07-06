@@ -102,12 +102,11 @@ Demo application is included in the `StatusAlert` workspace. To run it clone the
 import StatusAlert
 
 // Creating StatusAlert instance
-let statusAlert = StatusAlert.instantiate(
-    withImage: UIImage(named: "Some image name"),
-    title: "StatusAlert title",
-    message: "Message to show beyond title",
-    canBePickedOrDismissed: isUserInteractionAllowed
-)
+let statusAlert = StatusAlert()
+statusAlert.image = UIImage(named: "Some image name")
+statusAlert.title = "StatusAlert title"
+statusAlert.message = "Message to show beyond title"
+statusAlert.canBePickedOrDismissed = isUserInteractionAllowed
 
 // Presenting created instance
 statusAlert.showInKeyWindow()
