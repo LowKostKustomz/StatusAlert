@@ -109,6 +109,43 @@ import UIKit
     }
 }
 
+internal class ReusablesManager<Reusable: Any> {
+    typealias PrepareForReuse = (Reusable) -> Void
+    typealias CreateReusableClosure = () -> Reusable
+
+    private var reusables: [Reusable] = []
+    private let maximumReusablesNumber: Int
+    private let createReusableClosure: CreateReusableClosure
+    private let prepareForReuseClosure: PrepareForReuse?
+
+    init(
+        createReusableClosure: @escaping CreateReusableClosure,
+        prepareForReuseClosure: PrepareForReuse?,
+        maximumReusablesNumber: Int
+        ) {
+
+        self.createReusableClosure = createReusableClosure
+        self.prepareForReuseClosure = prepareForReuseClosure
+        self.maximumReusablesNumber = maximumReusablesNumber
+    }
+
+    func dequeueReusable() -> Reusable {
+        if let reusable = self.reusables.first {
+            self.reusables.removeFirst()
+            self.prepareForReuseClosure?(reusable)
+            return reusable
+        }
+        let reusable = self.createReusableClosure()
+        self.enqueueReusable(reusable)
+        return self.dequeueReusable()
+    }
+
+    func enqueueReusable(_ object: Reusable) {
+        guard self.reusables.count < self.maximumReusablesNumber else { return }
+        self.reusables.append(object)
+    }
+}
+
 // Compatibility
 
 #if swift(>=4.0)

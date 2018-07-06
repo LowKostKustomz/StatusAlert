@@ -203,9 +203,9 @@
 		E92B11C31FF93EE6009FEA6C /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				E92B11BC1FF92409009FEA6C /* Extensions */,
 				E9A189F81FDC1ABD00F3B75B /* StatusAlert.swift */,
 				E9A189F91FDC1ABD00F3B75B /* StatusAlertUtils.swift */,
+				E92B11BC1FF92409009FEA6C /* Extensions */,
 			);
 			name = Sources;
 			path = ../Sources/StatusAlert;
