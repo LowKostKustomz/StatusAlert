@@ -27,8 +27,7 @@ import UIKit
     @objc public var alertShowingDuration: TimeInterval = 2
 
     /// Multiple presentation requests behavior
-    // FIXME: - Fix default behavior to .ignoreIfAlreadyPresenting as it was before multiplePresentationsBehavior appeared.
-    @objc public static var multiplePresentationsBehavior: MultiplePresentationsBehavior = .dismissCurrentlyPresented
+    @objc public static var multiplePresentationsBehavior: MultiplePresentationsBehavior = .ignoreIfAlreadyPresenting
     
     /// If multiple alerts can be on screen at once
     @available(*, deprecated)
