@@ -16,8 +16,7 @@ class ViewController: UIViewController {
     }
     
     fileprivate let cellReuseIdentifier = "reuseIdentifier"
-    private let tableView = UITableView(frame: .zero,
-                                        style: .grouped)
+    private let tableView = UITableView(frame: .zero, style: .grouped)
     
     fileprivate var sections: [Section] = []
     private var preferredPosition: StatusAlert.VerticalPosition = .center

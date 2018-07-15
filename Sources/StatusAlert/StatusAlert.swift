@@ -48,7 +48,7 @@ import UIKit
 
     @objc public var message: String?
 
-    /// Determines wether `StatusAlert` can be picked or dismissed by tap
+    /// Determines whether `StatusAlert` can be picked or dismissed by tap
     @objc public var canBePickedOrDismissed: Bool {
         get { return self.contentView.isUserInteractionEnabled }
         set { self.contentView.isUserInteractionEnabled = newValue }
@@ -60,6 +60,11 @@ import UIKit
     /// or to dismiss currently presented alerts if `multiplePresentationsBehavior` is `dismissCurrentlyPresented`
     private static var currentlyPresentedStatusAlerts: [StatusAlert] = []
     
+    private static var alertToPresent: StatusAlert? = nil
+    private static var dismissing: Bool {
+        return alertToPresent != nil
+    }
+    
     private let defaultFadeAnimationDuration: TimeInterval = TimeInterval(UINavigationControllerHideShowBarDuration)
     private let blurEffect: UIBlurEffect = UIBlurEffect(style: .light)
     
@@ -70,22 +75,16 @@ import UIKit
     private var titleLabel: UILabel? = nil
     private var messageLabel: UILabel? = nil
 
+    private var contentStackViewConstraints: [NSLayoutConstraint] = []
     private var reusableObjectsConstraints: [NSLayoutConstraint] = []
     
     private var timer: Timer?
     
-    /// Determines whether `StatusAlert` can be shown
-    private var canBeShown: Bool {
-        if StatusAlert.multiplePresentationsBehavior == .ignoreIfAlreadyPresenting
-            && !StatusAlert.currentlyPresentedStatusAlerts.isEmpty {
-            return false
-        }
-        if self.image == nil,
-            self.title == nil,
-            self.message == nil {
-            return false
-        }
-        return true
+    /// Determines whether `StatusAlert` has at least one item to show
+    private var isContentEmpty: Bool {
+        return self.image == nil
+            && self.title == nil
+            && self.message == nil
     }
     
     /// Determines whether blur is available
@@ -122,16 +121,7 @@ import UIKit
     }
 
     deinit {
-        NSLayoutConstraint.deactivate(self.reusableObjectsConstraints)
-        if let imageView = self.imageView {
-            StatusAlert.reusableImageViewsManager.enqueueReusable(imageView)
-        }
-        if let titleLabel = self.titleLabel {
-            StatusAlert.reusableLabelsManager.enqueueReusable(titleLabel)
-        }
-        if let messageLabel = self.messageLabel {
-            StatusAlert.reusableLabelsManager.enqueueReusable(messageLabel)
-        }
+        self.enqueueReusableObjects()
     }
     
     // MARK: - Static methods -
@@ -142,7 +132,7 @@ import UIKit
     ///   - image: @1x should be 90*90 by default, optional
     ///   - title: displayed beyond image
     ///   - message: displayed beyond title or
-    ///   - canBePickedOrDismissed: determines wether StatusAlert can be picked or dismissed by tap
+    ///   - canBePickedOrDismissed: determines whether StatusAlert can be picked or dismissed by tap
     /// - Returns: `StatusAlert` instance
     @available(*, deprecated, message: "Use `init` instead and set all properties directly")
     @objc(statusAlertWithImage:title:message:canBePickedOrDismissed:)
@@ -280,16 +270,17 @@ import UIKit
         ) {
 
         self.assertIsMainThread()
-        guard self.canBeShown else {
-            return
+        guard !self.isContentEmpty else { return }
+
+        self.prepareForPresentation { [weak self] in
+            self?.prepareContent()
+            self?.positionAlert(
+                inPresenter: presenter,
+                withVerticalPosition: verticalPosition,
+                offset: offset
+            )
+            self?.performPresentation()
         }
-        self.prepare()
-        self.position(
-            inPresenter: presenter,
-            withVerticalPosition: verticalPosition,
-            offset: offset
-        )
-        self.present()
     }
 
     private func commonInit() {
@@ -387,12 +378,42 @@ import UIKit
         self.accessibilityElementsHidden = true
         self.accessibilityTraits = UIAccessibilityTraitNone
     }
+
+    private func resetView() {
+        self.deactivateConstraints(&self.contentStackViewConstraints)
+
+        self.enqueueReusableObjects()
+    }
+
+    private func enqueueReusableObjects() {
+        self.deactivateConstraints(&self.reusableObjectsConstraints)
+        if let imageView = self.imageView {
+            imageView.removeFromSuperview()
+            StatusAlert.reusableImageViewsManager.enqueueReusable(imageView)
+            self.imageView = nil
+        }
+        if let titleLabel = self.titleLabel {
+            titleLabel.removeFromSuperview()
+            StatusAlert.reusableLabelsManager.enqueueReusable(titleLabel)
+            self.titleLabel = nil
+        }
+        if let messageLabel = self.messageLabel {
+            messageLabel.removeFromSuperview()
+            StatusAlert.reusableLabelsManager.enqueueReusable(messageLabel)
+            self.messageLabel = nil
+        }
+    }
+
+    private func deactivateConstraints(_ array: inout [NSLayoutConstraint]) {
+        NSLayoutConstraint.deactivate(array)
+        array = []
+    }
     
     // MARK: Creation methods
     
     /// Must be called before the `StatusAlert` presenting
-    private func prepare() {
-        self.completeStackViewConstraints()
+    private func prepareContent() {
+        self.completeContentStackViewConstraints()
 
         self.imageView = self.createImageViewIfNeeded()
         if let imageView = self.imageView {
@@ -434,7 +455,7 @@ import UIKit
         NSLayoutConstraint.activate(self.reusableObjectsConstraints)
     }
     
-    private func position(
+    private func positionAlert(
         inPresenter presenter: UIView,
         withVerticalPosition verticalPosition: VerticalPosition,
         offset: CGFloat?
@@ -477,37 +498,42 @@ import UIKit
         }
     }
     
-    private func completeStackViewConstraints() {
+    private func completeContentStackViewConstraints() {
+        var constraints: [NSLayoutConstraint] = []
         if self.image != nil
             && (self.title != nil || self.message != nil) {
-            self.contentView.heightAnchor.constraint(
+            
+            constraints.append(self.contentView.heightAnchor.constraint(
                 greaterThanOrEqualToConstant: self.sizesAndDistances.minimumAlertHeight
-                ).isActive = true
-            self.contentView.widthAnchor.constraint(
+            ))
+            constraints.append(self.contentView.widthAnchor.constraint(
                 equalToConstant: self.sizesAndDistances.defaultAlertWidth
-                ).isActive = true
-            self.contentStackView.topAnchor.constraint(
+            ))
+            constraints.append(self.contentStackView.topAnchor.constraint(
                 greaterThanOrEqualTo: self.contentView.topAnchor,
                 constant: self.sizesAndDistances.minimumStackViewTopSpace
-                ).isActive = true
-            self.contentStackView.centerYAnchor.constraint(
+            ))
+            constraints.append(self.contentStackView.centerYAnchor.constraint(
                 equalTo: self.contentView.centerYAnchor,
                 constant: (self.sizesAndDistances.minimumStackViewTopSpace - self.sizesAndDistances.minimumStackViewBottomSpace) / 2
-                ).isActive = true
+            ))
         } else {
             if self.image == nil {
-                self.contentView.widthAnchor.constraint(
+                constraints.append(self.contentView.widthAnchor.constraint(
                     equalToConstant: self.sizesAndDistances.defaultAlertWidth
-                    ).isActive = true
+                ))
             }
-            self.contentStackView.topAnchor.constraint(
+            constraints.append(self.contentStackView.topAnchor.constraint(
                 greaterThanOrEqualTo: self.contentView.topAnchor,
                 constant: self.sizesAndDistances.minimumStackViewBottomSpace
-                ).isActive = true
-            self.contentStackView.centerYAnchor.constraint(
+            ))
+            constraints.append(self.contentStackView.centerYAnchor.constraint(
                 equalTo: self.contentView.centerYAnchor
-                ).isActive = true
+            ))
         }
+
+        self.contentStackViewConstraints.append(contentsOf: constraints)
+        NSLayoutConstraint.activate(self.contentStackViewConstraints)
     }
 
     @objc private func reduceTransparencyStatusDidChange() {
@@ -595,24 +621,35 @@ import UIKit
     }
     
     // MARK: Presentation methods
-    
-    private func present() {
+
+    private func prepareForPresentation(
+        onPrepared: @escaping () -> Void
+        ) {
+
         switch StatusAlert.multiplePresentationsBehavior {
         case .ignoreIfAlreadyPresenting:
             guard StatusAlert.currentlyPresentedStatusAlerts.isEmpty else { return }
-            self.performPresentation()
+            onPrepared()
         case .showMultiple:
-            self.performPresentation()
+            guard !StatusAlert.currentlyPresentedStatusAlerts.contains(self) else { return }
+            onPrepared()
         case .dismissCurrentlyPresented:
-            let group = DispatchGroup()
-            for alert in StatusAlert.currentlyPresentedStatusAlerts {
-                group.enter()
-                alert.dismiss {
-                    group.leave()
+            guard !StatusAlert.dismissing else { return }
+            if !StatusAlert.currentlyPresentedStatusAlerts.isEmpty {
+                StatusAlert.alertToPresent = self
+                let group = DispatchGroup()
+                for alert in StatusAlert.currentlyPresentedStatusAlerts {
+                    group.enter()
+                    alert.dismiss {
+                        group.leave()
+                    }
                 }
-            }
-            group.notify(queue: DispatchQueue.main) { [weak self] in
-                self?.performPresentation()
+                group.notify(queue: DispatchQueue.main) {
+                    onPrepared()
+                    StatusAlert.alertToPresent = nil
+                }
+            } else {
+                onPrepared()
             }
         }
     }
@@ -621,24 +658,23 @@ import UIKit
         StatusAlert.currentlyPresentedStatusAlerts.append(self)
 
         let scale: CGFloat = self.sizesAndDistances.defaultInitialScale
-        self.timer = Timer.scheduledTimer(
+        let timer = Timer.scheduledTimer(
             timeInterval: self.alertShowingDuration - self.defaultFadeAnimationDuration,
             target: self,
             selector: #selector(self.dismissByTimer),
             userInfo: nil,
             repeats: false)
-        if let timer = self.timer {
-            RunLoop.main.add(
-                timer,
-                forMode: RunLoopMode.commonModes
-            )
-        }
+        RunLoop.main.add(
+            timer,
+            forMode: RunLoopMode.commonModes
+        )
+        self.timer = timer
         self.contentView.transform = CGAffineTransform.identity.scaledBy(x: scale, y: scale)
 
         UIView.animate(
             withDuration: self.defaultFadeAnimationDuration,
             delay: 0,
-            options: UIViewAnimationOptions.curveEaseOut,
+            options: .curveEaseOut,
             animations: {
                 if self.isBlurAvailable {
                     if #available(iOS 11, *) {
@@ -690,8 +726,9 @@ import UIKit
                     if let strongSelf = self,
                         let index = StatusAlert.currentlyPresentedStatusAlerts.index(of: strongSelf) {
                         StatusAlert.currentlyPresentedStatusAlerts.remove(at: index)
-                        self?.removeFromSuperview()
                     }
+                    self?.removeFromSuperview()
+                    self?.resetView()
                     completion?()
             })
         }
