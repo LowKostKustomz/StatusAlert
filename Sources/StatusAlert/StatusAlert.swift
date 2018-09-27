@@ -25,7 +25,7 @@ import UIKit
     /// - Note: This time should include fade animation duration (which is `UINavigationControllerHideShowBarDuration`)
     /// - Note: Changes while showing will have no effect
     @objc public var alertShowingDuration: TimeInterval = 2
-
+    
     /// Multiple presentation requests behavior
     @objc public static var multiplePresentationsBehavior: MultiplePresentationsBehavior = .ignoreIfAlreadyPresenting
     
@@ -40,14 +40,14 @@ import UIKit
             }
         }
     }
-
+    
     /// @1x should be 90*90 by default
     @objc public var image: UIImage?
-
+    
     @objc public var title: String?
-
+    
     @objc public var message: String?
-
+    
     /// Determines whether `StatusAlert` can be picked or dismissed by tap
     @objc public var canBePickedOrDismissed: Bool {
         get { return self.contentView.isUserInteractionEnabled }
@@ -65,16 +65,16 @@ import UIKit
         return alertToPresent != nil
     }
     
-    private let defaultFadeAnimationDuration: TimeInterval = TimeInterval(UINavigationControllerHideShowBarDuration)
+    private let defaultFadeAnimationDuration: TimeInterval = TimeInterval(UINavigationController.hideShowBarDuration)
     private let blurEffect: UIBlurEffect = UIBlurEffect(style: .light)
     
     private let contentView: UIVisualEffectView = UIVisualEffectView()
     private let contentStackView: UIStackView = UIStackView()
-
+    
     private var imageView: UIImageView? = nil
     private var titleLabel: UILabel? = nil
     private var messageLabel: UILabel? = nil
-
+    
     private var contentStackViewConstraints: [NSLayoutConstraint] = []
     private var reusableObjectsConstraints: [NSLayoutConstraint] = []
     
@@ -91,7 +91,7 @@ import UIKit
     private var isBlurAvailable: Bool {
         return UIDevice.current.isBlurAvailable
     }
-
+    
     private var pickGesture: UILongPressGestureRecognizer?
     
     // MARK: - Interaction methods
@@ -103,23 +103,23 @@ import UIKit
         if self.pickGesture?.state == .cancelled
             || self.pickGesture?.state == .ended
             || self.pickGesture?.state == .failed {
-
+            
             self.dismiss(completion: nil)
         }
     }
-
+    
     // MARK: - Initialization -
-
+    
     @objc public override init(frame: CGRect) {
         super.init(frame: frame)
-
+        
         self.commonInit()
     }
-
+    
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     deinit {
         self.enqueueReusableObjects()
     }
@@ -158,7 +158,7 @@ import UIKit
     /// Shows `StatusAlert` in the center of the `keyWindow`
     /// - Note: must be called from the main thread only
     @objc public func showInKeyWindow() {
-
+        
         self.show()
     }
     
@@ -169,7 +169,7 @@ import UIKit
     /// - Note: must be called from the main thread only
     @objc(showInView:)
     public func show(in presenter: UIView) {
-
+        
         self.show(inPresenter: presenter)
     }
     
@@ -180,7 +180,7 @@ import UIKit
     /// - Note: must be called from the main thread only
     @objc(showWithVerticalPosition:)
     public func show(withVerticalPosition verticalPosition: VerticalPosition) {
-
+        
         self.show(with: verticalPosition, offset: 0)
     }
     
@@ -191,7 +191,7 @@ import UIKit
     /// - Note: must be called from the main thread only
     @objc(showWithOffset:)
     public func show(withOffset offset: CGFloat) {
-
+        
         self.show(offset: offset)
     }
     
@@ -268,10 +268,10 @@ import UIKit
         with verticalPosition: VerticalPosition = .center,
         offset: CGFloat? = nil
         ) {
-
+        
         self.assertIsMainThread()
         guard !self.isContentEmpty else { return }
-
+        
         self.prepareForPresentation { [weak self] in
             self?.prepareContent()
             self?.positionAlert(
@@ -282,26 +282,26 @@ import UIKit
             self?.performPresentation()
         }
     }
-
+    
     private func commonInit() {
         self.setupView()
         self.setupContentView()
         self.setupContentStackView()
-
+        
         self.layoutViews()
-
+        
         self.setupPickGestureRecognizer()
         self.observeReduceTransparencyStatus()
         self.setupAccessibilityProperties()
     }
-
+    
     private func setupView() {
         self.translatesAutoresizingMaskIntoConstraints = false
     }
-
+    
     private func setupContentView() {
         self.setupContentViewBackground()
-
+        
         if self.isBlurAvailable {
             if #available(iOS 11, *) {
                 self.alpha = 0
@@ -311,28 +311,28 @@ import UIKit
         } else {
             self.alpha = 0
         }
-
+        
         self.contentView.clipsToBounds = true
         self.contentView.layer.cornerRadius = self.sizesAndDistances.defaultCornerRadius
     }
-
+    
     private func setupContentStackView() {
         self.contentStackView.axis = .vertical
         self.contentStackView.distribution = .fill
         self.contentStackView.alignment = .center
         self.contentStackView.spacing = 0
     }
-
+    
     private func layoutViews() {
         self.addSubview(self.contentView)
         self.contentView.contentView.addSubview(self.contentStackView)
-
+        
         self.contentView.translatesAutoresizingMaskIntoConstraints = false
         self.contentView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
         self.contentView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
         self.contentView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         self.contentView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-
+        
         self.contentStackView.translatesAutoresizingMaskIntoConstraints = false
         self.contentStackView.leftAnchor.constraint(
             equalTo: self.contentView.leftAnchor,
@@ -353,7 +353,7 @@ import UIKit
             equalTo: self.contentView.centerXAnchor
             ).isActive = true
     }
-
+    
     private func setupPickGestureRecognizer() {
         self.pickGesture = UILongPressGestureRecognizer(target: self, action: #selector(self.pick))
         if let gesture = self.pickGesture {
@@ -363,28 +363,28 @@ import UIKit
             self.contentView.addGestureRecognizer(gesture)
         }
     }
-
+    
     private func observeReduceTransparencyStatus() {
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(self.reduceTransparencyStatusDidChange),
-            name: NSNotification.Name.UIAccessibilityReduceTransparencyStatusDidChange,
+            name: UIAccessibility.reduceTransparencyStatusDidChangeNotification,
             object: nil
         )
     }
-
+    
     private func setupAccessibilityProperties() {
         self.isAccessibilityElement = false
         self.accessibilityElementsHidden = true
-        self.accessibilityTraits = UIAccessibilityTraitNone
+        self.accessibilityTraits = UIAccessibilityTraits.none
     }
-
+    
     private func resetView() {
         self.deactivateConstraints(&self.contentStackViewConstraints)
-
+        
         self.enqueueReusableObjects()
     }
-
+    
     private func enqueueReusableObjects() {
         self.deactivateConstraints(&self.reusableObjectsConstraints)
         if let imageView = self.imageView {
@@ -403,7 +403,7 @@ import UIKit
             self.messageLabel = nil
         }
     }
-
+    
     private func deactivateConstraints(_ array: inout [NSLayoutConstraint]) {
         NSLayoutConstraint.deactivate(array)
         array = []
@@ -414,7 +414,7 @@ import UIKit
     /// Must be called before the `StatusAlert` presenting
     private func prepareContent() {
         self.completeContentStackViewConstraints()
-
+        
         self.imageView = self.createImageViewIfNeeded()
         if let imageView = self.imageView {
             let customSpace: CGFloat
@@ -435,7 +435,7 @@ import UIKit
                 self.contentStackView.addArrangedSubview(spaceView)
             }
         }
-
+        
         self.titleLabel = self.createTitleLabelIfNeeded()
         if let titleLabel = self.titleLabel {
             self.contentStackView.addArrangedSubview(titleLabel)
@@ -446,12 +446,12 @@ import UIKit
                 self.contentStackView.addArrangedSubview(spaceView)
             }
         }
-
+        
         self.messageLabel = self.createMessageLabelIfNeeded()
         if let messageLabel = self.messageLabel {
             self.contentStackView.addArrangedSubview(messageLabel)
         }
-
+        
         NSLayoutConstraint.activate(self.reusableObjectsConstraints)
     }
     
@@ -460,7 +460,7 @@ import UIKit
         withVerticalPosition verticalPosition: VerticalPosition,
         offset: CGFloat?
         ) {
-
+        
         presenter.addSubview(self)
         
         self.centerXAnchor.constraint(equalTo: presenter.centerXAnchor).isActive = true
@@ -531,11 +531,11 @@ import UIKit
                 equalTo: self.contentView.centerYAnchor
             ))
         }
-
+        
         self.contentStackViewConstraints.append(contentsOf: constraints)
         NSLayoutConstraint.activate(self.contentStackViewConstraints)
     }
-
+    
     @objc private func reduceTransparencyStatusDidChange() {
         self.setupContentViewBackground()
     }
@@ -557,7 +557,7 @@ import UIKit
     private func createSpaceView(
         withHeight height: CGFloat
         ) -> UIView {
-
+        
         let spaceView = StatusAlert.reusableSpaceViewsManager.dequeueReusable()
         let constraint = spaceView.heightAnchor.constraint(equalToConstant: height)
         self.reusableObjectsConstraints.append(constraint)
@@ -574,7 +574,7 @@ import UIKit
         self.reusableObjectsConstraints.append(widthConstraint)
         let heightConstraint = imageView.heightAnchor.constraint(equalToConstant: sizesAndDistances.defaultImageWidth)
         self.reusableObjectsConstraints.append(heightConstraint)
-
+        
         return imageView
     }
     
@@ -621,11 +621,11 @@ import UIKit
     }
     
     // MARK: Presentation methods
-
+    
     private func prepareForPresentation(
         onPrepared: @escaping () -> Void
         ) {
-
+        
         switch StatusAlert.multiplePresentationsBehavior {
         case .ignoreIfAlreadyPresenting:
             guard StatusAlert.currentlyPresentedStatusAlerts.isEmpty else { return }
@@ -653,10 +653,10 @@ import UIKit
             }
         }
     }
-
+    
     private func performPresentation() {
         StatusAlert.currentlyPresentedStatusAlerts.append(self)
-
+        
         let scale: CGFloat = self.sizesAndDistances.defaultInitialScale
         let timer = Timer.scheduledTimer(
             timeInterval: self.alertShowingDuration - self.defaultFadeAnimationDuration,
@@ -666,11 +666,11 @@ import UIKit
             repeats: false)
         RunLoop.main.add(
             timer,
-            forMode: RunLoopMode.commonModes
+            forMode: RunLoop.Mode.common
         )
         self.timer = timer
         self.contentView.transform = CGAffineTransform.identity.scaledBy(x: scale, y: scale)
-
+        
         UIView.animate(
             withDuration: self.defaultFadeAnimationDuration,
             delay: 0,
@@ -689,10 +689,10 @@ import UIKit
                 self.contentView.transform = CGAffineTransform.identity
         },
             completion: { [weak self] (_) in
-                UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, self?.accessibilityAnnouncement)
+                UIAccessibility.post(notification: UIAccessibility.Notification.announcement, argument: self?.accessibilityAnnouncement)
         })
     }
-
+    
     @objc private func dismissByTimer() {
         self.dismiss(completion: nil)
     }
@@ -703,7 +703,7 @@ import UIKit
         
         if self.pickGesture?.state != .changed
             && self.pickGesture?.state != .began {
-
+            
             self.isUserInteractionEnabled = false
             UIView.animate(
                 withDuration: self.defaultFadeAnimationDuration,
@@ -739,11 +739,11 @@ import UIKit
     private func assertIsMainThread() {
         precondition(Thread.isMainThread, "`StatusAlert` must only be used from the main thread.")
     }
-
+    
     // MARK: - Reusable elements -
-
+    
     // MARK: UIImageView
-
+    
     private static let reusableImageViewsManager: ReusablesManager<UIImageView> = ReusablesManager(
         createReusableClosure: { () -> UIImageView in
             return StatusAlert.reusableImageView()
@@ -751,19 +751,19 @@ import UIKit
         prepareForReuseClosure: nil,
         maximumReusablesNumber: 5
     )
-
+    
     private static func reusableImageView() -> UIImageView {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.isAccessibilityElement = false
-        imageView.accessibilityTraits = UIAccessibilityTraitNone
-
+        imageView.accessibilityTraits = UIAccessibilityTraits.none
+        
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }
-
+    
     // MARK: UILabel
-
+    
     private static let reusableLabelsManager: ReusablesManager<UILabel> = ReusablesManager(
         createReusableClosure: { () -> UILabel in
             return StatusAlert.reusableLabel()
@@ -771,18 +771,18 @@ import UIKit
         prepareForReuseClosure: nil,
         maximumReusablesNumber: 5
     )
-
+    
     private static func reusableLabel() -> UILabel {
         let label = UILabel()
         label.textAlignment = .center
         label.numberOfLines = 0
         label.isAccessibilityElement = false
-        label.accessibilityTraits = UIAccessibilityTraitNone
+        label.accessibilityTraits = UIAccessibilityTraits.none
         return label
     }
-
+    
     // MARK: - SpaceView
-
+    
     private static let reusableSpaceViewsManager: ReusablesManager<UIView> = ReusablesManager(
         createReusableClosure: { () -> UIView in
             return StatusAlert.reusableSpaceView()
@@ -790,7 +790,7 @@ import UIKit
         prepareForReuseClosure: nil,
         maximumReusablesNumber: 10
     )
-
+    
     private static func reusableSpaceView() -> UIView {
         let spaceView = UIView()
         spaceView.backgroundColor = UIColor.clear
@@ -802,6 +802,6 @@ import UIKit
 // Compatibility
 
 #if swift(>=4.0)
-private let NSKernAttributeName = NSAttributedStringKey.kern
-private let NSParagraphStyleAttributeName = NSAttributedStringKey.paragraphStyle
+private let NSKernAttributeName = NSAttributedString.Key.kern
+private let NSParagraphStyleAttributeName = NSAttributedString.Key.paragraphStyle
 #endif
