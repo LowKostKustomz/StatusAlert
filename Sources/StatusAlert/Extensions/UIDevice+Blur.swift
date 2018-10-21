@@ -27,7 +27,7 @@ extension UIDevice {
     }
     
     private var reduceTransparencyEnabled: Bool {
-        return UIAccessibilityIsReduceTransparencyEnabled()
+        return UIAccessibility.isReduceTransparencyEnabled
     }
     
     private var deviceSupportsBlur: Bool {
