@@ -65,7 +65,7 @@ import UIKit
         return alertToPresent != nil
     }
     
-    private let defaultFadeAnimationDuration: TimeInterval = TimeInterval(UINavigationController.hideShowBarDuration)
+    private let defaultFadeAnimationDuration: TimeInterval = TimeInterval(UINavigationControllerHideShowBarDuration)
     private let blurEffect: UIBlurEffect = UIBlurEffect(style: .light)
     
     private let contentView: UIVisualEffectView = UIVisualEffectView()
@@ -368,7 +368,7 @@ import UIKit
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(self.reduceTransparencyStatusDidChange),
-            name: UIAccessibility.reduceTransparencyStatusDidChangeNotification,
+            name: UIAccessibilityReduceTransparencyStatusDidChange,
             object: nil
         )
     }
@@ -376,7 +376,7 @@ import UIKit
     private func setupAccessibilityProperties() {
         self.isAccessibilityElement = false
         self.accessibilityElementsHidden = true
-        self.accessibilityTraits = UIAccessibilityTraits.none
+        self.accessibilityTraits = UIAccessibilityTraitNone
     }
     
     private func resetView() {
@@ -666,7 +666,7 @@ import UIKit
             repeats: false)
         RunLoop.main.add(
             timer,
-            forMode: RunLoop.Mode.common
+            forMode: RunLoopCommonMode
         )
         self.timer = timer
         self.contentView.transform = CGAffineTransform.identity.scaledBy(x: scale, y: scale)
@@ -689,8 +689,17 @@ import UIKit
                 self.contentView.transform = CGAffineTransform.identity
         },
             completion: { [weak self] (_) in
-                UIAccessibility.post(notification: UIAccessibility.Notification.announcement, argument: self?.accessibilityAnnouncement)
+                self?.postAccessibilityAnnouncement()
         })
+    }
+
+    private func postAccessibilityAnnouncement() {
+        let announcement = self.accessibilityAnnouncement
+        #if swift(>=4.2)
+        UIAccessibility.post(notification: UIAccessibility.Notification.announcement, argument: announcement)
+        #else
+        UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, announcement)
+        #endif
     }
     
     @objc private func dismissByTimer() {
@@ -756,7 +765,7 @@ import UIKit
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.isAccessibilityElement = false
-        imageView.accessibilityTraits = UIAccessibilityTraits.none
+        imageView.accessibilityTraits = UIAccessibilityTraitNone
         
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
@@ -777,7 +786,7 @@ import UIKit
         label.textAlignment = .center
         label.numberOfLines = 0
         label.isAccessibilityElement = false
-        label.accessibilityTraits = UIAccessibilityTraits.none
+        label.accessibilityTraits = UIAccessibilityTraitNone
         return label
     }
     
@@ -801,7 +810,20 @@ import UIKit
 
 // Compatibility
 
-#if swift(>=4.0)
+#if swift(>=4.2)
 private let NSKernAttributeName = NSAttributedString.Key.kern
 private let NSParagraphStyleAttributeName = NSAttributedString.Key.paragraphStyle
+#elseif swift(>=4.0)
+private let NSKernAttributeName = NSAttributedStringKey.kern
+private let NSParagraphStyleAttributeName = NSAttributedStringKey.paragraphStyle
+#endif
+
+#if swift(>=4.2)
+private let UINavigationControllerHideShowBarDuration = UINavigationController.hideShowBarDuration
+private let UIAccessibilityReduceTransparencyStatusDidChange = UIAccessibility.reduceTransparencyStatusDidChangeNotification
+private let UIAccessibilityTraitNone = UIAccessibilityTraits.none
+private let RunLoopCommonMode = RunLoop.Mode.common
+#else
+private let UIAccessibilityReduceTransparencyStatusDidChange = NSNotification.Name.UIAccessibilityReduceTransparencyStatusDidChange
+private let RunLoopCommonMode = RunLoopMode.commonModes
 #endif

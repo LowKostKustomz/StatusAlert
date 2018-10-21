@@ -24,3 +24,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 }
 
+#if swift(>=4.2)
+typealias UIApplicationLaunchOptionsKey = UIApplication.LaunchOptionsKey
+#endif
