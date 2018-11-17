@@ -1,16 +1,16 @@
 PODS:
-  - StatusAlert (0.10.1)
+  - StatusAlert (1.0.0)
 
 DEPENDENCIES:
   - StatusAlert (from `../`)
 
 EXTERNAL SOURCES:
   StatusAlert:
-    :path: ../
+    :path: "../"
 
 SPEC CHECKSUMS:
-  StatusAlert: cb0392d42c47012a5163ee8358182f98c21d4a78
+  StatusAlert: d63e70063a967b5e3afbbaa8874c16f667f0f85b
 
 PODFILE CHECKSUM: 951ba9893a9a5d668588518877668840ab9527c6
 
-COCOAPODS: 1.3.1
+COCOAPODS: 1.5.3

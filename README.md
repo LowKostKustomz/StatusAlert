@@ -54,7 +54,7 @@ It looks very similar to the alerts displayed in Podcasts, Apple Music and News 
 To install StatusAlert using [CocoaPods](http://cocoapods.org), add the following line to your `Podfile`:
 
 ```ruby
-pod 'StatusAlert', '~> 0.12.2'
+pod 'StatusAlert', '~> 1.0.0'
 ```
 
 ### Carthage
@@ -62,7 +62,7 @@ pod 'StatusAlert', '~> 0.12.2'
 To install StatusAlert using [Carthage](https://github.com/Carthage/Carthage), add the following line to your `Cartfile`:
 
 ```ruby
-github "LowKostKustomz/StatusAlert" ~> 0.12.2
+github "LowKostKustomz/StatusAlert" ~> 1.0.0
 ```
 
 ### Swift Package Manager
@@ -71,7 +71,7 @@ To install StatusAlert using [Swift Package Manager](https://github.com/apple/sw
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/LowKostKustomz/StatusAlert.git", .exact("0.12.2"))
+    .package(url: "https://github.com/LowKostKustomz/StatusAlert.git", .exact("1.0.0"))
 ]
 ```
 
