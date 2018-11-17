@@ -26,10 +26,10 @@ import UIKit
         @objc public static let common: Appearance = Appearance()
         
         /// - Note: Do not change to save system look
-        @objc public var titleFont: UIFont = UIFont.systemFont(ofSize: 23, weight: UIFontWeightSemibold)
+        @objc public var titleFont: UIFont = UIFont.systemFont(ofSize: 23, weight: FontWeightSemibold)
         
         /// - Note: Do not change to save system look
-        @objc public var messageFont: UIFont = UIFont.systemFont(ofSize: 16, weight: UIFontWeightRegular)
+        @objc public var messageFont: UIFont = UIFont.systemFont(ofSize: 16, weight: FontWeightRegular)
         
         /// - Note: Do not change to save system look
         @objc public var tintColor: UIColor = UIColor.darkGray
@@ -149,6 +149,9 @@ internal class ReusablesManager<Reusable: Any> {
 // Compatibility
 
 #if swift(>=4.0)
-    private let UIFontWeightSemibold = UIFont.Weight.semibold
-    private let UIFontWeightRegular = UIFont.Weight.regular
+private let FontWeightSemibold = UIFont.Weight.semibold
+private let FontWeightRegular = UIFont.Weight.regular
+#else
+private let FontWeightSemibold = UIFontWeightSemibold
+private let FontWeightRegular = UIFontWeightRegular
 #endif

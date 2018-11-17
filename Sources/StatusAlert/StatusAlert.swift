@@ -22,7 +22,7 @@ import UIKit
     
     /// How long StatusAlert should be on screen.
     ///
-    /// - Note: This time should include fade animation duration (which is `UINavigationControllerHideShowBarDuration`)
+    /// - Note: This time should include fade animation duration (which is `NavigationControllerHideShowBarDuration`)
     /// - Note: Changes while showing will have no effect
     @objc public var alertShowingDuration: TimeInterval = 2
     
@@ -65,7 +65,7 @@ import UIKit
         return alertToPresent != nil
     }
     
-    private let defaultFadeAnimationDuration: TimeInterval = TimeInterval(UINavigationControllerHideShowBarDuration)
+    private let defaultFadeAnimationDuration: TimeInterval = TimeInterval(NavigationControllerHideShowBarDuration)
     private let blurEffect: UIBlurEffect = UIBlurEffect(style: .light)
     
     private let contentView: UIVisualEffectView = UIVisualEffectView()
@@ -368,7 +368,7 @@ import UIKit
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(self.reduceTransparencyStatusDidChange),
-            name: UIAccessibilityReduceTransparencyStatusDidChange,
+            name: AccessibilityReduceTransparencyStatusDidChangeNotificationName,
             object: nil
         )
     }
@@ -376,7 +376,7 @@ import UIKit
     private func setupAccessibilityProperties() {
         self.isAccessibilityElement = false
         self.accessibilityElementsHidden = true
-        self.accessibilityTraits = UIAccessibilityTraitNone
+        self.accessibilityTraits = AccessibilityTraitNone
     }
     
     private func resetView() {
@@ -586,7 +586,7 @@ import UIKit
         
         let attributedText = NSAttributedString(
             string: title,
-            attributes: [NSKernAttributeName: 0.01]
+            attributes: [KernAttributeName: 0.01]
         )
         titleLabel.attributedText = attributedText
         
@@ -605,8 +605,8 @@ import UIKit
         let attributedText = NSAttributedString(
             string: message,
             attributes: [
-                NSKernAttributeName: 0.01,
-                NSParagraphStyleAttributeName: paragraphStyle
+                KernAttributeName: 0.01,
+                ParagraphStyleAttributeName: paragraphStyle
             ]
         )
         messageLabel.attributedText = attributedText
@@ -765,7 +765,7 @@ import UIKit
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.isAccessibilityElement = false
-        imageView.accessibilityTraits = UIAccessibilityTraitNone
+        imageView.accessibilityTraits = AccessibilityTraitNone
         
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
@@ -786,7 +786,7 @@ import UIKit
         label.textAlignment = .center
         label.numberOfLines = 0
         label.isAccessibilityElement = false
-        label.accessibilityTraits = UIAccessibilityTraitNone
+        label.accessibilityTraits = AccessibilityTraitNone
         return label
     }
     
@@ -811,19 +811,24 @@ import UIKit
 // Compatibility
 
 #if swift(>=4.2)
-private let NSKernAttributeName = NSAttributedString.Key.kern
-private let NSParagraphStyleAttributeName = NSAttributedString.Key.paragraphStyle
+private let KernAttributeName = NSAttributedString.Key.kern
+private let ParagraphStyleAttributeName = NSAttributedString.Key.paragraphStyle
 #elseif swift(>=4.0)
-private let NSKernAttributeName = NSAttributedStringKey.kern
-private let NSParagraphStyleAttributeName = NSAttributedStringKey.paragraphStyle
+private let KernAttributeName = NSAttributedStringKey.kern
+private let ParagraphStyleAttributeName = NSAttributedStringKey.paragraphStyle
+#else
+private let KernAttributeName = NSKernAttributeName
+private let ParagraphStyleAttributeName = NSParagraphStyleAttributeName
 #endif
 
 #if swift(>=4.2)
-private let UINavigationControllerHideShowBarDuration = UINavigationController.hideShowBarDuration
-private let UIAccessibilityReduceTransparencyStatusDidChange = UIAccessibility.reduceTransparencyStatusDidChangeNotification
-private let UIAccessibilityTraitNone = UIAccessibilityTraits.none
+private let NavigationControllerHideShowBarDuration = UINavigationController.hideShowBarDuration
+private let AccessibilityReduceTransparencyStatusDidChangeNotificationName = UIAccessibility.reduceTransparencyStatusDidChangeNotification
+private let AccessibilityTraitNone = UIAccessibilityTraits.none
 private let RunLoopCommonMode = RunLoop.Mode.common
 #else
-private let UIAccessibilityReduceTransparencyStatusDidChange = NSNotification.Name.UIAccessibilityReduceTransparencyStatusDidChange
+private let NavigationControllerHideShowBarDuration = UINavigationControllerHideShowBarDuration
+private let AccessibilityReduceTransparencyStatusDidChangeNotificationName = NSNotification.Name.UIAccessibilityReduceTransparencyStatusDidChange
+private let AccessibilityTraitNone = UIAccessibilityTraitNone
 private let RunLoopCommonMode = RunLoopMode.commonModes
 #endif
