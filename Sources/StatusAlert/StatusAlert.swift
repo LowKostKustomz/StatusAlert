@@ -273,7 +273,7 @@ import UIKit
         }
         
         self.contentView.clipsToBounds = true
-        self.contentView.layer.cornerRadius = self.sizesAndDistances.defaultCornerRadius
+        self.contentView.layer.cornerRadius = self.sizesAndDistances.cornerRadius
     }
     
     private func setupContentStackView() {
@@ -380,11 +380,11 @@ import UIKit
             let customSpace: CGFloat
             
             if self.title != nil && self.message != nil {
-                customSpace = self.sizesAndDistances.defaultImageBottomSpace
+                customSpace = self.sizesAndDistances.imageBottomSpace
             } else if self.title == nil {
-                customSpace = self.sizesAndDistances.defaultImageToMessageSpace
+                customSpace = self.sizesAndDistances.imageToMessageSpace
             } else {
-                customSpace = self.sizesAndDistances.defaultTitleBottomSpace
+                customSpace = self.sizesAndDistances.titleBottomSpace
             }
             
             self.contentStackView.addArrangedSubview(imageView)
@@ -400,9 +400,9 @@ import UIKit
         if let titleLabel = self.titleLabel {
             self.contentStackView.addArrangedSubview(titleLabel)
             if #available(iOS 11.0, *) {
-                self.contentStackView.setCustomSpacing(self.sizesAndDistances.defaultTitleBottomSpace, after: titleLabel)
+                self.contentStackView.setCustomSpacing(self.sizesAndDistances.titleBottomSpace, after: titleLabel)
             } else if self.message != nil {
-                let spaceView = self.createSpaceView(withHeight: self.sizesAndDistances.defaultTitleBottomSpace)
+                let spaceView = self.createSpaceView(withHeight: self.sizesAndDistances.titleBottomSpace)
                 self.contentStackView.addArrangedSubview(spaceView)
             }
         }
@@ -435,24 +435,24 @@ import UIKit
             if #available(iOS 11, *) {
                 self.topAnchor.constraint(
                     equalTo: presenter.safeAreaLayoutGuide.topAnchor,
-                    constant: offset ?? self.sizesAndDistances.defaultTopOffset
+                    constant: offset ?? self.sizesAndDistances.topOffset
                     ).isActive = true
             } else {
                 self.topAnchor.constraint(
                     equalTo: presenter.topAnchor,
-                    constant: offset ?? self.sizesAndDistances.defaultTopOffset
+                    constant: offset ?? self.sizesAndDistances.topOffset
                     ).isActive = true
             }
         case .bottom:
             if #available(iOS 11, *) {
                 self.bottomAnchor.constraint(
                     equalTo: presenter.safeAreaLayoutGuide.bottomAnchor,
-                    constant: offset ?? -self.sizesAndDistances.defaultBottomOffset
+                    constant: offset ?? -self.sizesAndDistances.bottomOffset
                     ).isActive = true
             } else {
                 self.bottomAnchor.constraint(
                     equalTo: presenter.bottomAnchor,
-                    constant: offset ?? -self.sizesAndDistances.defaultBottomOffset
+                    constant: offset ?? -self.sizesAndDistances.bottomOffset
                     ).isActive = true
             }
         }
@@ -467,7 +467,7 @@ import UIKit
                 greaterThanOrEqualToConstant: self.sizesAndDistances.minimumAlertHeight
             ))
             constraints.append(self.contentView.widthAnchor.constraint(
-                equalToConstant: self.sizesAndDistances.defaultAlertWidth
+                equalToConstant: self.sizesAndDistances.alertWidth
             ))
             constraints.append(self.contentStackView.topAnchor.constraint(
                 greaterThanOrEqualTo: self.contentView.topAnchor,
@@ -480,7 +480,7 @@ import UIKit
         } else {
             if self.image == nil {
                 constraints.append(self.contentView.widthAnchor.constraint(
-                    equalToConstant: self.sizesAndDistances.defaultAlertWidth
+                    equalToConstant: self.sizesAndDistances.alertWidth
                 ))
             }
             constraints.append(self.contentStackView.topAnchor.constraint(
@@ -530,9 +530,9 @@ import UIKit
         let imageView = StatusAlert.reusableImageViewsManager.dequeueReusable()
         imageView.image = image
         imageView.tintColor = self.appearance.tintColor
-        let widthConstraint = imageView.widthAnchor.constraint(equalToConstant: sizesAndDistances.defaultImageWidth)
+        let widthConstraint = imageView.widthAnchor.constraint(equalToConstant: sizesAndDistances.imageWidth)
         self.reusableObjectsConstraints.append(widthConstraint)
-        let heightConstraint = imageView.heightAnchor.constraint(equalToConstant: sizesAndDistances.defaultImageWidth)
+        let heightConstraint = imageView.heightAnchor.constraint(equalToConstant: sizesAndDistances.imageWidth)
         self.reusableObjectsConstraints.append(heightConstraint)
         
         return imageView
@@ -617,7 +617,7 @@ import UIKit
     private func performPresentation() {
         StatusAlert.currentlyPresentedStatusAlerts.append(self)
         
-        let scale: CGFloat = self.sizesAndDistances.defaultInitialScale
+        let scale: CGFloat = self.sizesAndDistances.initialScale
         let timer = Timer.scheduledTimer(
             timeInterval: self.alertShowingDuration - self.defaultFadeAnimationDuration,
             target: self,
@@ -667,7 +667,7 @@ import UIKit
     }
     
     private func dismiss(completion: (() -> Void)?) {
-        let scale: CGFloat = self.sizesAndDistances.defaultInitialScale
+        let scale: CGFloat = self.sizesAndDistances.initialScale
         self.timer?.invalidate()
         
         if self.pickGesture?.state != .changed
