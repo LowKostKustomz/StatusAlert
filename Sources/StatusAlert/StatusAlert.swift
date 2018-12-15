@@ -273,6 +273,7 @@ import UIKit
         guard !self.isContentEmpty else { return }
         
         self.prepareForPresentation { [weak self] in
+            self?.setupContentViewBackground()
             self?.prepareContent()
             self?.positionAlert(
                 inPresenter: presenter,
@@ -300,8 +301,6 @@ import UIKit
     }
     
     private func setupContentView() {
-        self.setupContentViewBackground()
-        
         if self.isBlurAvailable {
             if #available(iOS 11, *) {
                 self.alpha = 0
