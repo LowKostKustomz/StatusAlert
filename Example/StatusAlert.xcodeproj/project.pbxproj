@@ -255,7 +255,6 @@
 				607FACCD1AFB9204008FA782 /* Frameworks */,
 				607FACCE1AFB9204008FA782 /* Resources */,
 				9E847D7A482576E27D7726F6 /* [CP] Embed Pods Frameworks */,
-				7A2B368E972ED2F1D32C2D0A /* [CP] Copy Pods Resources */,
 				E9A189F71FDC1A7D00F3B75B /* Embed Frameworks */,
 			);
 			buildRules = (
@@ -277,7 +276,6 @@
 				E97CF1B320019E2400A6C870 /* Frameworks */,
 				E97CF1B420019E2400A6C870 /* Resources */,
 				EF70A6A1C40DC63A5874DB59 /* [CP] Embed Pods Frameworks */,
-				57B797B54B050AAB4487CF08 /* [CP] Copy Pods Resources */,
 				E97FDC9F200275CB00450C12 /* Embed Frameworks */,
 			);
 			buildRules = (
@@ -385,36 +383,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		57B797B54B050AAB4487CF08 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StatusAlertObjCDemo/Pods-StatusAlertObjCDemo-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		7A2B368E972ED2F1D32C2D0A /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StatusAlertSwiftDemo/Pods-StatusAlertSwiftDemo-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		941A3836E4AF3283A2600734 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
