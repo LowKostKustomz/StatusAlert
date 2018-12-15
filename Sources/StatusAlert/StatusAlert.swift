@@ -29,18 +29,6 @@ import UIKit
     /// Multiple presentation requests behavior
     @objc public static var multiplePresentationsBehavior: MultiplePresentationsBehavior = .ignoreIfAlreadyPresenting
     
-    /// If multiple alerts can be on screen at once
-    @available(*, deprecated, message: "Use multiplePresentationsBehavior instead")
-    @objc public static var shouldShowMultipleAlertsSimultaneously: Bool = false {
-        didSet {
-            if self.shouldShowMultipleAlertsSimultaneously {
-                self.multiplePresentationsBehavior = .showMultiple
-            } else {
-                self.multiplePresentationsBehavior = .ignoreIfAlreadyPresenting
-            }
-        }
-    }
-    
     /// @1x should be 90*90 by default
     @objc public var image: UIImage?
     
@@ -122,35 +110,6 @@ import UIKit
     
     deinit {
         self.enqueueReusableObjects()
-    }
-    
-    // MARK: - Static methods -
-    
-    /// Instantiates `StatusAlert`
-    ///
-    /// - Parameters:
-    ///   - image: @1x should be 90*90 by default, optional
-    ///   - title: displayed beyond image
-    ///   - message: displayed beyond title or
-    ///   - canBePickedOrDismissed: determines whether StatusAlert can be picked or dismissed by tap
-    /// - Returns: `StatusAlert` instance
-    @available(*, deprecated, message: "Use `init` instead and set all properties directly")
-    @objc(statusAlertWithImage:title:message:canBePickedOrDismissed:)
-    public static func instantiate(
-        withImage image: UIImage?,
-        title: String?,
-        message: String?,
-        canBePickedOrDismissed: Bool = false
-        ) -> StatusAlert {
-        
-        let statusAlert = StatusAlert()
-        
-        statusAlert.image = image
-        statusAlert.title = title
-        statusAlert.message = message
-        statusAlert.canBePickedOrDismissed = canBePickedOrDismissed
-        
-        return statusAlert
     }
     
     // MARK: - Show methods -
