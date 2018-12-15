@@ -144,7 +144,7 @@ var blurStyle: UIBlurEffect.Style
 
 Alert will hide itself after 2 seconds timeout.
 
-You can also pass `canBePickedOrDismissed: true` into `StatusAlert`'s `instantiate` method. After that you will also be able to dismiss the alert manually by tap it and long tap the alert to delay dismissal.
+You can change alert showing duration by setting `alertShowingDuration` property. You also can set `canBePickedOrDismissed` property to `true`. After that you will be able to dismiss the alert manually by tapping it and delay dismissal by long tapping the alert.
 
 ## Apps Using _StatusAlert_
 
