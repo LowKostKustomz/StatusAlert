@@ -39,6 +39,9 @@ import UIKit
         ///
         /// - Note: Do not change to save system look
         @objc public var backgroundColor: UIColor = UIColor.groupTableViewBackground
+
+        /// - Note: Do not change to save system look
+        @objc public var blurStyle: UIBlurEffect.Style = .light
         
         @objc public static func copyCommon() -> Appearance {
             let common = Appearance.common
@@ -47,6 +50,7 @@ import UIKit
             copy.messageFont        = common.messageFont
             copy.tintColor          = common.tintColor
             copy.backgroundColor    = common.backgroundColor
+            copy.blurStyle          = common.blurStyle
             return copy
         }
     }

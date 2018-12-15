@@ -137,6 +137,7 @@ var titleFont: UIFont
 var messageFont: UIFont
 var tintColor: UIColor
 var backgroundColor: UIColor
+var blurStyle: UIBlurEffect.Style
 ```
 
 ### Dismissal

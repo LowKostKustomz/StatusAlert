@@ -54,7 +54,9 @@ import UIKit
     }
     
     private let defaultFadeAnimationDuration: TimeInterval = TimeInterval(NavigationControllerHideShowBarDuration)
-    private let blurEffect: UIBlurEffect = UIBlurEffect(style: .light)
+    private lazy var blurEffect: UIBlurEffect = {
+        return UIBlurEffect(style: self.appearance.blurStyle)
+    }()
     
     private let contentView: UIVisualEffectView = UIVisualEffectView()
     private let contentStackView: UIStackView = UIStackView()
@@ -232,13 +234,14 @@ import UIKit
         guard !self.isContentEmpty else { return }
         
         self.prepareForPresentation { [weak self] in
-            self?.setupContentViewBackground()
             self?.prepareContent()
             self?.positionAlert(
                 inPresenter: presenter,
                 withVerticalPosition: verticalPosition,
                 offset: offset
             )
+            self?.setupContentViewBackground()
+            self?.observeReduceTransparencyStatus()
             self?.performPresentation()
         }
     }
@@ -251,7 +254,6 @@ import UIKit
         self.layoutViews()
         
         self.setupPickGestureRecognizer()
-        self.observeReduceTransparencyStatus()
         self.setupAccessibilityProperties()
     }
     
