@@ -258,19 +258,19 @@
     UIAlertAction* topAction = [UIAlertAction actionWithTitle:@"Top"
                                                         style:UIAlertActionStyleDefault
                                                       handler:^(UIAlertAction * _Nonnull action) {
-                                                          preferredVerticalPosition = StatusAlertVerticalPositionTop;
+                                                          self->preferredVerticalPosition = StatusAlertVerticalPositionTop;
                                                           [weakSelf setupNavigationItems];
                                                       }];
     UIAlertAction* centerAction = [UIAlertAction actionWithTitle:@"Center"
                                                            style:UIAlertActionStyleDefault
                                                          handler:^(UIAlertAction * _Nonnull action) {
-                                                             preferredVerticalPosition = StatusAlertVerticalPositionCenter;
+                                                             self->preferredVerticalPosition = StatusAlertVerticalPositionCenter;
                                                              [weakSelf setupNavigationItems];
                                                          }];
     UIAlertAction* bottomAction = [UIAlertAction actionWithTitle:@"Bottom"
                                                            style:UIAlertActionStyleDefault
                                                          handler:^(UIAlertAction * _Nonnull action) {
-                                                             preferredVerticalPosition = StatusAlertVerticalPositionBottom;
+                                                             self->preferredVerticalPosition = StatusAlertVerticalPositionBottom;
                                                              [weakSelf setupNavigationItems];
                                                          }];
     UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"Cancel"
@@ -334,13 +334,13 @@
     UIAlertAction* yesAction = [UIAlertAction actionWithTitle:@"Yes"
                                                         style:UIAlertActionStyleDefault
                                                       handler:^(UIAlertAction * _Nonnull action) {
-                                                          isPickable = true;
+                                                          self->isPickable = true;
                                                           [weakSelf setupNavigationItems];
                                                       }];
     UIAlertAction* noAction = [UIAlertAction actionWithTitle:@"No"
                                                        style:UIAlertActionStyleDefault
                                                      handler:^(UIAlertAction * _Nonnull action) {
-                                                         isPickable = false;
+                                                         self->isPickable = false;
                                                          [weakSelf setupNavigationItems];
                                                      }];
     
