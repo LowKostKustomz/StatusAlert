@@ -693,7 +693,7 @@ import UIKit
             },
                 completion: { [weak self] (_) in
                     if let strongSelf = self,
-                        let index = StatusAlert.currentlyPresentedStatusAlerts.index(of: strongSelf) {
+                        let index = StatusAlert.currentlyPresentedStatusAlerts.firstIndex(of: strongSelf) {
                         StatusAlert.currentlyPresentedStatusAlerts.remove(at: index)
                     }
                     self?.removeFromSuperview()
