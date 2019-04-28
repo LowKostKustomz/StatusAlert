@@ -2,7 +2,7 @@ platform :ios, '9.0'
 use_frameworks!
 
 target 'StatusAlertSwiftDemo' do
-  pod 'StatusAlert', :path => '../'
+    pod 'StatusAlert', :path => '../'
 end
 
 target 'StatusAlertObjCDemo' do

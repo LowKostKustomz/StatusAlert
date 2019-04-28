@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'StatusAlert'
-  s.version          = '1.1.0'
+  s.version          = '1.1.1'
   s.summary          = 'Display Apple system-like status alerts for iOS'
   s.description      = <<-DESC
 StatusAlert is an iOS framework that displays status alerts similar to Apple's system self-hiding alerts. It is well suited for notifying user without interrupting user flow in iOS-like way.
