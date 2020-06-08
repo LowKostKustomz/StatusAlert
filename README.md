@@ -162,7 +162,6 @@ Bitxfy
 
 [![BitxfyScreenShot](https://raw.githubusercontent.com/LowKostKustomz/StatusAlert/master/Assets/BitxfyStatusAlert.png)][BitxfyAppstoreLink]
 
-<br>
 [NotifyMeAppStoreLink]: https://apps.apple.com/us/app/notifyme-remind-alert-push/id1512269708?ls=1
 
 <p align="center">
