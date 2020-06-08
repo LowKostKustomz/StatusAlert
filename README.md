@@ -162,6 +162,20 @@ Bitxfy
 
 [![BitxfyScreenShot](https://raw.githubusercontent.com/LowKostKustomz/StatusAlert/master/Assets/BitxfyStatusAlert.png)][BitxfyAppstoreLink]
 
+[NotifyMeAppStoreLink]: https://apps.apple.com/us/app/notifyme-remind-alert-push/id1512269708?ls=1
+
+<p align="center">
+<a href="https://apps.apple.com/us/app/notifyme-remind-alert-push/id1512269708?ls=1">
+<img src="../Assets/ReminderBotIcon.png?raw=true" align="center" width="40">
+</a>
+<br>
+<strong><a href="https://apps.apple.com/us/app/notifyme-remind-alert-push/id1512269708?ls=1">
+NotifyMe
+</strong>
+</p>
+
+[![NotifyMeScreenShot](../Assets/ReminderBotStatusAlert.png?raw=true)][NotifyMeAppStoreLink]
+
 > Feel free to submit pull request if you are using this framework in your apps.
 
 ## Author
