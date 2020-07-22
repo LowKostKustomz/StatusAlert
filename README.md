@@ -1,3 +1,7 @@
+> StatusAlert is being sponsored by the following tool; please help to support us by takin a look and signing up to a free trial.
+
+<a href="https://tracking.gitads.io/?repo=StatusAlert"> <img src="https://images.gitads.io/StatusAlert" alt="GitAds"/> </a>
+
 ![Author StatusAlert](https://assets.gitlab-static.net/ZEBSTER/FrameworksAssets/raw/master/StatusAlert/StatusAlertHeader.png)
 
 <p align="center">
